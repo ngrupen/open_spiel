@@ -1,10 +1,10 @@
-// Copyright 2019 DeepMind Technologies Ltd. All rights reserved.
+// Copyright 2021 DeepMind Technologies Limited
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -140,7 +140,9 @@ struct SearchNode {
   std::string ToString(const State& state) const;
   std::string ChildrenStr(const State& state) const;
 
-  Action SampleFromPrior(const State& state, std::shared_ptr<Evaluator> evaluator, std::mt19937* rng) const;
+  Action SampleFromPrior(const State& state,
+                         Evaluator* evaluator,
+                         std::mt19937* rng) const;
 };
 
 // A SpielBot that uses the MCTS algorithm as its policy.

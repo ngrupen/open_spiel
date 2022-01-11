@@ -56,6 +56,24 @@ if (OPEN_SPIEL_BUILD_WITH_LIBTORCH)
                 $<TARGET_OBJECTS:bots>)
   target_link_libraries (alpha_zero_torch_game_example ${TORCH_LIBRARIES})
 
+  add_executable(az_tic_tac_toe_eval_example az_tic_tac_toe_eval_example.cc
+                ${OPEN_SPIEL_OBJECTS}
+                $<TARGET_OBJECTS:alpha_zero_torch>
+                $<TARGET_OBJECTS:bots>)
+  target_link_libraries (az_tic_tac_toe_eval_example ${TORCH_LIBRARIES})
+
+  add_executable(az_ttt_eval_progress az_ttt_eval_progress.cc
+                ${OPEN_SPIEL_OBJECTS}
+                $<TARGET_OBJECTS:alpha_zero_torch>
+                $<TARGET_OBJECTS:bots>)
+  target_link_libraries (az_ttt_eval_progress ${TORCH_LIBRARIES})
+
+  add_executable(az_ttt_eval_progress_single_checkpoint az_ttt_eval_progress_single_checkpoint.cc
+                ${OPEN_SPIEL_OBJECTS}
+                $<TARGET_OBJECTS:alpha_zero_torch>
+                $<TARGET_OBJECTS:bots>)
+  target_link_libraries (az_ttt_eval_progress_single_checkpoint ${TORCH_LIBRARIES})
+
   add_executable(dqn_torch_example dqn_torch_example.cc
                 ${OPEN_SPIEL_OBJECTS}
                 $<TARGET_OBJECTS:dqn_torch>)
