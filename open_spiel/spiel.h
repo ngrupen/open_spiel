@@ -262,6 +262,11 @@ class State {
   // is added.
   virtual std::vector<Action> LegalActions() const = 0;
 
+  virtual std::vector<Action> OriginalLegalActions(Player player) {}
+
+  virtual int CheckValidMove(Player player, Action action) {}
+
+
   // Returns a vector containing 1 for legal actions and 0 for illegal actions.
   // The length is `game.NumDistinctActions()` for player nodes, and
   // `game.MaxChanceOutcomes()` for chance nodes.

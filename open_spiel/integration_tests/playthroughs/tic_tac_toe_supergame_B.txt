@@ -1,0 +1,125 @@
+game: tic_tac_toe_supergame_B
+
+GameType.chance_mode = ChanceMode.DETERMINISTIC
+GameType.dynamics = Dynamics.SEQUENTIAL
+GameType.information = Information.PERFECT_INFORMATION
+GameType.long_name = "Tic Tac Toe (SuperGame B)"
+GameType.max_num_players = 2
+GameType.min_num_players = 2
+GameType.parameter_specification = []
+GameType.provides_information_state_string = True
+GameType.provides_information_state_tensor = False
+GameType.provides_observation_string = True
+GameType.provides_observation_tensor = True
+GameType.provides_factored_observation_string = False
+GameType.reward_model = RewardModel.TERMINAL
+GameType.short_name = "tic_tac_toe_supergame_B"
+GameType.utility = Utility.ZERO_SUM
+
+NumDistinctActions() = 18
+PolicyTensorShape() = [18]
+MaxChanceOutcomes() = 0
+GetParameters() = {}
+NumPlayers() = 2
+MinUtility() = -1.0
+MaxUtility() = 1.0
+UtilitySum() = 0.0
+ObservationTensorShape() = [3, 3, 3]
+ObservationTensorLayout() = TensorLayout.CHW
+ObservationTensorSize() = 27
+MaxGameLength() = 9
+ToString() = "tic_tac_toe_supergame_B()"
+
+# State 0
+# ...
+# ...
+# ...
+IsTerminal() = False
+History() = []
+HistoryString() = ""
+IsChanceNode() = False
+IsSimultaneousNode() = False
+CurrentPlayer() = 0
+InformationStateString(0) = ""
+InformationStateString(1) = ""
+ObservationString(0) = "...\n...\n..."
+ObservationString(1) = "...\n...\n..."
+PublicObservationString() = "...\n...\n..."
+PrivateObservationString(0) = ""
+PrivateObservationString(1) = ""
+ObservationTensor(0):
+◉◉◉  ◯◯◯  ◯◯◯
+◉◉◉  ◯◯◯  ◯◯◯
+◉◉◉  ◯◯◯  ◯◯◯
+ObservationTensor(1):
+◉◉◉  ◯◯◯  ◯◯◯
+◉◉◉  ◯◯◯  ◯◯◯
+◉◉◉  ◯◯◯  ◯◯◯
+Rewards() = [0.0, 0.0]
+Returns() = [0.0, 0.0]
+LegalActions() = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+StringLegalActions() = ["x(0,0)", "x(0,1)", "x(0,2)", "x(1,0)", "x(1,1)", "x(1,2)", "x(2,0)", "x(2,1)", "x(2,2)", "o(0,0)", "o(0,1)", "o(0,2)", "o(1,0)", "o(1,1)", "o(1,2)", "o(2,0)", "o(2,1)", "o(2,2)"]
+
+# Apply action "x(1,1)"
+action: 4
+
+# State 1
+# ...
+# .x.
+# ...
+IsTerminal() = False
+History() = [4]
+HistoryString() = "4"
+IsChanceNode() = False
+IsSimultaneousNode() = False
+CurrentPlayer() = 1
+InformationStateString(0) = "4"
+InformationStateString(1) = "4"
+ObservationString(0) = "...\n.x.\n..."
+ObservationString(1) = "...\n.x.\n..."
+PublicObservationString() = "...\n.x.\n..."
+PrivateObservationString(0) = ""
+PrivateObservationString(1) = ""
+ObservationTensor(0):
+◉◉◉  ◯◯◯  ◯◯◯
+◉◯◉  ◯◯◯  ◯◉◯
+◉◉◉  ◯◯◯  ◯◯◯
+ObservationTensor(1):
+◉◉◉  ◯◯◯  ◯◯◯
+◉◯◉  ◯◯◯  ◯◉◯
+◉◉◉  ◯◯◯  ◯◯◯
+Rewards() = [0.0, 0.0]
+Returns() = [0.0, 0.0]
+LegalActions() = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+StringLegalActions() = ["x(0,0)", "x(0,1)", "x(0,2)", "x(1,0)", "x(1,1)", "x(1,2)", "x(2,0)", "x(2,1)", "x(2,2)", "o(0,0)", "o(0,1)", "o(0,2)", "o(1,0)", "o(1,1)", "o(1,2)", "o(2,0)", "o(2,1)", "o(2,2)"]
+
+# Apply action "x(2,0)"
+action: 6
+
+# State 2
+# ...
+# .x.
+# ...
+IsTerminal() = True
+History() = [4, 6]
+HistoryString() = "4, 6"
+IsChanceNode() = False
+IsSimultaneousNode() = False
+CurrentPlayer() = -4
+InformationStateString(0) = "4, 6"
+InformationStateString(1) = "4, 6"
+ObservationString(0) = "...\n.x.\n..."
+ObservationString(1) = "...\n.x.\n..."
+PublicObservationString() = "...\n.x.\n..."
+PrivateObservationString(0) = ""
+PrivateObservationString(1) = ""
+ObservationTensor(0):
+◉◉◉  ◯◯◯  ◯◯◯
+◉◯◉  ◯◯◯  ◯◉◯
+◉◉◉  ◯◯◯  ◯◯◯
+ObservationTensor(1):
+◉◉◉  ◯◯◯  ◯◯◯
+◉◯◉  ◯◯◯  ◯◉◯
+◉◉◉  ◯◯◯  ◯◯◯
+Rewards() = [1.0, -1.0]
+Returns() = [1.0, -1.0]

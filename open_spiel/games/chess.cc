@@ -319,7 +319,7 @@ void ChessState::ObservationTensor(Player player,
 
   auto value_it = values.begin();
 
-  // Piece cconfiguration.
+  // Piece configuration.
   for (const auto& piece_type : kPieceTypes) {
     AddPieceTypePlane(Color::kWhite, piece_type, Board(), value_it);
     AddPieceTypePlane(Color::kBlack, piece_type, Board(), value_it);

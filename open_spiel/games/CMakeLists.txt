@@ -128,6 +128,12 @@ set(GAME_SOURCES
   tarok/contracts.h
   tic_tac_toe.cc
   tic_tac_toe.h
+  tic_tac_toe_supergame_A.cc
+  tic_tac_toe_supergame_A.h
+  tic_tac_toe_supergame_B.cc
+  tic_tac_toe_supergame_B.h
+  tic_tac_toe_supergame_C.cc
+  tic_tac_toe_supergame_C.h
   tiny_bridge.cc
   tiny_bridge.h
   tiny_hanabi.cc
@@ -453,6 +459,18 @@ add_test(tarok_test tarok_test)
 add_executable(tic_tac_toe_test tic_tac_toe_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
 add_test(tic_tac_toe_test tic_tac_toe_test)
+
+add_executable(tic_tac_toe_supergame_A_test tic_tac_toe_supergame_A_test.cc ${OPEN_SPIEL_OBJECTS}
+               $<TARGET_OBJECTS:tests>)
+add_test(tic_tac_toe_supergame_A_test tic_tac_toe_supergame_A_test)
+
+add_executable(tic_tac_toe_supergame_B_test tic_tac_toe_supergame_B_test.cc ${OPEN_SPIEL_OBJECTS}
+               $<TARGET_OBJECTS:tests>)
+add_test(tic_tac_toe_supergame_B_test tic_tac_toe_supergame_B_test)
+
+add_executable(tic_tac_toe_supergame_C_test tic_tac_toe_supergame_C_test.cc ${OPEN_SPIEL_OBJECTS}
+               $<TARGET_OBJECTS:tests>)
+add_test(tic_tac_toe_supergame_C_test tic_tac_toe_supergame_C_test)
 
 add_executable(laser_tag_test laser_tag_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)

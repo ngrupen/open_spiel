@@ -1,10 +1,10 @@
-// Copyright 2019 DeepMind Technologies Ltd. All rights reserved.
+// Copyright 2021 DeepMind Technologies Limited
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//      http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -174,7 +174,9 @@ std::string SearchNode::ToString(const State& state) const {
       children.size());
 }
 
-Action SearchNode::SampleFromPrior(const State& state, std::shared_ptr<Evaluator> evaluator, std::mt19937* rng) const {
+Action SearchNode::SampleFromPrior(const State& state,
+                                   Evaluator* evaluator,
+                                   std::mt19937* rng) const {
   std::unique_ptr<State> working_state = state.Clone();
   ActionsAndProbs prior = evaluator->Prior(*working_state);
   Action chosen_action = SampleAction(prior, *rng).first;
@@ -226,25 +228,23 @@ MCTSBot::MCTSBot(const Game& game, std::shared_ptr<Evaluator> evaluator,
 Action MCTSBot::Step(const State& state) {
   absl::Time start = absl::Now();
   std::unique_ptr<SearchNode> root = MCTSearch(state);
-  // SPIEL_CHECK_GT(root->children.size(), 0);
 
-  if ((max_simulations_ == 1) || (max_simulations_ == 0))  {
+  if (max_simulations_ <= 1) {
     // sample from prior
-    Action sample = root->SampleFromPrior(state, evaluator_, &rng_);
-    return sample;
+    return root->SampleFromPrior(state, evaluator_.get(), &rng_);
   } else {
     // return best action
     const SearchNode& best = root->BestChild();
 
     if (verbose_) {
       double seconds = absl::ToDoubleSeconds(absl::Now() - start);
-      std::cerr
-          << absl::StrFormat(
-                 ("Finished %d sims in %.3f secs, %.1f sims/s, "
-                  "tree size: %d nodes / %d mb."),
-                 root->explore_count, seconds, (root->explore_count / seconds),
-                 nodes_, MemoryUsedMb(nodes_))
-          << std::endl;
+      std::cerr << absl::StrFormat(
+                       ("Finished %d sims in %.3f secs, %.1f sims/s, "
+                        "tree size: %d nodes / %d mb."),
+                       root->explore_count, seconds,
+                       (root->explore_count / seconds), nodes_,
+                       MemoryUsedMb(nodes_))
+                << std::endl;
       std::cerr << "Root:" << std::endl;
       std::cerr << root->ToString(state) << std::endl;
       std::cerr << "Children:" << std::endl;
@@ -255,7 +255,7 @@ Action MCTSBot::Step(const State& state) {
         std::cerr << "Children of chosen:" << std::endl;
         std::cerr << best.ChildrenStr(*chosen_state) << std::endl;
       }
-    } 
+    }
     return best.action;
   }
 }
@@ -295,16 +295,18 @@ std::unique_ptr<State> MCTSBot::ApplyTreePolicy(
     }
 
     Action selected_action;
-    if (current_node->children.size() == 0) {
+    if (current_node->children.empty()) {
       // no children, sample from prior
-      selected_action = current_node->SampleFromPrior(state, evaluator_, &rng_);
+      selected_action = current_node->SampleFromPrior(state, evaluator_.get(),
+                                                      &rng_);
     } else {
       // look at children
       SearchNode* chosen_child = nullptr;
       if (working_state->IsChanceNode()) {
         // For chance nodes, rollout according to chance node's probability
         // distribution
-        Action chosen_action = SampleAction(working_state->ChanceOutcomes(), rng_).first;
+        Action chosen_action =
+            SampleAction(working_state->ChanceOutcomes(), rng_).first;
 
         for (SearchNode& child : current_node->children) {
           if (child.action == chosen_action) {

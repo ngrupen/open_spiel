@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef OPEN_SPIEL_GAMES_TIC_TAC_TOE_H_
-#define OPEN_SPIEL_GAMES_TIC_TAC_TOE_H_
+#ifndef OPEN_SPIEL_GAMES_TIC_TAC_TOE_SUPERGAME_B_H_
+#define OPEN_SPIEL_GAMES_TIC_TAC_TOE_SUPERGAME_B_H_
 
 #include <array>
 #include <map>
@@ -29,7 +29,7 @@
 // Parameters: none
 
 namespace open_spiel {
-namespace tic_tac_toe {
+namespace tic_tac_toe_supergame_B {
 
 // Constants.
 inline constexpr int kNumPlayers = 2;
@@ -49,12 +49,12 @@ enum class CellState {
 };
 
 // State of an in-play game.
-class TicTacToeState : public State {
+class TicTacToeSuperGameBState : public State {
  public:
-  TicTacToeState(std::shared_ptr<const Game> game);
+  TicTacToeSuperGameBState(std::shared_ptr<const Game> game);
 
-  TicTacToeState(const TicTacToeState&) = default;
-  TicTacToeState& operator=(const TicTacToeState&) = default;
+  TicTacToeSuperGameBState(const TicTacToeSuperGameBState&) = default;
+  TicTacToeSuperGameBState& operator=(const TicTacToeSuperGameBState&) = default;
 
   Player CurrentPlayer() const override {
     return IsTerminal() ? kTerminalPlayerId : current_player_;
@@ -71,6 +71,7 @@ class TicTacToeState : public State {
   void UndoAction(Player player, Action move) override;
   std::vector<Action> LegalActions() const override;
   std::vector<Action> OriginalLegalActions(Player player) override;
+  int CheckValidMove(Player player, Action action) override;
   CellState BoardAt(int cell) const { return board_[cell]; }
   CellState BoardAt(int row, int column) const {
     return board_[row * kNumCols + column];
@@ -85,16 +86,17 @@ class TicTacToeState : public State {
   bool IsFull() const;                // Is the board full?
   Player current_player_ = 0;         // Player zero goes first
   Player outcome_ = kInvalidPlayer;
+  Player invalid_mover_ = kInvalidPlayer;
   int num_moves_ = 0;
 };
 
 // Game object.
-class TicTacToeGame : public Game {
+class TicTacToeSuperGameBGame : public Game {
  public:
-  explicit TicTacToeGame(const GameParameters& params);
-  int NumDistinctActions() const override { return kNumCells; }
+  explicit TicTacToeSuperGameBGame(const GameParameters& params);
+  int NumDistinctActions() const override { return kNumCells*2; }
   std::unique_ptr<State> NewInitialState() const override {
-    return std::unique_ptr<State>(new TicTacToeState(shared_from_this()));
+    return std::unique_ptr<State>(new TicTacToeSuperGameBState(shared_from_this()));
   }
   int NumPlayers() const override { return kNumPlayers; }
   double MinUtility() const override { return -1; }
@@ -108,12 +110,14 @@ class TicTacToeGame : public Game {
 
 CellState PlayerToState(Player player);
 std::string StateToString(CellState state);
+CellState ActionToMarker(Action action_id);
+Action ActionToPosition(Action action_id);
 
 inline std::ostream& operator<<(std::ostream& stream, const CellState& state) {
   return stream << StateToString(state);
 }
 
-}  // namespace tic_tac_toe
+}  // namespace tic_tac_toe_supergame_B
 }  // namespace open_spiel
 
-#endif  // OPEN_SPIEL_GAMES_TIC_TAC_TOE_H_
+#endif  // OPEN_SPIEL_GAMES_TIC_TAC_TOE_SUPERGAME_B_H_

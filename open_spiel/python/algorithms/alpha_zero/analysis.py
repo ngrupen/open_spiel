@@ -109,7 +109,6 @@ def prepare(data, cols):
   df["zero"] = 0
   return df
 
-
 def subplot(rows, cols, pos, *args, **kwargs):
   ax = plt.subplot(rows, cols, pos, *args, **kwargs)
   ax.tick_params(top=False, right=False)  # Don't interfere with the titles.
@@ -166,7 +165,20 @@ def plot_zero(df, ax, x):
   df.plot(ax=ax, x=x, y="zero", label="", visible=False)
 
 
-def plot_data(config, data):
+def mkdir_p(path):
+    """
+    Creates directory recursively if it does not already exist
+    """
+    import errno
+    try:
+        os.makedirs(path)
+    except OSError as exc:
+        if exc.errno == errno.EEXIST and os.path.isdir(path):
+            pass
+        else:
+            raise
+
+def plot_data(config, data, path):
   """Plot a bunch of graphs from an alphazero experiment."""
   num_rows, num_cols = 3, 4
   x = X_AXIS[FLAGS.x_axis]
@@ -244,7 +256,10 @@ def plot_data(config, data):
   ax = subplot(num_rows, num_cols, 12, title="Game length histogram")
   plot_histogram_numbered(ax, x, data, ["game_length_hist"])
 
-  plt.show()
+#   plt.show()
+
+  mkdir_p(os.path.join(path, 'figures'))
+  plt.savefig(os.path.join(path, 'figures', 'results.png'))
 
 
 def main(argv):
@@ -268,7 +283,7 @@ def main(argv):
   print()
 
   try:
-    plot_data(config, data)
+    plot_data(config, data, FLAGS.path)
   except KeyboardInterrupt:
     pass
 
