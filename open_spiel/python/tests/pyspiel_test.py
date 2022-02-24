@@ -108,6 +108,8 @@ EXPECTED_GAMES = set([
     "tic_tac_toe_supergame_A",
     "tic_tac_toe_supergame_B",
     "tic_tac_toe_supergame_C",
+    "tic_tac_toe_supergame_D",
+    "tic_tac_toe_supergame_E",
     "tiny_bridge_2p",
     "tiny_bridge_4p",
     "tiny_hanabi",
