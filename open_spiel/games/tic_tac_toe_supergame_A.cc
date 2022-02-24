@@ -85,6 +85,7 @@ void TicTacToeSuperGameAState::DoApplyAction(Action move) {
       outcome_ = current_player_;
     }
   } else {
+      board_[move] = PlayerToState(CurrentPlayer());
       invalid_mover_ = current_player_;
       outcome_ = 1 - current_player_;
   }
@@ -171,9 +172,9 @@ bool TicTacToeSuperGameAState::IsTerminal() const {
 }
 
 std::vector<double> TicTacToeSuperGameAState::Returns() const {
-  if ((HasLine(Player{0})) || (invalid_mover_ == Player{1})) {
+  if ((HasLine(Player{0}) && invalid_mover_ != Player{0}) || (invalid_mover_ == Player{1})) {
     return {1.0, -1.0};
-  } else if ((HasLine(Player{1})) || (invalid_mover_ == Player{0})) {
+  } else if ((HasLine(Player{1}) && invalid_mover_ != Player{1}) || (invalid_mover_ == Player{0})) {
     return {-1.0, 1.0};
   } else {
     return {0.0, 0.0};

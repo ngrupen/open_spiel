@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef OPEN_SPIEL_GAMES_TIC_TAC_TOE_SUPERGAME_C_H_
-#define OPEN_SPIEL_GAMES_TIC_TAC_TOE_SUPERGAME_C_H_
+#ifndef OPEN_SPIEL_GAMES_TIC_TAC_TOE_SUPERGAME_E_H_
+#define OPEN_SPIEL_GAMES_TIC_TAC_TOE_SUPERGAME_E_H_
 
 #include <array>
 #include <map>
@@ -29,7 +29,7 @@
 // Parameters: none
 
 namespace open_spiel {
-namespace tic_tac_toe_supergame_C {
+namespace tic_tac_toe_supergame_E {
 
 // Constants.
 inline constexpr int kNumPlayers = 2;
@@ -49,12 +49,12 @@ enum class CellState {
 };
 
 // State of an in-play game.
-class TicTacToeSuperGameCState : public State {
+class TicTacToeSuperGameEState : public State {
  public:
-  TicTacToeSuperGameCState(std::shared_ptr<const Game> game);
+  TicTacToeSuperGameEState(std::shared_ptr<const Game> game);
 
-  TicTacToeSuperGameCState(const TicTacToeSuperGameCState&) = default;
-  TicTacToeSuperGameCState& operator=(const TicTacToeSuperGameCState&) = default;
+  TicTacToeSuperGameEState(const TicTacToeSuperGameEState&) = default;
+  TicTacToeSuperGameEState& operator=(const TicTacToeSuperGameEState&) = default;
 
   Player CurrentPlayer() const override {
     return IsTerminal() ? kTerminalPlayerId : current_player_;
@@ -90,13 +90,16 @@ class TicTacToeSuperGameCState : public State {
   int num_moves_ = 0;
 };
 
+// Helper function
+int Summation(int n);
+
 // Game object.
-class TicTacToeSuperGameCGame : public Game {
+class TicTacToeSuperGameEGame : public Game {
  public:
-  explicit TicTacToeSuperGameCGame(const GameParameters& params);
-  int NumDistinctActions() const override { return kNumCells*3; }
+  explicit TicTacToeSuperGameEGame(const GameParameters& params);
+  int NumDistinctActions() const override { return kNumCells*3+Summation(kNumCells-1)*4; }
   std::unique_ptr<State> NewInitialState() const override {
-    return std::unique_ptr<State>(new TicTacToeSuperGameCState(shared_from_this()));
+    return std::unique_ptr<State>(new TicTacToeSuperGameEState(shared_from_this()));
   }
   int NumPlayers() const override { return kNumPlayers; }
   double MinUtility() const override { return -1; }
@@ -111,13 +114,15 @@ class TicTacToeSuperGameCGame : public Game {
 CellState PlayerToState(Player player);
 std::string StateToString(CellState state);
 CellState ActionToMarker(Action action_id);
+CellState ActionToMarker2(Action action_id);
 Action ActionToPosition(Action action_id);
+Action ActionToPosition2(Action action_id);
 
 inline std::ostream& operator<<(std::ostream& stream, const CellState& state) {
   return stream << StateToString(state);
 }
 
-}  // namespace tic_tac_toe_supergame_C
+}  // namespace tic_tac_toe_supergame_E
 }  // namespace open_spiel
 
-#endif  // OPEN_SPIEL_GAMES_TIC_TAC_TOE_SUPERGAME_C_H_
+#endif  // OPEN_SPIEL_GAMES_TIC_TAC_TOE_SUPERGAME_E_H_
