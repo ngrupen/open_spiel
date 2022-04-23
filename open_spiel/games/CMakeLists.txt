@@ -140,6 +140,8 @@ set(GAME_SOURCES
   tic_tac_toe_supergame_E.h
   tic_tac_toe_supergame_F.cc
   tic_tac_toe_supergame_F.h
+  tic_tac_toe_supergame_Z.cc
+  tic_tac_toe_supergame_Z.h
   tiny_bridge.cc
   tiny_bridge.h
   tiny_hanabi.cc
@@ -489,6 +491,10 @@ add_test(tic_tac_toe_supergame_E_test tic_tac_toe_supergame_E_test)
 add_executable(tic_tac_toe_supergame_F_test tic_tac_toe_supergame_F_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
 add_test(tic_tac_toe_supergame_F_test tic_tac_toe_supergame_F_test)
+
+add_executable(tic_tac_toe_supergame_Z_test tic_tac_toe_supergame_Z_test.cc ${OPEN_SPIEL_OBJECTS}
+               $<TARGET_OBJECTS:tests>)
+add_test(tic_tac_toe_supergame_Z_test tic_tac_toe_supergame_Z_test)
 
 add_executable(laser_tag_test laser_tag_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
