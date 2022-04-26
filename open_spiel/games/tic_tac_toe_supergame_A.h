@@ -103,7 +103,8 @@ class TicTacToeSuperGameAGame : public Game {
   double UtilitySum() const override { return 0; }
   double MaxUtility() const override { return 1; }
   std::vector<int> ObservationTensorShape() const override {
-    return {kCellStates, kNumRows, kNumCols};
+    // return {kCellStates, kNumRows, kNumCols};
+    return {kCellStates+1, kNumRows, kNumCols};
   }
   int MaxGameLength() const override { return kNumCells; }
 };

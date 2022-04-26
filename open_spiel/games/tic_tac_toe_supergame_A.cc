@@ -91,6 +91,8 @@ void TicTacToeSuperGameAState::DoApplyAction(Action move) {
   }
   current_player_ = 1 - current_player_;
   num_moves_ += 1;
+//   std::cerr << "Apply action player: " << current_player_ << std::endl;
+
 }
 
 std::vector<Action> TicTacToeSuperGameAState::LegalActions() const {
@@ -209,11 +211,54 @@ void TicTacToeSuperGameAState::ObservationTensor(Player player,
   SPIEL_CHECK_LT(player, num_players_);
 
   // Treat `values` as a 2-d tensor.
-  TensorView<2> view(values, {kCellStates, kNumCells}, true);
+//   std::cerr << "Cell states " << kCellStates << std::endl;
+//   std::cerr << "Cells " << kNumCells << std::endl;
+//   std::cerr << "Values: " << absl::StrJoin(values, ",") << std::endl;
+
+  // piece locations
+  TensorView<2> view(values, {kCellStates+1, kNumCells}, true);
   for (int cell = 0; cell < kNumCells; ++cell) {
     view[{static_cast<int>(board_[cell]), cell}] = 1.0;
+    // std::cerr << "Cell " << cell << std::endl;
+    // std::cerr << "Value " << board_[cell] << std::endl;
   }
+
+  // current player plane
+  for (int cell = 0; cell < kNumCells; ++cell) {
+    view[{3, cell}] = current_player_;
+  }
+
+  // print out each dimension of tensor view   
+//   for (int idx = 0; idx < 4; idx++) {
+//     for (int cell = 0; cell < kNumCells; cell++) {
+//     //   std::cerr << "idx: " << idx << ", cell: " << cell << ", view: " << view[{static_cast<int>(board_[idx]), cell}] << std::endl;
+//       std::cerr << "idx: " << idx << ", cell: " << cell << ", view: " << view[{idx, cell}] << std::endl;
+    
+//     }
+//     std::cerr << "----" << std::endl;
+//   }
+
+//   int size = view.size();
+//   const int rank = view.rank();
+//   std::array<int, rank> shape = view.shape();
+//   std::cerr << "observation tensor player: " << player << std::endl;
+//   std::cerr << "observation tensor current player: " << current_player_ << std::endl;
+//   std::cerr << "Size: " << size << std::endl;
+//   std::cerr << "Rank: " << rank << std::endl;
+//   std::cerr << "Shape: " << absl::StrJoin(shape, ",") << std::endl;
 }
+
+// void TicTacToeSuperGameAState::ObservationTensor(Player player,
+//                                        absl::Span<float> values) const {
+//   SPIEL_CHECK_GE(player, 0);
+//   SPIEL_CHECK_LT(player, num_players_);
+
+//   // Treat `values` as a 2-d tensor.
+//   TensorView<2> view(values, {kCellStates, kNumCells}, true);
+//   for (int cell = 0; cell < kNumCells; ++cell) {
+//     view[{static_cast<int>(board_[cell]), cell}] = 1.0;
+//   }
+// }
 
 void TicTacToeSuperGameAState::UndoAction(Player player, Action move) {
   board_[move] = CellState::kEmpty;
