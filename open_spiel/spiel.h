@@ -300,6 +300,9 @@ class State {
   // implementation of operator==.
   virtual std::string ToString() const = 0;
 
+  virtual std::string GetIDString() {}
+
+
   // Returns true if these states are equal, false otherwise. Two states are
   // equal if they are the same world state; the interpretation might differ
   // across games. For instance, in an imperfect information game, the full

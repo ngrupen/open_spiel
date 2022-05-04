@@ -21,7 +21,6 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <filesystem>
 
 #include "open_spiel/abseil-cpp/absl/flags/flag.h"
 #include "open_spiel/abseil-cpp/absl/flags/parse.h"
@@ -346,6 +345,7 @@ int main(int argc, char **argv) {
         }
         }
     }
+    outFile.close();
 
     std::cerr << "Number of games played: " << num_games << std::endl;
     std::cerr << "Number of distinct games played: " << histories.size()  << std::endl;

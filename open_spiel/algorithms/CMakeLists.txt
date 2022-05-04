@@ -37,6 +37,8 @@ add_library (algorithms OBJECT
   get_all_infostates.h
   get_all_states.cc
   get_all_states.h
+  get_all_state_ids.cc
+  get_all_state_ids.h
   get_legal_actions_map.cc
   get_legal_actions_map.h
   history_tree.cc
@@ -53,6 +55,8 @@ add_library (algorithms OBJECT
   mcts.h
   minimax.cc
   minimax.h
+  supergame_minimax.cc
+  supergame_minimax.h
   observation_history.h
   observation_history.cc
   oos.h

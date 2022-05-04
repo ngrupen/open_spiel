@@ -127,6 +127,8 @@ std::pair<std::vector<double>, std::vector<std::string>> PlayGame(
 
     if (!quiet)
       std::cerr << "State: " << std::endl << state->ToString() << std::endl;
+    //   std::cerr << "\nState ID: " << std::endl << state->GetIDString() << std::endl;
+
   }
 
   std::cerr << "Returns: " << absl::StrJoin(state->Returns(), ",")

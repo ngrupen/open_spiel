@@ -61,6 +61,7 @@ class TicTacToeState : public State {
   }
   std::string ActionToString(Player player, Action action_id) const override;
   std::string ToString() const override;
+  std::string GetIDString() override;
   bool IsTerminal() const override;
   std::vector<double> Returns() const override;
   std::string InformationStateString(Player player) const override;

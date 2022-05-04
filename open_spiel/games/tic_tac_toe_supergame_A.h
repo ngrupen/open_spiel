@@ -61,6 +61,7 @@ class TicTacToeSuperGameAState : public State {
   }
   std::string ActionToString(Player player, Action action_id) const override;
   std::string ToString() const override;
+  std::string GetIDString() override;
   bool IsTerminal() const override;
   std::vector<double> Returns() const override;
   std::string InformationStateString(Player player) const override;
@@ -76,6 +77,8 @@ class TicTacToeSuperGameAState : public State {
   CellState BoardAt(int row, int column) const {
     return board_[row * kNumCols + column];
   }
+
+
 
  protected:
   std::array<CellState, kNumCells> board_;

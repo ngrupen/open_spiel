@@ -166,7 +166,21 @@ std::string TicTacToeSuperGameAState::ToString() const {
       absl::StrAppend(&str, "\n");
     }
   }
+//   std::cerr << "state str:\n" << str << "\n" << std::endl;
+//   std::cerr << "----" << std::endl;
   return str;
+}
+
+std::string TicTacToeSuperGameAState::GetIDString() {
+  std::string id_str;
+  for (int r = 0; r < kNumRows; ++r) {
+    for (int c = 0; c < kNumCols; ++c) {
+      absl::StrAppend(&id_str, StateToString(BoardAt(r, c)));
+    }
+  }
+  absl::StrAppend(&id_str, current_player_);
+//   std::cerr << "state ID str:" << id_str << "\n" << std::endl;
+  return id_str;
 }
 
 bool TicTacToeSuperGameAState::IsTerminal() const {

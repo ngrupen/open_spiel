@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "open_spiel/algorithms/minimax.h"
+#include "open_spiel/algorithms/supergame_minimax.h"
 
 #include <algorithm>  // std::max
 #include <limits>
@@ -65,7 +65,8 @@ double _alpha_beta(State* state, int depth, double alpha, double beta,
   if (player == maximizing_player) {
     double value = -std::numeric_limits<double>::infinity();
 
-    for (auto action : state->LegalActions()) {
+    for (auto action : state->OriginalLegalActions(player)) {
+
       state->ApplyAction(action);
       double child_value =
           _alpha_beta(state, /*depth=*/depth - 1, /*alpha=*/alpha,
@@ -90,7 +91,7 @@ double _alpha_beta(State* state, int depth, double alpha, double beta,
   } else {
     double value = std::numeric_limits<double>::infinity();
 
-    for (auto action : state->LegalActions()) {
+    for (auto action : state->OriginalLegalActions(player)) {
       state->ApplyAction(action);
       double child_value =
           _alpha_beta(state, /*depth=*/depth - 1, /*alpha=*/alpha,
@@ -116,7 +117,7 @@ double _alpha_beta(State* state, int depth, double alpha, double beta,
 }
 }  // namespace
 
-std::pair<double, Action> AlphaBetaSearch(
+std::pair<double, Action> SupergameAlphaBetaSearch(
     const Game& game, const State* state,
     std::function<double(const State&)> value_function, int depth_limit,
     Player maximizing_player) {
