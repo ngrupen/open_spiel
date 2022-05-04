@@ -148,6 +148,16 @@ std::string TicTacToeState::ToString() const {
   return str;
 }
 
+std::string TicTacToeState::GetIDString() {
+  std::string id_str;
+  for (int r = 0; r < kNumRows; ++r) {
+    for (int c = 0; c < kNumCols; ++c) {
+      absl::StrAppend(&id_str, StateToString(BoardAt(r, c)));
+    }
+  }
+  return id_str;
+}
+
 bool TicTacToeState::IsTerminal() const {
   return outcome_ != kInvalidPlayer || IsFull();
 }
@@ -182,19 +192,19 @@ void TicTacToeState::ObservationTensor(Player player,
   // Treat `values` as a 2-d tensor.
   TensorView<2> view(values, {kCellStates, kNumCells}, true);
   for (int cell = 0; cell < kNumCells; ++cell) {
-    std::cerr << "Cell: " << cell << ", Value: " << board_[cell] << ", Value (int): " << static_cast<int>(board_[cell]) << std::endl;
+    // std::cerr << "Cell: " << cell << ", Value: " << board_[cell] << ", Value (int): " << static_cast<int>(board_[cell]) << std::endl;
     view[{static_cast<int>(board_[cell]), cell}] = 1.0;
   }
 
   // print out each dimension of tensor view   
-  for (int idx = 0; idx < 3; idx++) {
-    for (int cell = 0; cell < kNumCells; cell++) {
+//   for (int idx = 0; idx < 3; idx++) {
+    // for (int cell = 0; cell < kNumCells; cell++) {
     //   std::cerr << "idx: " << idx << ", cell: " << cell << ", view: " << view[{static_cast<int>(board_[idx]), cell}] << std::endl;
-      std::cerr << "idx: " << idx << ", cell: " << cell << ", view: " << view[{idx, cell}] << std::endl;
+    //   std::cerr << "idx: " << idx << ", cell: " << cell << ", view: " << view[{idx, cell}] << std::endl;
     
-    }
-    std::cerr << "----" << std::endl;
-  }
+    // }
+    // std::cerr << "----" << std::endl;
+//   }
 }
 
 void TicTacToeState::UndoAction(Player player, Action move) {

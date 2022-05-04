@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef OPEN_SPIEL_ALGORITHMS_GET_ALL_STATES_H_
-#define OPEN_SPIEL_ALGORITHMS_GET_ALL_STATES_H_
+#ifndef OPEN_SPIEL_ALGORITHMS_GET_ALL_STATE_IDS_H_
+#define OPEN_SPIEL_ALGORITHMS_GET_ALL_STATE_IDS_H_
 
 #include <string>
 
@@ -22,7 +22,7 @@
 namespace open_spiel {
 namespace algorithms {
 
-// Get all states in the game, indexed by their string representation.
+// Get all state IDs in the game, indexed by their string ID representation.
 // For small games only!
 //
 // Useful for methods that solve the games explicitly, i.e. value iteration.
@@ -40,11 +40,11 @@ namespace algorithms {
 //
 // Note: negative depth limit means no limit, 0 means only root, etc..
 
-std::map<std::string, std::unique_ptr<State>> GetAllStates(
+std::map<std::string, std::unique_ptr<State>> GetAllStateIDs(
     const Game& game, int depth_limit, bool include_terminals,
     bool include_chance_states, bool stop_at_duplicates = false);
 
 }  // namespace algorithms
 }  // namespace open_spiel
 
-#endif  // OPEN_SPIEL_ALGORITHMS_GET_ALL_STATES_H_
+#endif  // OPEN_SPIEL_ALGORITHMS_GET_ALL_STATE_IDS_H_

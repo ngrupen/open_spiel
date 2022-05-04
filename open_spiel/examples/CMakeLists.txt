@@ -26,6 +26,8 @@ add_test(mcts_example_test mcts_example)
 add_executable(minimax_example minimax_example.cc ${OPEN_SPIEL_OBJECTS})
 add_test(minimax_example_test minimax_example)
 
+add_executable(minimax_ttt_example minimax_ttt_example.cc ${OPEN_SPIEL_OBJECTS})
+
 add_executable(policy_iteration_example policy_iteration_example.cc ${OPEN_SPIEL_OBJECTS})
 add_test(policy_iteration_example_test policy_iteration_example)
 
@@ -37,6 +39,8 @@ add_executable(tabular_sarsa_example tabular_sarsa_example.cc ${OPEN_SPIEL_OBJEC
 add_executable(tabular_q_learning_example tabular_q_learning_example.cc ${OPEN_SPIEL_OBJECTS})
 
 add_executable(count_all_states count_all_states.cc ${OPEN_SPIEL_OBJECTS})
+
+add_executable(count_all_ttt_states count_all_ttt_states.cc ${OPEN_SPIEL_OBJECTS})
 
 if (OPEN_SPIEL_BUILD_WITH_TENSORFLOW_CC)
   add_executable(alpha_zero_example alpha_zero_example.cc ${OPEN_SPIEL_OBJECTS} $<TARGET_OBJECTS:alpha_zero>)
@@ -73,6 +77,11 @@ if (OPEN_SPIEL_BUILD_WITH_LIBTORCH)
                 $<TARGET_OBJECTS:alpha_zero_torch>
                 $<TARGET_OBJECTS:bots>)
   target_link_libraries (az_ttt_eval_progress_single_checkpoint ${TORCH_LIBRARIES})
+
+  add_executable(evaluate_all_ttt_states evaluate_all_ttt_states.cc
+                ${OPEN_SPIEL_OBJECTS}
+                $<TARGET_OBJECTS:alpha_zero_torch>)
+  target_link_libraries (evaluate_all_ttt_states ${TORCH_LIBRARIES})
 
   add_executable(mcts_ttt_eval mcts_ttt_eval.cc
                 ${OPEN_SPIEL_OBJECTS}
