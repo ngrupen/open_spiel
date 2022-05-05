@@ -108,19 +108,33 @@ int main(int argc, char** argv) {
     std::vector<std::string> nonterminal_state_strings;
     std::vector<std::string> terminal_state_strings;
     std::vector<std::vector<double>> all_az_values;
+    std::vector<std::vector<double>> all_az_policies;
+    std::vector<std::vector<Action>> all_legal_moves;
     std::vector<std::vector<double>> all_oracle_values;
-
     // std::vector<std::vector<double>> terminal_values;
     for (auto const & [state_id_str, state] : all_state_ids) {
       switch (state->GetType()) {
         case StateType::kDecision: {
           if (game->GetType().information == GameType::Information::kPerfectInformation) {
+            Player player = state->CurrentPlayer();
+
             // az evaluation of non-terminal state
             std::vector<double> az_values = az_evaluator->Evaluate(*state);
             all_az_values.push_back(az_values);
 
+            // az policy at non-terminal state
+            open_spiel::ActionsAndProbs az_prior = az_evaluator->Prior(*state);
+            std::vector<double> az_policy;
+            for (auto const & [act, prob] : az_prior) {
+              az_policy.push_back(prob);
+            }
+            all_az_policies.push_back(az_policy);
+
+            // legal actions
+            std::vector<Action> legal_moves = state->OriginalLegalActions(player);
+            all_legal_moves.push_back(legal_moves);
+
             // oracle evaluation
-            Player player = state->CurrentPlayer();
             std::pair<double, Action> value_action = SupergameAlphaBetaSearch(
                 *game, state.get(), empty_funct, kSearchDepth, player);
             std::vector<double> oracle_values;
@@ -131,8 +145,6 @@ int main(int argc, char** argv) {
                 oracle_values.push_back(-value_action.first);
                 oracle_values.push_back(value_action.first);
             }
-            // oracle_values[player] =  value_action.first;
-            // oracle_values[1-player] =  -value_action.first;
             all_oracle_values.push_back(oracle_values);
 
             // store results
@@ -176,6 +188,8 @@ int main(int argc, char** argv) {
         outFile << "State ID: " << nonterminal_state_strings[idx] << std::endl;
         outFile << "AZ Values: " << absl::StrJoin(all_az_values[idx], ",") << std::endl;
         outFile << "Oracle Values: " << absl::StrJoin(all_oracle_values[idx], ",") << std::endl;
+        outFile << "AZ Policy: " << absl::StrJoin(all_az_policies[idx], ",") << std::endl;
+        outFile << "Legal Moves: " << absl::StrJoin(all_legal_moves[idx], ",") << std::endl;
       }
     }
     outFile.close();
