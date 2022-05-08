@@ -21,7 +21,6 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <filesystem>
 
 #include "open_spiel/abseil-cpp/absl/flags/flag.h"
 #include "open_spiel/abseil-cpp/absl/flags/parse.h"

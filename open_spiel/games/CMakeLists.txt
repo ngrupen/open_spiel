@@ -130,6 +130,8 @@ set(GAME_SOURCES
   tic_tac_toe.h
   tic_tac_toe_supergame_A.cc
   tic_tac_toe_supergame_A.h
+  tic_tac_toe_supergame_A_stacked.cc
+  tic_tac_toe_supergame_A_stacked.h
   tic_tac_toe_supergame_B.cc
   tic_tac_toe_supergame_B.h
   tic_tac_toe_supergame_C.cc
@@ -471,6 +473,10 @@ add_test(tic_tac_toe_test tic_tac_toe_test)
 add_executable(tic_tac_toe_supergame_A_test tic_tac_toe_supergame_A_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
 add_test(tic_tac_toe_supergame_A_test tic_tac_toe_supergame_A_test)
+
+add_executable(tic_tac_toe_supergame_A_stacked_test tic_tac_toe_supergame_A_stacked_test.cc ${OPEN_SPIEL_OBJECTS}
+               $<TARGET_OBJECTS:tests>)
+add_test(tic_tac_toe_supergame_A_stacked_test tic_tac_toe_supergame_A_stacked_test)
 
 add_executable(tic_tac_toe_supergame_B_test tic_tac_toe_supergame_B_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
