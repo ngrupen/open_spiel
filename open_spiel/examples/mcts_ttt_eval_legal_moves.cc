@@ -38,14 +38,21 @@
 ABSL_FLAG(std::string, game, "tic_tac_toe", "The name of the game to play.");
 ABSL_FLAG(std::string, player1, "mcts", "Who controls player1.");
 ABSL_FLAG(std::string, player2, "mcts", "Who controls player2.");
+ABSL_FLAG(std::string, az_path, "", "Path to AZ experiment.");
+ABSL_FLAG(std::string, az_graph_def, "vpnet.pb",
+          "AZ graph definition file name.");
 ABSL_FLAG(double, uct_c, 2, "UCT exploration constant.");
 ABSL_FLAG(int, rollout_count, 10, "How many rollouts per evaluation.");
-ABSL_FLAG(int, max_test_simulations, 10, "How many simulations to run for test player.");
-ABSL_FLAG(int, max_op_simulations, 20000, "How many simulations to run for opponent.");
+ABSL_FLAG(int, max_p1_simulations, 0, "How many simulations to run for AZ.");
+ABSL_FLAG(int, max_p2_simulations, 20000, "How many simulations to run for opponent.");
 ABSL_FLAG(int, num_games, 1, "How many games to play.");
-ABSL_FLAG(int, num_random_moves, 0, "Number of random starting moves.");
 ABSL_FLAG(int, max_memory_mb, 1000,
           "The maximum memory used before cutting the search short.");
+ABSL_FLAG(int, az_checkpoint, -1, "Checkpoint of AZ model.");
+ABSL_FLAG(int, az_batch_size, 1, "Batch size of AZ inference.");
+ABSL_FLAG(int, az_threads, 1, "Number of threads to run for AZ inference.");
+ABSL_FLAG(int, az_cache_size, 16384, "Cache size of AZ algorithm.");
+ABSL_FLAG(int, az_cache_shards, 1, "Cache shards of AZ algorithm.");
 ABSL_FLAG(bool, solve, true, "Whether to use MCTS-Solver.");
 ABSL_FLAG(uint_fast32_t, seed, 0, "Seed for MCTS.");
 ABSL_FLAG(bool, verbose, false, "Show the MCTS stats of possible moves.");
@@ -62,6 +69,8 @@ std::unique_ptr<open_spiel::Bot>
 InitBot(std::string type, const open_spiel::Game &game,
         open_spiel::Player player,
         std::shared_ptr<open_spiel::algorithms::Evaluator> evaluator,
+        std::shared_ptr<open_spiel::algorithms::torch_az::VPNetEvaluator>
+            az_evaluator,
         bool player1) {
   if (type == "human") {
     return std::make_unique<open_spiel::HumanBot>();
@@ -70,14 +79,14 @@ InitBot(std::string type, const open_spiel::Game &game,
     if(player1) {
         return std::make_unique<open_spiel::algorithms::MCTSBot>(
             game, std::move(evaluator), absl::GetFlag(FLAGS_uct_c),
-            absl::GetFlag(FLAGS_max_test_simulations),
+            absl::GetFlag(FLAGS_max_p1_simulations),
             absl::GetFlag(FLAGS_max_memory_mb), absl::GetFlag(FLAGS_solve), Seed(),
             absl::GetFlag(FLAGS_verbose));
     }
     else {
         return std::make_unique<open_spiel::algorithms::MCTSBot>(
             game, std::move(evaluator), absl::GetFlag(FLAGS_uct_c),
-            absl::GetFlag(FLAGS_max_op_simulations),
+            absl::GetFlag(FLAGS_max_p2_simulations),
             absl::GetFlag(FLAGS_max_memory_mb), absl::GetFlag(FLAGS_solve), Seed(),
             absl::GetFlag(FLAGS_verbose));
     }
@@ -87,7 +96,7 @@ InitBot(std::string type, const open_spiel::Game &game,
   }
 
   open_spiel::SpielFatalError(
-      "Bad player type. Known types: human, mcts, random");
+      "Bad player type. Known types: az, human, mcts, random");
 }
 
 open_spiel::Action GetAction(const open_spiel::State &state,
@@ -103,14 +112,14 @@ open_spiel::Action GetAction(const open_spiel::State &state,
 std::tuple<std::vector<double>, std::vector<std::string>, std::vector<open_spiel::Action>, std::vector<std::string>, std::vector<int>>
 PlayGame(const open_spiel::Game &game,
          std::vector<std::unique_ptr<open_spiel::Bot>> &bots, std::mt19937 &rng,
-         const std::vector<std::string> &initial_actions, int test_player) {
+         const std::vector<std::string> &initial_actions, int az_player) {
   bool quiet = absl::GetFlag(FLAGS_quiet);
   std::unique_ptr<open_spiel::State> state = game.NewInitialState();
   std::vector<std::string> history;
 
-  std::vector<open_spiel::Action> test_actions;
-  std::vector<std::string> test_action_strs;
-  std::vector<int> test_action_scores;
+  std::vector<open_spiel::Action> az_actions;
+  std::vector<std::string> az_action_strs;
+  std::vector<int> az_action_scores;
 
   if (!quiet)
     std::cerr << "Initial state:\n" << state << std::endl;
@@ -134,7 +143,7 @@ PlayGame(const open_spiel::Game &game,
   }
 
   // play random moves (if any) 
-  int random_moves = absl::GetFlag(FLAGS_num_random_moves);
+  int random_moves = rand() % 5;
   std::random_device rd;
   std::default_random_engine eng(rd());
   if (random_moves > 0) {
@@ -167,24 +176,24 @@ PlayGame(const open_spiel::Game &game,
     open_spiel::Player current_player = state->CurrentPlayer();
     open_spiel::Player opponent_player = 1 - current_player;
 
-    std::cerr << "Test Player: " << test_player << std::endl;
+    std::cerr << "AZ Player: " << az_player << std::endl;
     std::cerr << "Current Player: " << current_player << std::endl;
 
     // The state must be a decision node, ask the right bot to make its action.
     open_spiel::Action action = bots[current_player]->Step(*state);
 
-    // save test_player's actions
-    if (test_player == current_player) {
+    // save az_player's actions
+    if (az_player == current_player) {
       std::cerr << "Action: " << action << std::endl;
-      test_actions.push_back(action);
-      test_action_strs.push_back(state->ActionToString(current_player, action));
+      az_actions.push_back(action);
+      az_action_strs.push_back(state->ActionToString(current_player, action));
       int valid;
       if (game_type.short_name == "tic_tac_toe")
         valid = 0;
       else
         valid = state->CheckValidMove(current_player, action);
       std::cerr << "Valid move: " << valid << std::endl;
-      test_action_scores.push_back(valid);
+      az_action_scores.push_back(valid);
     }
 
     if (!quiet)
@@ -206,7 +215,7 @@ PlayGame(const open_spiel::Game &game,
             << std::endl;
   std::cerr << "Game actions: " << absl::StrJoin(history, ", ") << std::endl;
 
-  return {state->Returns(), history, test_actions, test_action_strs, test_action_scores};
+  return {state->Returns(), history, az_actions, az_action_strs, az_action_scores};
 }
 
 std::vector<std::string> tokenize(std::string const &str, const char delim) {
@@ -246,30 +255,50 @@ int main(int argc, char **argv) {
     open_spiel::SpielFatalError("Game must have sequential turns.");
   if (game_type.chance_mode != open_spiel::GameType::ChanceMode::kDeterministic)
     open_spiel::SpielFatalError("Game must be deterministic.");
+//   if (absl::GetFlag(FLAGS_az_path).empty())
+//     open_spiel::SpielFatalError("AlphaZero path must be specified.");
+//   if (absl::GetFlag(FLAGS_player1) != "az" &&
+//       absl::GetFlag(FLAGS_player2) != "az")
+//     open_spiel::SpielFatalError("One of the players must be AlphaZero.");
 
     
+    std::cout << "playing games with checkpoint: " << absl::GetFlag(FLAGS_az_checkpoint) << std::endl;
+
+    open_spiel::algorithms::torch_az::DeviceManager device_manager;
+    device_manager.AddDevice(open_spiel::algorithms::torch_az::VPNetModel(
+        *game, absl::GetFlag(FLAGS_az_path), absl::GetFlag(FLAGS_az_graph_def),
+        "/cpu:0"));
+    device_manager.Get(0, 0)->LoadCheckpoint(absl::GetFlag(FLAGS_az_checkpoint));
+
+    auto az_evaluator =
+        std::make_shared<open_spiel::algorithms::torch_az::VPNetEvaluator>(
+            /*device_manager=*/&device_manager,
+            /*batch_size=*/absl::GetFlag(FLAGS_az_batch_size),
+            /*threads=*/absl::GetFlag(FLAGS_az_threads),
+            /*cache_size=*/absl::GetFlag(FLAGS_az_cache_size),
+            /*cache_shards=*/absl::GetFlag(FLAGS_az_cache_shards));
     auto evaluator =
         std::make_shared<open_spiel::algorithms::RandomRolloutEvaluator>(
             absl::GetFlag(FLAGS_rollout_count), Seed());
 
     std::vector<std::unique_ptr<open_spiel::Bot>> bots;
     bots.push_back(
-        InitBot(absl::GetFlag(FLAGS_player1), *game, 0, evaluator, true));
+        InitBot(absl::GetFlag(FLAGS_player1), *game, 0, evaluator, az_evaluator, true));
     bots.push_back(
-        InitBot(absl::GetFlag(FLAGS_player2), *game, 1, evaluator, false));
+        InitBot(absl::GetFlag(FLAGS_player2), *game, 1, evaluator, az_evaluator, false));
 
     std::vector<std::string> initial_actions;
     for (int i = 1; i < positional_args.size(); ++i) {
         initial_actions.push_back(positional_args[i]);
     }
 
-    int test_player;
+    int az_player;
 
     // if (absl::GetFlag(FLAGS_player1) == "az") {
-        test_player = 0;
+        az_player = 0;
     // }
     // else {
-        // test_player = 1;
+        // az_player = 1;
     // }
 
     std::map<std::string, int> histories;
@@ -277,28 +306,27 @@ int main(int argc, char **argv) {
     std::vector<int> overall_wins(2, 0);
     int num_games = absl::GetFlag(FLAGS_num_games);
 
-    // construct output files
+    // construct output file
     std::string save_path = absl::GetFlag(FLAGS_save_path);
-    save_path += "/actions.txt";
-
-    std::string save_path_2 = absl::GetFlag(FLAGS_save_path);
-    save_path_2 += "/results.txt";
+    save_path += "/checkpoint_";
+    save_path += std::to_string(absl::GetFlag(FLAGS_az_checkpoint));
+    save_path += ".txt";
 
     std::ofstream outFile;
     outFile.open(save_path);
     if (outFile.is_open()) {
         for (int game_num = 0; game_num < num_games; ++game_num) {
-        auto [returns, history, test_actions, test_action_strs, test_action_scores] = PlayGame(*game, bots, rng, initial_actions, test_player);
+        auto [returns, history, az_actions, az_action_strs, az_action_scores] = PlayGame(*game, bots, rng, initial_actions, az_player);
         std::cerr << "Game " << game_num << std::endl;
         std::cerr << "History: " << absl::StrJoin(history, ",") << std::endl;
-        std::cerr << "Test Player actions: " << absl::StrJoin(test_actions, ", ") << std::endl;
-        std::cerr << "Test Player action strings: " << absl::StrJoin(test_action_strs, ", ") << std::endl;
-        std::cerr << "Test Player action scores: " << absl::StrJoin(test_action_scores, ", ") << std::endl;
+        std::cerr << "AZ actions: " << absl::StrJoin(az_actions, ", ") << std::endl;
+        std::cerr << "AZ action strings: " << absl::StrJoin(az_action_strs, ", ") << std::endl;
+        std::cerr << "AZ action scores: " << absl::StrJoin(az_action_scores, ", ") << std::endl;
 
         outFile << "History: " << absl::StrJoin(history, ",") << std::endl;
-        outFile << "Test Player actions: " << absl::StrJoin(test_actions, ",") << std::endl;
-        outFile << "Test Player action strings: " << absl::StrJoin(test_action_strs, ",") << std::endl;
-        outFile << "Test Player action scores: " << absl::StrJoin(test_action_scores, ",") << std::endl;
+        outFile << "AZ actions: " << absl::StrJoin(az_actions, ",") << std::endl;
+        outFile << "AZ action strings: " << absl::StrJoin(az_action_strs, ",") << std::endl;
+        outFile << "AZ action scores: " << absl::StrJoin(az_action_scores, ",") << std::endl;
         histories[absl::StrJoin(history, " ")] += 1;
         for (int i = 0; i < returns.size(); ++i) {
             double v = returns[i];
@@ -309,22 +337,13 @@ int main(int argc, char **argv) {
         }
         }
     }
+    outFile.close();
 
     std::cerr << "Number of games played: " << num_games << std::endl;
     std::cerr << "Number of distinct games played: " << histories.size()  << std::endl;
     std::cerr << "Players: " << absl::GetFlag(FLAGS_player1) << ", " << absl::GetFlag(FLAGS_player2) << std::endl;
     std::cerr << "Overall wins: " << absl::StrJoin(overall_wins, ", ") << std::endl;
     std::cerr << "Overall returns: " << absl::StrJoin(overall_returns, ", ") << std::endl;
-
-    std::ofstream outFile2;
-    outFile2.open(save_path_2);
-    if (outFile2.is_open()) {
-        outFile2 << "Number of games played: " << num_games << std::endl;
-        outFile2 << "Number of distinct games played: " << histories.size()  << std::endl;
-        outFile2 << "Players: " << absl::GetFlag(FLAGS_player1) << ", " << absl::GetFlag(FLAGS_player2) << std::endl;
-        outFile2 << "Overall wins: " << absl::StrJoin(overall_wins, ", ") << std::endl;
-        outFile2 << "Overall returns: " << absl::StrJoin(overall_returns, ", ") << std::endl;
-    }
 
   return 0;
 }

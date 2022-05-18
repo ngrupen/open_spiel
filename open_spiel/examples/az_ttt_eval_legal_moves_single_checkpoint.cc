@@ -21,7 +21,6 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <filesystem>
 
 #include "open_spiel/abseil-cpp/absl/flags/flag.h"
 #include "open_spiel/abseil-cpp/absl/flags/parse.h"
@@ -47,7 +46,6 @@ ABSL_FLAG(int, rollout_count, 10, "How many rollouts per evaluation.");
 ABSL_FLAG(int, max_az_simulations, 2, "How many simulations to run for AZ.");
 ABSL_FLAG(int, max_op_simulations, 10000, "How many simulations to run for opponent.");
 ABSL_FLAG(int, num_games, 1, "How many games to play.");
-ABSL_FLAG(int, num_random_moves, 0, "Number of random starting moves.");
 ABSL_FLAG(int, max_memory_mb, 1000,
           "The maximum memory used before cutting the search short.");
 ABSL_FLAG(int, az_checkpoint, -1, "Checkpoint of AZ model.");
@@ -115,7 +113,6 @@ PlayGame(const open_spiel::Game &game,
   bool quiet = absl::GetFlag(FLAGS_quiet);
   std::unique_ptr<open_spiel::State> state = game.NewInitialState();
   std::vector<std::string> history;
-
   std::vector<open_spiel::Action> az_actions;
   std::vector<std::string> az_action_strs;
   std::vector<int> az_action_scores;
@@ -254,60 +251,43 @@ int main(int argc, char **argv) {
       absl::GetFlag(FLAGS_player2) != "az")
     open_spiel::SpielFatalError("One of the players must be AlphaZero.");
 
-  // iterate through all saved checkpoints
-  std::vector<int> checkpoints;
-  std::vector<std::string> checkpoint_paths;
-  const char delim = '-';
-  for (const auto const & entry : std::filesystem::directory_iterator(absl::GetFlag(FLAGS_az_path))) {
-    std::string fname = entry.path().filename().string();
-    std::vector<std::string> tokens = tokenize(fname, delim);
-    if ((tokens.size() > 1) && (isNumber(tokens[1]))) {
-        checkpoints.push_back(std::stoi(tokens[1]));
-    }
-  }
-
-  std::sort(checkpoints.begin(), checkpoints.end());
-  checkpoints.erase(std::unique(checkpoints.begin(), checkpoints.end()), checkpoints.end());
-  std::cout << "checkpoints to test:" << absl::StrJoin(checkpoints, ",") << std::endl;
-
-  for (int i = 0; i < checkpoints.size(); ++i) {
-    std::cout << "playing games with checkpoint: " << checkpoints[i] << std::endl;
+    
+    std::cout << "playing games with checkpoint: " << absl::GetFlag(FLAGS_az_checkpoint) << std::endl;
 
     open_spiel::algorithms::torch_az::DeviceManager device_manager;
     device_manager.AddDevice(open_spiel::algorithms::torch_az::VPNetModel(
-      *game, absl::GetFlag(FLAGS_az_path), absl::GetFlag(FLAGS_az_graph_def),
-      "/cpu:0"));
-    device_manager.Get(0, 0)->LoadCheckpoint(checkpoints[i]);
+        *game, absl::GetFlag(FLAGS_az_path), absl::GetFlag(FLAGS_az_graph_def),
+        "/cpu:0"));
+    device_manager.Get(0, 0)->LoadCheckpoint(absl::GetFlag(FLAGS_az_checkpoint));
 
     auto az_evaluator =
-      std::make_shared<open_spiel::algorithms::torch_az::VPNetEvaluator>(
-          /*device_manager=*/&device_manager,
-          /*batch_size=*/absl::GetFlag(FLAGS_az_batch_size),
-          /*threads=*/absl::GetFlag(FLAGS_az_threads),
-          /*cache_size=*/absl::GetFlag(FLAGS_az_cache_size),
-          /*cache_shards=*/absl::GetFlag(FLAGS_az_cache_shards));
+        std::make_shared<open_spiel::algorithms::torch_az::VPNetEvaluator>(
+            /*device_manager=*/&device_manager,
+            /*batch_size=*/absl::GetFlag(FLAGS_az_batch_size),
+            /*threads=*/absl::GetFlag(FLAGS_az_threads),
+            /*cache_size=*/absl::GetFlag(FLAGS_az_cache_size),
+            /*cache_shards=*/absl::GetFlag(FLAGS_az_cache_shards));
     auto evaluator =
-      std::make_shared<open_spiel::algorithms::RandomRolloutEvaluator>(
-          absl::GetFlag(FLAGS_rollout_count), Seed());
+        std::make_shared<open_spiel::algorithms::RandomRolloutEvaluator>(
+            absl::GetFlag(FLAGS_rollout_count), Seed());
 
     std::vector<std::unique_ptr<open_spiel::Bot>> bots;
     bots.push_back(
-      InitBot(absl::GetFlag(FLAGS_player1), *game, 0, evaluator, az_evaluator));
+        InitBot(absl::GetFlag(FLAGS_player1), *game, 0, evaluator, az_evaluator));
     bots.push_back(
-      InitBot(absl::GetFlag(FLAGS_player2), *game, 1, evaluator, az_evaluator));
+        InitBot(absl::GetFlag(FLAGS_player2), *game, 1, evaluator, az_evaluator));
 
     std::vector<std::string> initial_actions;
     for (int i = 1; i < positional_args.size(); ++i) {
-      initial_actions.push_back(positional_args[i]);
+        initial_actions.push_back(positional_args[i]);
     }
 
     int az_player;
-
     if (absl::GetFlag(FLAGS_player1) == "az") {
-      az_player = 0;
+        az_player = 0;
     }
     else {
-      az_player = 1;
+        az_player = 1;
     }
 
     std::map<std::string, int> histories;
@@ -318,7 +298,7 @@ int main(int argc, char **argv) {
     // construct output file
     std::string save_path = absl::GetFlag(FLAGS_save_path);
     save_path += "/checkpoint_";
-    save_path += std::to_string(checkpoints[i]);
+    save_path += std::to_string(absl::GetFlag(FLAGS_az_checkpoint));
     save_path += ".txt";
 
     std::ofstream outFile;
@@ -338,11 +318,11 @@ int main(int argc, char **argv) {
         outFile << "AZ action scores: " << absl::StrJoin(az_action_scores, ",") << std::endl;
         histories[absl::StrJoin(history, " ")] += 1;
         for (int i = 0; i < returns.size(); ++i) {
-          double v = returns[i];
-          overall_returns[i] += v;
-          if (v > 0) {
+            double v = returns[i];
+            overall_returns[i] += v;
+            if (v > 0) {
             overall_wins[i] += 1;
-          }
+            }
         }
       }
     }
@@ -352,8 +332,6 @@ int main(int argc, char **argv) {
     std::cerr << "Players: " << absl::GetFlag(FLAGS_player1) << ", " << absl::GetFlag(FLAGS_player2) << std::endl;
     std::cerr << "Overall wins: " << absl::StrJoin(overall_wins, ", ") << std::endl;
     std::cerr << "Overall returns: " << absl::StrJoin(overall_returns, ", ") << std::endl;
-
-  }
 
   return 0;
 }
