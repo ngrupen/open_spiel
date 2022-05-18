@@ -60,40 +60,40 @@ if (OPEN_SPIEL_BUILD_WITH_LIBTORCH)
                 $<TARGET_OBJECTS:bots>)
   target_link_libraries (alpha_zero_torch_game_example ${TORCH_LIBRARIES})
 
-  add_executable(az_tic_tac_toe_eval_example az_tic_tac_toe_eval_example.cc
+  add_executable(az_ttt_eval_play az_ttt_eval_play.cc
                 ${OPEN_SPIEL_OBJECTS}
                 $<TARGET_OBJECTS:alpha_zero_torch>
                 $<TARGET_OBJECTS:bots>)
-  target_link_libraries (az_tic_tac_toe_eval_example ${TORCH_LIBRARIES})
+  target_link_libraries (az_ttt_eval_play ${TORCH_LIBRARIES})
 
-  add_executable(az_ttt_eval_progress az_ttt_eval_progress.cc
+  add_executable(az_ttt_eval_legal_moves_all_checkpoints az_ttt_eval_legal_moves_all_checkpoints.cc
                 ${OPEN_SPIEL_OBJECTS}
                 $<TARGET_OBJECTS:alpha_zero_torch>
                 $<TARGET_OBJECTS:bots>)
-  target_link_libraries (az_ttt_eval_progress ${TORCH_LIBRARIES})
+  target_link_libraries (az_ttt_eval_legal_moves_all_checkpoints ${TORCH_LIBRARIES})
 
-  add_executable(az_ttt_eval_progress_single_checkpoint az_ttt_eval_progress_single_checkpoint.cc
+  add_executable(az_ttt_eval_legal_moves_single_checkpoint az_ttt_eval_legal_moves_single_checkpoint.cc
                 ${OPEN_SPIEL_OBJECTS}
                 $<TARGET_OBJECTS:alpha_zero_torch>
                 $<TARGET_OBJECTS:bots>)
-  target_link_libraries (az_ttt_eval_progress_single_checkpoint ${TORCH_LIBRARIES})
+  target_link_libraries (az_ttt_eval_legal_moves_single_checkpoint ${TORCH_LIBRARIES})
 
   add_executable(evaluate_all_ttt_states evaluate_all_ttt_states.cc
                 ${OPEN_SPIEL_OBJECTS}
                 $<TARGET_OBJECTS:alpha_zero_torch>)
   target_link_libraries (evaluate_all_ttt_states ${TORCH_LIBRARIES})
 
-  add_executable(mcts_ttt_eval mcts_ttt_eval.cc
+  add_executable(mcts_ttt_eval_legal_moves mcts_ttt_eval_legal_moves.cc
                 ${OPEN_SPIEL_OBJECTS}
                 $<TARGET_OBJECTS:alpha_zero_torch>
                 $<TARGET_OBJECTS:bots>)
-  target_link_libraries (mcts_ttt_eval ${TORCH_LIBRARIES})
+  target_link_libraries (mcts_ttt_eval_legal_moves ${TORCH_LIBRARIES})
 
-  add_executable(mcts_ttt_eval_set_rand mcts_ttt_eval_set_rand.cc
+  add_executable(mcts_ttt_eval_play mcts_ttt_eval_play.cc
                 ${OPEN_SPIEL_OBJECTS}
                 $<TARGET_OBJECTS:alpha_zero_torch>
                 $<TARGET_OBJECTS:bots>)
-  target_link_libraries (mcts_ttt_eval_set_rand ${TORCH_LIBRARIES})
+  target_link_libraries (mcts_ttt_eval_play ${TORCH_LIBRARIES})
 
   add_executable(dqn_torch_example dqn_torch_example.cc
                 ${OPEN_SPIEL_OBJECTS}
