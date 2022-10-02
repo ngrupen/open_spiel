@@ -104,29 +104,45 @@ struct Trajectory {
 Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
                     std::vector<std::unique_ptr<MCTSBot>>* bots,
                     std::mt19937* rng, double temperature, int temperature_drop,
-                    double cutoff_value, bool verbose = false) {
+                    double cutoff_value, int max_simulations, std::shared_ptr<Evaluator> vp_eval,
+                    bool verbose = false) {
   std::unique_ptr<open_spiel::State> state = game.NewInitialState();
   std::vector<std::string> history;
   Trajectory trajectory;
 
   while (true) {
     open_spiel::Player player = state->CurrentPlayer();
-    std::unique_ptr<SearchNode> root = (*bots)[player]->MCTSearch(*state);
     open_spiel::ActionsAndProbs policy;
-    policy.reserve(root->children.size());
-    for (const SearchNode& c : root->children) {
-      policy.emplace_back(c.action,
-                          std::pow(c.explore_count, 1.0 / temperature));
-    }
-    NormalizePolicy(&policy);
     open_spiel::Action action;
-    if (history.size() >= temperature_drop) {
-      action = root->BestChild().action;
-    } else {
-      action = open_spiel::SampleAction(policy, *rng).first;
+    double root_value;
+    if (max_simulations <= 1) {
+        // sample from prior
+        std::unique_ptr<State> working_state = state->Clone();
+        policy = vp_eval->Prior(*working_state);
+        NormalizePolicy(&policy);
+        action = open_spiel::SampleAction(policy, *rng).first;
+        root_value = vp_eval->Evaluate(*working_state).front();
+    }
+    else {
+        //  MCTS search
+        std::unique_ptr<SearchNode> root = (*bots)[player]->MCTSearch(*state);
+        policy.reserve(root->children.size());
+        for (const SearchNode& c : root->children) {
+        policy.emplace_back(c.action,
+                            std::pow(c.explore_count, 1.0 / temperature));
+        }
+
+        NormalizePolicy(&policy);
+
+        if (history.size() >= temperature_drop) {
+            action = root->BestChild().action;
+        } else {
+            action = open_spiel::SampleAction(policy, *rng).first;
+        }
+
+        root_value = root->total_reward / root->explore_count;
     }
 
-    double root_value = root->total_reward / root->explore_count;
     trajectory.states.push_back(Trajectory::State{
         state->ObservationTensor(), player, state->LegalActions(), action,
         std::move(policy), root_value});
@@ -152,6 +168,75 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
                 absl::StrJoin(history, " "));
   return trajectory;
 }
+
+// Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
+//                     std::vector<std::unique_ptr<MCTSBot>>* bots,
+//                     std::mt19937* rng, double temperature, int temperature_drop,
+//                     double cutoff_value, int max_simulations, std::shared_ptr<Evaluator> vp_eval,
+//                     bool verbose = false) {
+//   std::unique_ptr<open_spiel::State> state = game.NewInitialState();
+//   std::vector<std::string> history;
+//   Trajectory trajectory;
+
+//   while (true) {
+//     open_spiel::Player player = state->CurrentPlayer();
+//     open_spiel::ActionsAndProbs policy;
+//     std::unique_ptr<SearchNode> root = (*bots)[player]->MCTSearch(*state);
+//     policy.reserve(root->children.size());
+//     std::cerr << "Root children size: " << root->children.size() << std::endl;
+//     for (const SearchNode& c : root->children) {
+//       policy.emplace_back(c.action,
+//                           std::pow(c.explore_count, 1.0 / temperature));
+//     }
+
+//     std::cerr << "Pre-normalization policy" << std::endl;
+//     for (const std::pair<Action, double>& outcome : policy) {
+//         std::cerr << "Outcome first: " << outcome.first << std::endl;
+//         std::cerr << "Outcome second: " << outcome.second << std::endl;
+//     }
+//     std::cerr << " " << std::endl;
+
+//     NormalizePolicy(&policy);
+//     std::cerr << "Post-normalization policy" << std::endl;
+//     for (const std::pair<Action, double>& outcome : policy) {
+//         std::cerr << "Outcome first: " << outcome.first << std::endl;
+//         std::cerr << "Outcome second: " << outcome.second << std::endl;
+//     }
+//     std::cerr << " " << std::endl;
+
+//     open_spiel::Action action;
+//     if (history.size() >= temperature_drop) {
+//       action = root->BestChild().action;
+//     } else {
+//       action = open_spiel::SampleAction(policy, *rng).first;
+//     }
+
+//     double root_value = root->total_reward / root->explore_count;
+//     trajectory.states.push_back(Trajectory::State{
+//         state->ObservationTensor(), player, state->LegalActions(), action,
+//         std::move(policy), root_value});
+//     std::string action_str = state->ActionToString(player, action);
+//     history.push_back(action_str);
+//     state->ApplyAction(action);
+//     if (verbose) {
+//       logger->Print("Player: %d, action: %s", player, action_str);
+//     }
+//     if (state->IsTerminal()) {
+//       trajectory.returns = state->Returns();
+//       break;
+//     } else if (std::abs(root_value) > cutoff_value) {
+//       trajectory.returns.resize(2);
+//       trajectory.returns[player] = root_value;
+//       trajectory.returns[1 - player] = -root_value;
+//       break;
+//     }
+//   }
+
+//   logger->Print("Game %d: Returns: %s; Actions: %s", game_num,
+//                 absl::StrJoin(trajectory.returns, " "),
+//                 absl::StrJoin(history, " "));
+//   return trajectory;
+// }
 
 std::unique_ptr<MCTSBot> InitAZBot(const AlphaZeroConfig& config,
                                    const open_spiel::Game& game,
@@ -190,7 +275,8 @@ void actor(const open_spiel::Game& game, const AlphaZeroConfig& config, int num,
                                                : game.MaxUtility() + 1);
     if (!trajectory_queue->Push(
             PlayGame(logger.get(), game_num, game, &bots, &rng,
-                     config.temperature, config.temperature_drop, cutoff),
+                     config.temperature, config.temperature_drop, cutoff,
+                     config.max_simulations, vp_eval),
             absl::Seconds(10))) {
       logger->Print("Failed to push a trajectory after 10 seconds.");
     }
@@ -273,7 +359,8 @@ void evaluator(const open_spiel::Game& game, const AlphaZeroConfig& config,
     logger.Print("Running MCTS with %d simulations", rand_max_simulations);
     Trajectory trajectory = PlayGame(
         &logger, game_num, game, &bots, &rng, /*temperature=*/1,
-        /*temperature_drop=*/0, /*cutoff_value=*/game.MaxUtility() + 1);
+        /*temperature_drop=*/0, /*cutoff_value=*/game.MaxUtility() + 1,
+        config.max_simulations, vp_eval);
 
     results->Add(difficulty, trajectory.returns[az_player]);
     logger.Print("Game %d: AZ: %5.2f, MCTS: %5.2f, MCTS-sims: %d, length: %d",
