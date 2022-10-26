@@ -128,6 +128,10 @@ set(GAME_SOURCES
   tarok/contracts.h
   tic_tac_toe.cc
   tic_tac_toe.h
+  tic_tac_toe_4x4.cc
+  tic_tac_toe_4x4.h
+  tic_tac_toe_5x5.cc
+  tic_tac_toe_5x5.h
   tic_tac_toe_supergame_A.cc
   tic_tac_toe_supergame_A.h
   tic_tac_toe_supergame_A_stacked.cc
@@ -469,6 +473,14 @@ add_test(tarok_test tarok_test)
 add_executable(tic_tac_toe_test tic_tac_toe_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
 add_test(tic_tac_toe_test tic_tac_toe_test)
+
+add_executable(tic_tac_toe_4x4_test tic_tac_toe_4x4_test.cc ${OPEN_SPIEL_OBJECTS}
+               $<TARGET_OBJECTS:tests>)
+add_test(tic_tac_toe_4x4_test tic_tac_toe_4x4_test)
+
+add_executable(tic_tac_toe_5x5_test tic_tac_toe_5x5_test.cc ${OPEN_SPIEL_OBJECTS}
+               $<TARGET_OBJECTS:tests>)
+add_test(tic_tac_toe_5x5_test tic_tac_toe_5x5_test)
 
 add_executable(tic_tac_toe_supergame_A_test tic_tac_toe_supergame_A_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
