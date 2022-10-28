@@ -80,6 +80,7 @@ std::pair<std::vector<double>, std::vector<std::string>> PlayGame(
     const std::vector<std::string>& initial_actions) {
   bool quiet = absl::GetFlag(FLAGS_quiet);
   std::unique_ptr<open_spiel::State> state = game.NewInitialState();
+  std::string init_state_id = state->GetIDString();
   std::vector<std::string> history;
 
   for (const auto& action_str : initial_actions) {
