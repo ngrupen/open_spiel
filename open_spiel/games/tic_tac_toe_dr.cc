@@ -266,6 +266,11 @@ void TicTacToeDRState::FillBoardFromStr(std::string state_str) {
       current_player_ = 0;
     else
       current_player_ = 1;
+    
+    if (num_os > num_xs) {
+      std::cout << "State ID: " << state_str << std::endl;
+      SpielFatalError("Illegal starting state!");
+    }
 
     // Account for prior moves
     num_moves_ = num_xs + num_os;
