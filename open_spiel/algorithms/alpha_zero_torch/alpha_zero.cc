@@ -164,7 +164,7 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
     }
   }
 
-  logger->Print("Game %d: Returns: %s; Actions: %s; Initial State %s", game_num,
+  logger->Print("Game %d: Returns: %s; Actions: %s; Initial State: %s", game_num,
                 absl::StrJoin(trajectory.returns, " "),
                 absl::StrJoin(history, " "),
                 init_state_id);
