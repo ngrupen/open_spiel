@@ -111,7 +111,6 @@ int main(int argc, char** argv) {
     std::vector<std::vector<double>> all_az_policies;
     std::vector<std::vector<Action>> all_legal_moves;
     std::vector<std::vector<double>> all_oracle_values;
-    // std::vector<std::vector<double>> terminal_values;
     for (auto const & [state_id_str, state] : all_state_ids) {
       switch (state->GetType()) {
         case StateType::kDecision: {
@@ -193,4 +192,5 @@ int main(int argc, char** argv) {
       }
     }
     outFile.close();
+
 }

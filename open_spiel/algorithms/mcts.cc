@@ -233,6 +233,7 @@ Action MCTSBot::Step(const State& state) {
     // sample from prior
     return root->SampleFromPrior(state, evaluator_.get(), &rng_);
   } else {
+
     // return best action
     const SearchNode& best = root->BestChild();
 
