@@ -130,6 +130,8 @@ set(GAME_SOURCES
   tic_tac_toe.h
   tic_tac_toe_dr.cc
   tic_tac_toe_dr.h
+  tic_tac_toe_turns.cc
+  tic_tac_toe_turns.h
   tic_tac_toe_4x4.cc
   tic_tac_toe_4x4.h
   tic_tac_toe_5x5.cc
@@ -479,6 +481,10 @@ add_test(tic_tac_toe_test tic_tac_toe_test)
 add_executable(tic_tac_toe_dr_test tic_tac_toe_dr_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
 add_test(tic_tac_toe_dr_test tic_tac_toe_dr_test)
+
+add_executable(tic_tac_toe_turns_test tic_tac_toe_turns_test.cc ${OPEN_SPIEL_OBJECTS}
+               $<TARGET_OBJECTS:tests>)
+add_test(tic_tac_toe_turns_test tic_tac_toe_turns_test)
 
 add_executable(tic_tac_toe_4x4_test tic_tac_toe_4x4_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
