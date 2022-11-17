@@ -128,6 +128,8 @@ set(GAME_SOURCES
   tarok/contracts.h
   tic_tac_toe.cc
   tic_tac_toe.h
+  tic_tac_toe_rand_start.cc
+  tic_tac_toe_rand_start.h
   tic_tac_toe_supergame_A.cc
   tic_tac_toe_supergame_A.h
   tic_tac_toe_supergame_A_stacked.cc

@@ -99,4 +99,9 @@ if (OPEN_SPIEL_BUILD_WITH_LIBTORCH)
                 ${OPEN_SPIEL_OBJECTS}
                 $<TARGET_OBJECTS:dqn_torch>)
   target_link_libraries (dqn_torch_example ${TORCH_LIBRARIES})
+
+  add_executable(state_value_pairs state_value_pairs.cc
+                ${OPEN_SPIEL_OBJECTS}
+                $<TARGET_OBJECTS:alpha_zero_torch>)
+  target_link_libraries (state_value_pairs ${TORCH_LIBRARIES})
 endif ()

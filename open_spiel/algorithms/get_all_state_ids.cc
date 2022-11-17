@@ -16,7 +16,6 @@
 
 namespace open_spiel {
 namespace algorithms {
-namespace {
 
 // Walk a subgame and return all states contained in the subgames. This does
 // a recursive tree walk, therefore all valid sequences must have finite number
@@ -67,8 +66,6 @@ void GetSubgameStateIDs(State* state,
                      stop_at_duplicates);
   }
 }
-
-}  // namespace
 
 std::map<std::string, std::unique_ptr<State>> GetAllStateIDs(
     const Game& game, int depth_limit, bool include_terminals,

@@ -44,6 +44,12 @@ std::map<std::string, std::unique_ptr<State>> GetAllStateIDs(
     const Game& game, int depth_limit, bool include_terminals,
     bool include_chance_states, bool stop_at_duplicates = false);
 
+void GetSubgameStateIDs(State* state,
+                      std::map<std::string, std::unique_ptr<State>>* all_state_ids,
+                      int depth_limit, int depth, bool include_terminals,
+                      bool include_chance_states,
+                      bool stop_at_duplicates);
+
 }  // namespace algorithms
 }  // namespace open_spiel
 
