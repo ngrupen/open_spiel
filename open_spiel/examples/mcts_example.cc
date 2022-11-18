@@ -97,8 +97,6 @@ std::pair<std::vector<double>, std::vector<std::string>> PlayGame(
 
   while (!state->IsTerminal()) {
     open_spiel::Player player = state->CurrentPlayer();
-    if (!quiet) std::cerr << "player turn: " << player << std::endl;
-
     open_spiel::Action action;
     if (state->IsChanceNode()) {
       // Chance node; sample one according to underlying distribution.
