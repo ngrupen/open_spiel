@@ -107,6 +107,7 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
                     double cutoff_value, int max_simulations, std::shared_ptr<Evaluator> vp_eval,
                     bool verbose = false) {
   std::unique_ptr<open_spiel::State> state = game.NewInitialState();
+  std::string init_state_id = state->GetIDString();
   std::vector<std::string> history;
   Trajectory trajectory;
 
@@ -163,9 +164,10 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
     }
   }
 
-  logger->Print("Game %d: Returns: %s; Actions: %s", game_num,
+  logger->Print("Game %d: Returns: %s; Actions: %s; Initial State: %s", game_num,
                 absl::StrJoin(trajectory.returns, " "),
-                absl::StrJoin(history, " "));
+                absl::StrJoin(history, " "),
+                init_state_id);
   return trajectory;
 }
 
