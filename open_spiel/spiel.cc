@@ -755,6 +755,7 @@ std::vector<float> State::ObservationTensor(Player player) const {
   // Python). This can lead to doing this check twice.
   // TODO(author2): Do we want to prevent executing this twice for games
   // that implement it?
+//   std::cerr << "Player (from spiel.h):  " << player << std::endl;
   SPIEL_CHECK_GE(player, 0);
   SPIEL_CHECK_LT(player, num_players_);
   std::vector<float> observation(game_->ObservationTensorSize());

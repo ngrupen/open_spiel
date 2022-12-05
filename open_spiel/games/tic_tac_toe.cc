@@ -84,6 +84,9 @@ void TicTacToeState::DoApplyAction(Action move) {
     outcome_ = current_player_;
   }
   current_player_ = 1 - current_player_;
+//   std::cerr << "Current player (from TTT):  " << current_player_ << std::endl;
+  SPIEL_CHECK_LT(current_player_, num_players_);
+  SPIEL_CHECK_GE(current_player_, 0);
   num_moves_ += 1;
 }
 
