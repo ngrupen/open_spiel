@@ -164,10 +164,6 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
 //   std::cerr << "Playing game! "  << std::endl;
 
   // for value vs. policy coin flip
-  absl::uniform_real_distribution<double> value_vs_policy_dist(0.0, 1.0);
-
-  // TODO: NEED TO MAKE SURE NUMBERS AREN'T SAMPLED IN SAME ORDER EVERY TIME
-    // BUT OTHERWISE LOGIC IS THERE!
   int idx_temp = 0;
   while (true) {
     idx_temp = idx_temp + 1;
@@ -233,16 +229,10 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
                     temp_value = temp_state->Returns().front();
                     // open_spiel::SpielFatalError("Done!");
                 } else {
-                    // returns = evaluator_->Evaluate(*working_state);
                     temp_value = vp_eval->Evaluate(*temp_state).front();
                 }
 
-                // double temp_value = vp_eval->Evaluate(*temp_state).front();
-                // std::cerr << "Temp value: " << temp_value << std::endl;
                 values.push_back(temp_value);
-                // std::cerr << " " << std::endl;
-                // std::cerr << "Orig state current player 3: " << state->CurrentPlayer() << std::endl;
-                // std::cerr << "Temp state current player 3: " << temp_state->CurrentPlayer() << std::endl;
             }
 
             // Derive policy from next state values
@@ -258,6 +248,9 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
             }
             // std::cerr << " " << std::endl;
             // open_spiel::SpielFatalError("Using value probability in PlayGame!");
+            // root value = value network's estimate
+            std::unique_ptr<State> working_state = state->Clone();
+            root_value = vp_eval->Evaluate(*working_state).front();
         } else {
             // Normal AZ policy construction
             // std::cerr << "Using polic! " << std::endl;
@@ -265,6 +258,7 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
                 policy.emplace_back(c.action,
                                 std::pow(c.explore_count, 1.0 / temperature));
             }
+            root_value = root->total_reward / root->explore_count;
         }
 
         NormalizePolicy(&policy);
@@ -274,8 +268,11 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
         } else {
             action = open_spiel::SampleAction(policy, *rng).first;
         }
-
-        root_value = root->total_reward / root->explore_count;
+        // TODO: NOT ACTUALLY CHANGING VALUE TARGET HERE!
+        // TODO: TWO IDEAS:
+        //     1) When using value function: use evaluation of current state as root value
+        //     2) Add value action seelction to root (i.e. use value action selection in mcts)
+        // root_value = root->total_reward / root->explore_count;
     }
 
     // std::cerr << "Player (from above):  " << player << std::endl;
