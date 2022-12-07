@@ -20,9 +20,13 @@
 #include <memory>
 #include <random>
 #include <vector>
+// #include <math.h>
+// #include <cstdlib>
+
 
 #include "open_spiel/abseil-cpp/absl/algorithm/container.h"
 #include "open_spiel/abseil-cpp/absl/random/distributions.h"
+#include "open_spiel/abseil-cpp/absl/random/random.h"
 #include "open_spiel/abseil-cpp/absl/strings/str_cat.h"
 #include "open_spiel/abseil-cpp/absl/strings/str_format.h"
 #include "open_spiel/abseil-cpp/absl/time/clock.h"
@@ -266,6 +270,35 @@ std::pair<ActionsAndProbs, Action> MCTSBot::StepWithPolicy(const State& state) {
   return {{{action, 1.}}, action};
 }
 
+std::vector<double> Softmax(
+    const std::vector<double>& values, double lambda) {
+  std::vector<double> new_values = values;
+  for (double& new_value : new_values) {
+    new_value *= lambda;
+  }
+  double max = *std::max_element(new_values.begin(), new_values.end());
+
+  double denom = 0;
+  for (int idx = 0; idx < values.size(); ++idx) {
+    new_values[idx] = std::exp(new_values[idx] - max);
+    denom += new_values[idx];
+  }
+
+  SPIEL_CHECK_GT(denom, 0);
+  double prob_sum = 0.0;
+  std::vector<double> policy;
+  policy.reserve(new_values.size());
+  for (int idx = 0; idx < values.size(); ++idx) {
+    double prob = new_values[idx] / denom;
+    SPIEL_CHECK_PROB(prob);
+    prob_sum += prob;
+    policy.push_back(prob);
+  }
+
+  SPIEL_CHECK_FLOAT_NEAR(prob_sum, 1.0, 1e-12);
+  return policy;
+}
+
 std::unique_ptr<State> MCTSBot::ApplyTreePolicy(
     SearchNode* root, const State& state,
     std::vector<SearchNode*>* visit_path) {
@@ -275,7 +308,44 @@ std::unique_ptr<State> MCTSBot::ApplyTreePolicy(
   while (!working_state->IsTerminal() && current_node->explore_count > 0) {
     if (current_node->children.empty()) {
       // For a new node, initialize its state, then choose a child as normal.
-      ActionsAndProbs legal_actions = evaluator_->Prior(*working_state);
+      
+      
+    //   ActionsAndProbs legal_actions = evaluator_->Prior(*working_state);
+      ActionsAndProbs legal_actions;
+      if (absl::Uniform(rng_, 0.0, 1.0) < 0.5) {
+        // Use value function for action selection
+        // Collect next state values
+        std::vector<double> values;
+        std::vector<Action> temp_actions = working_state->LegalActions();
+        for (const Action& action : temp_actions) {
+            std::unique_ptr<State> temp_state = state.Clone();
+            // std::cerr << "Applying action: " << action << std::endl;
+            temp_state->ApplyAction(action);
+            // std::cerr << "DONE Applying action: " << action << std::endl;
+                
+            double temp_value;
+            if (temp_state->IsTerminal()) {
+                temp_value = temp_state->Returns().front();
+            } else {
+                temp_value = evaluator_->Evaluate(*temp_state).front();
+            }
+
+            values.push_back(temp_value);
+        }
+
+        // Derive policy from next state values
+        // std::cerr << "Values (pre-soft): " << absl::StrJoin(values, ",") << std::endl;
+        std::vector<double> policy_probs = Softmax(values, 1.0);
+        // std::cerr << "Values (post-soft): " << absl::StrJoin(policy_probs, ",") << std::endl;
+        int idx = 0;
+        for (const Action& action : temp_actions) {
+            legal_actions.emplace_back(action, policy_probs[idx]);
+        }
+      } else {
+        // Normal AZ policy construction
+        legal_actions = evaluator_->Prior(*working_state);
+      }
+
       if (current_node == root && dirichlet_alpha_ > 0) {
         std::vector<double> noise =
             dirichlet_noise(legal_actions.size(), dirichlet_alpha_, &rng_);

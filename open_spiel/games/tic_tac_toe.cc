@@ -78,6 +78,8 @@ std::string StateToString(CellState state) {
 }
 
 void TicTacToeState::DoApplyAction(Action move) {
+//   std::cerr << "board:  " << GetIDString() << std::endl;
+//   std::cerr << "move:  " << move << std::endl;
   SPIEL_CHECK_EQ(board_[move], CellState::kEmpty);
   board_[move] = PlayerToState(CurrentPlayer());
   if (HasLine(current_player_)) {

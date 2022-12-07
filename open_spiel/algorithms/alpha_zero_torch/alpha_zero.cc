@@ -133,24 +133,6 @@ std::vector<double> Softmax(
   return policy;
 }
 
-// std::vector<double> softmax(std::vector<double> input) {
-// 	std::vector<double> exp_values;
-// 	double exp_sum = 0;
-//     for (int idx = 0; idx < input.size(); idx++) {
-//         double exp_val = exp(input[idx]);
-//         exp_values.push_back(exp_val);
-//         exp_sum += exp_val;
-//     }
-
-// 	std::vector<double> probs;
-//     for (int idx = 0; idx < exp_values.size(); idx++) {
-//         prob = exp_values[idx] / exp_sum;
-//         probs.push_back(exp_val);
-//     }
-    
-//     return probs
-// }
-
 Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
                     std::vector<std::unique_ptr<MCTSBot>>* bots,
                     std::mt19937* rng, double temperature, int temperature_drop,
@@ -186,80 +168,48 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
         policy.reserve(root->children.size());
 
         // If using policy do this
-        // for (const SearchNode& c : root->children) {
-        //     // std::cerr << "Action: " << c.action << std::endl;
-        //     policy.emplace_back(c.action,
-        //                     std::pow(c.explore_count, 1.0 / temperature));
-        // }
-
-        if (value_action_selection && absl::Uniform(*rng, 0.0, 1.0) < use_value_probability) {
-            // Use value function for action selection
-            // double pre_cutoff_v2 = absl::Uniform(*rng, 0.0, 1.0);
-            // std::cerr << "cutoff (pre V2): " << pre_cutoff_v2 << std::endl;
-            // bool post_cutoff_v2 = pre_cutoff_v2 < use_value_probability;
-            // std::cerr << "cutoff (post V2): " << post_cutoff_v2 << std::endl;
-
-            // Collect next state values
-            std::vector<double> values;
-            for (const SearchNode& c : root->children) {
-                // std::cerr << " " << c.action << std::endl;
-                // std::cerr << "Action: " << c.action << std::endl;
-                std::unique_ptr<State> temp_state = state->Clone();
-                // std::cerr << "Orig state current player 1: " << state->CurrentPlayer() << std::endl;
-                // std::cerr << "Temp state current player 1: " << temp_state->CurrentPlayer() << std::endl;
-                temp_state->ApplyAction(c.action);
-                // std::cerr << "Orig state current player 2: " << state->CurrentPlayer() << std::endl;
-                // std::cerr << "Temp state current player 2: " << temp_state->CurrentPlayer() << std::endl;
-                // std::cerr << "State: " << state->GetIDString() << std::endl;
-                // std::cerr << "state is terminal: " << state->IsTerminal() << std::endl;
-                // std::cerr << "Temp state: " << temp_state->GetIDString() << std::endl;
-                // std::cerr << "temp state is terminal: " << temp_state->IsTerminal() << std::endl;
-                // FOUND IT --> TEMP STATE IS BECOMING TERMINAL after applying action
-                // SO EVALUATION FAILS --> WHY ISN'T TERMINAL CHECK PICKED UP THOUGH??
-                // if (temp_state->CurrentPlayer() == -4) {
-                //     std::cerr << "Evaling -4 " << std::endl;
-                //     std::cerr << "State:  " << temp_state->GetIDString() << std::endl;
-                //     std::cerr << "state is terminal: " << state->IsTerminal() << std::endl;
-                //     std::cerr << "temp state is terminal: " << temp_state->IsTerminal() << std::endl;
-                //     double blah_value = vp_eval->Evaluate(*temp_state).front();
-                // }
-                
-                double temp_value;
-                if (temp_state->IsTerminal()) {
-                    temp_value = temp_state->Returns().front();
-                    // open_spiel::SpielFatalError("Done!");
-                } else {
-                    temp_value = vp_eval->Evaluate(*temp_state).front();
-                }
-
-                values.push_back(temp_value);
-            }
-
-            // Derive policy from next state values
-            std::vector<double> policy_probs = Softmax(values, 1.0);
-            // std::cerr << "Value probs: " << absl::StrJoin(policy_probs, ",") << std::endl;
-            int idx = 0;
-            for (const SearchNode& c : root->children) {
-                // std::cerr << "Action: " << c.action << std::endl;
-                // std::cerr << "Policy probs (from value): " << policy_probs[idx] << std::endl;
-                // std::cerr << "Legal (from value): " << state->LegalActions() << std::endl;
-                policy.emplace_back(c.action,
-                                std::pow(policy_probs[idx], 1.0 / temperature));
-            }
-            // std::cerr << " " << std::endl;
-            // open_spiel::SpielFatalError("Using value probability in PlayGame!");
-            // root value = value network's estimate
-            std::unique_ptr<State> working_state = state->Clone();
-            root_value = vp_eval->Evaluate(*working_state).front();
-        } else {
-            // Normal AZ policy construction
-            // std::cerr << "Using polic! " << std::endl;
-            for (const SearchNode& c : root->children) {
-                policy.emplace_back(c.action,
-                                std::pow(c.explore_count, 1.0 / temperature));
-            }
-            root_value = root->total_reward / root->explore_count;
+        for (const SearchNode& c : root->children) {
+            // std::cerr << "Action: " << c.action << std::endl;
+            policy.emplace_back(c.action,
+                            std::pow(c.explore_count, 1.0 / temperature));
         }
+
+        // if (value_action_selection && absl::Uniform(*rng, 0.0, 1.0) < use_value_probability) {
+        //     // Use value function for action selection
+        //     // Collect next state values
+        //     std::vector<double> values;
+        //     for (const SearchNode& c : root->children) {
+        //         std::unique_ptr<State> temp_state = state->Clone();
+        //         temp_state->ApplyAction(c.action);
+                
+        //         double temp_value;
+        //         if (temp_state->IsTerminal()) {
+        //             temp_value = temp_state->Returns().front();
+        //         } else {
+        //             temp_value = vp_eval->Evaluate(*temp_state).front();
+        //         }
+
+        //         values.push_back(temp_value);
+        //     }
+
+        //     // Derive policy from next state values
+        //     std::vector<double> policy_probs = Softmax(values, 1.0);
+        //     int idx = 0;
+        //     for (const SearchNode& c : root->children) {
+        //         policy.emplace_back(c.action,
+        //                         std::pow(policy_probs[idx], 1.0 / temperature));
+        //     }
+        //     // root value = value network's estimate
+        //     std::unique_ptr<State> working_state = state->Clone();
+        //     root_value = vp_eval->Evaluate(*working_state).front();
+        // } else {
+        //     // Normal AZ policy construction
+        //     for (const SearchNode& c : root->children) {
+        //         policy.emplace_back(c.action,
+        //                         std::pow(c.explore_count, 1.0 / temperature));
+        //     }
+        //     root_value = root->total_reward / root->explore_count;
+        // }
 
         NormalizePolicy(&policy);
 
@@ -272,7 +222,7 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
         // TODO: TWO IDEAS:
         //     1) When using value function: use evaluation of current state as root value
         //     2) Add value action seelction to root (i.e. use value action selection in mcts)
-        // root_value = root->total_reward / root->explore_count;
+        root_value = root->total_reward / root->explore_count;
     }
 
     // std::cerr << "Player (from above):  " << player << std::endl;
