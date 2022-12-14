@@ -168,48 +168,49 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
         policy.reserve(root->children.size());
 
         // If using policy do this
-        for (const SearchNode& c : root->children) {
-            // std::cerr << "Action: " << c.action << std::endl;
-            policy.emplace_back(c.action,
-                            std::pow(c.explore_count, 1.0 / temperature));
-        }
-
-        // if (value_action_selection && absl::Uniform(*rng, 0.0, 1.0) < use_value_probability) {
-        //     // Use value function for action selection
-        //     // Collect next state values
-        //     std::vector<double> values;
-        //     for (const SearchNode& c : root->children) {
-        //         std::unique_ptr<State> temp_state = state->Clone();
-        //         temp_state->ApplyAction(c.action);
-                
-        //         double temp_value;
-        //         if (temp_state->IsTerminal()) {
-        //             temp_value = temp_state->Returns().front();
-        //         } else {
-        //             temp_value = vp_eval->Evaluate(*temp_state).front();
-        //         }
-
-        //         values.push_back(temp_value);
-        //     }
-
-        //     // Derive policy from next state values
-        //     std::vector<double> policy_probs = Softmax(values, 1.0);
-        //     int idx = 0;
-        //     for (const SearchNode& c : root->children) {
-        //         policy.emplace_back(c.action,
-        //                         std::pow(policy_probs[idx], 1.0 / temperature));
-        //     }
-        //     // root value = value network's estimate
-        //     std::unique_ptr<State> working_state = state->Clone();
-        //     root_value = vp_eval->Evaluate(*working_state).front();
-        // } else {
-        //     // Normal AZ policy construction
-        //     for (const SearchNode& c : root->children) {
-        //         policy.emplace_back(c.action,
-        //                         std::pow(c.explore_count, 1.0 / temperature));
-        //     }
-        //     root_value = root->total_reward / root->explore_count;
+        // for (const SearchNode& c : root->children) {
+        //     // std::cerr << "Action: " << c.action << std::endl;
+        //     policy.emplace_back(c.action,
+        //                     std::pow(c.explore_count, 1.0 / temperature));
         // }
+
+        // If using policy and value do this
+        if (value_action_selection && absl::Uniform(*rng, 0.0, 1.0) < use_value_probability) {
+            // Use value function for action selection
+            // Collect next state values
+            std::vector<double> values;
+            for (const SearchNode& c : root->children) {
+                std::unique_ptr<State> temp_state = state->Clone();
+                temp_state->ApplyAction(c.action);
+                
+                double temp_value;
+                if (temp_state->IsTerminal()) {
+                    temp_value = temp_state->Returns().front();
+                } else {
+                    temp_value = vp_eval->Evaluate(*temp_state).front();
+                }
+
+                values.push_back(temp_value);
+            }
+
+            // Derive policy from next state values
+            std::vector<double> policy_probs = Softmax(values, 1.0);
+            int idx = 0;
+            for (const SearchNode& c : root->children) {
+                policy.emplace_back(c.action,
+                                std::pow(policy_probs[idx], 1.0 / temperature));
+            }
+            // root value = value network's estimate
+            std::unique_ptr<State> working_state = state->Clone();
+            root_value = vp_eval->Evaluate(*working_state).front();
+        } else {
+            // Normal AZ policy construction
+            for (const SearchNode& c : root->children) {
+                policy.emplace_back(c.action,
+                                std::pow(c.explore_count, 1.0 / temperature));
+            }
+            root_value = root->total_reward / root->explore_count;
+        }
 
         NormalizePolicy(&policy);
 
@@ -218,10 +219,6 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
         } else {
             action = open_spiel::SampleAction(policy, *rng).first;
         }
-        // TODO: NOT ACTUALLY CHANGING VALUE TARGET HERE!
-        // TODO: TWO IDEAS:
-        //     1) When using value function: use evaluation of current state as root value
-        //     2) Add value action seelction to root (i.e. use value action selection in mcts)
         root_value = root->total_reward / root->explore_count;
     }
 

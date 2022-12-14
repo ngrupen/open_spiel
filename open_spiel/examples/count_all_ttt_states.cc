@@ -39,8 +39,8 @@ using open_spiel::algorithms::GetAllHistories;
 //     of the order in which the moves were played.
 int main(int argc, char** argv) {
   for (const std::string& game_name :
-       {std::string("tic_tac_toe"), std::string("tic_tac_toe_supergame_A"),
-        std::string("tic_tac_toe_supergame_B")}) {
+       {std::string("tic_tac_toe"), std::string("tic_tac_toe_4x4"),
+        std::string("tic_tac_toe_5x5")}) {
     std::shared_ptr<const open_spiel::Game> game =
         LoadGame(std::string(game_name));
     std::vector<std::unique_ptr<open_spiel::State>> all_histories =
@@ -74,6 +74,7 @@ int main(int argc, char** argv) {
     }
     const int num_nonterminal_states = nonterminal_states.size();
     const int num_terminal_states = terminal_states.size();
+    std::cout << " " << std::endl;
     std::cout << "Game: " << game_name
               << ", num_histories: " << num_histories
               << ", num_terminal_histories: " << num_terminal_histories

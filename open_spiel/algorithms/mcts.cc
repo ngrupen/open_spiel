@@ -310,41 +310,41 @@ std::unique_ptr<State> MCTSBot::ApplyTreePolicy(
       // For a new node, initialize its state, then choose a child as normal.
       
       
-    //   ActionsAndProbs legal_actions = evaluator_->Prior(*working_state);
-      ActionsAndProbs legal_actions;
-      if (absl::Uniform(rng_, 0.0, 1.0) < 0.5) {
-        // Use value function for action selection
-        // Collect next state values
-        std::vector<double> values;
-        std::vector<Action> temp_actions = working_state->LegalActions();
-        for (const Action& action : temp_actions) {
-            std::unique_ptr<State> temp_state = state.Clone();
-            // std::cerr << "Applying action: " << action << std::endl;
-            temp_state->ApplyAction(action);
-            // std::cerr << "DONE Applying action: " << action << std::endl;
+      ActionsAndProbs legal_actions = evaluator_->Prior(*working_state);
+    //   ActionsAndProbs legal_actions;
+    //   if (absl::Uniform(rng_, 0.0, 1.0) < 0.5) {
+    //     // Use value function for action selection
+    //     // Collect next state values
+    //     std::vector<double> values;
+    //     std::vector<Action> temp_actions = working_state->LegalActions();
+    //     for (const Action& action : temp_actions) {
+    //         std::unique_ptr<State> temp_state = state.Clone();
+    //         // std::cerr << "Applying action: " << action << std::endl;
+    //         temp_state->ApplyAction(action);
+    //         // std::cerr << "DONE Applying action: " << action << std::endl;
                 
-            double temp_value;
-            if (temp_state->IsTerminal()) {
-                temp_value = temp_state->Returns().front();
-            } else {
-                temp_value = evaluator_->Evaluate(*temp_state).front();
-            }
+    //         double temp_value;
+    //         if (temp_state->IsTerminal()) {
+    //             temp_value = temp_state->Returns().front();
+    //         } else {
+    //             temp_value = evaluator_->Evaluate(*temp_state).front();
+    //         }
 
-            values.push_back(temp_value);
-        }
+    //         values.push_back(temp_value);
+    //     }
 
         // Derive policy from next state values
         // std::cerr << "Values (pre-soft): " << absl::StrJoin(values, ",") << std::endl;
-        std::vector<double> policy_probs = Softmax(values, 1.0);
-        // std::cerr << "Values (post-soft): " << absl::StrJoin(policy_probs, ",") << std::endl;
-        int idx = 0;
-        for (const Action& action : temp_actions) {
-            legal_actions.emplace_back(action, policy_probs[idx]);
-        }
-      } else {
-        // Normal AZ policy construction
-        legal_actions = evaluator_->Prior(*working_state);
-      }
+    //     std::vector<double> policy_probs = Softmax(values, 1.0);
+    //     // std::cerr << "Values (post-soft): " << absl::StrJoin(policy_probs, ",") << std::endl;
+    //     int idx = 0;
+    //     for (const Action& action : temp_actions) {
+    //         legal_actions.emplace_back(action, policy_probs[idx]);
+    //     }
+    //   } else {
+    //     // Normal AZ policy construction
+    //     legal_actions = evaluator_->Prior(*working_state);
+    //   }
 
       if (current_node == root && dirichlet_alpha_ > 0) {
         std::vector<double> noise =
