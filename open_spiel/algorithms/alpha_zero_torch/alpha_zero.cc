@@ -436,10 +436,37 @@ void learner(const open_spiel::Game& game, const AlphaZeroConfig& config,
         outcomes.Add(p1_outcome > 0 ? 0 : (p1_outcome < 0 ? 1 : 2));
 
         for (const Trajectory::State& state : trajectory->states) {
+          // std::cout << "legal actions: " << state.legal_actions << std::endl;
+          // std::cout << "observation: " << state.observation << std::endl;
+          // std::cout << "policy: " << state.policy << std::endl;
+          // std::cout << "p1 outcome: " << p1_outcome << std::endl;
           replay_buffer.Add(VPNetModel::TrainInputs{state.legal_actions,
                                                     state.observation,
                                                     state.policy, p1_outcome});
-          num_states += 1;
+          
+          open_spiel::GameType game_type = game.GetType();
+          if (game_type.short_name == "tic_tac_toe") {
+
+            std::vector<float> symmetric;
+            for (int cell = 0; cell < 27; cell++){
+              if (cell<9) symmetric.push_back(state.observation[cell]);
+              else if (cell<18) symmetric.push_back(state.observation[cell+9]);
+              else symmetric.push_back(state.observation[cell-9]);
+            }
+
+            // std::cout << "legal actions: " << state.legal_actions << std::endl;
+            // std::cout << "observation: " << symmetric << std::endl;
+            // std::cout << "policy: " << state.policy << std::endl;
+            // std::cout << "p1 outcome: " << -p1_outcome << std::endl;
+
+            replay_buffer.Add(VPNetModel::TrainInputs{state.legal_actions,
+                                                      symmetric,
+                                                      state.policy, -p1_outcome});
+
+            num_states += 2;
+            // if (num_states > 8) open_spiel::SpielFatalError("stop");
+          }
+          else open_spiel::SpielFatalError("Game type not implemented for symmetric trajectories.");
         }
 
         for (int stage = 0; stage < stage_count; ++stage) {
