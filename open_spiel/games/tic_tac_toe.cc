@@ -77,6 +77,19 @@ std::string StateToString(CellState state) {
   }
 }
 
+CellState InvertCellState(CellState state) {
+  switch (state) {
+    case CellState::kEmpty:
+      return CellState::kEmpty;
+    case CellState::kNought:
+      return CellState::kCross;
+    case CellState::kCross:
+      return CellState::kNought;
+    default:
+      SpielFatalError("Unknown state.");
+  }
+}
+
 void TicTacToeState::DoApplyAction(Action move) {
   SPIEL_CHECK_EQ(board_[move], CellState::kEmpty);
   board_[move] = PlayerToState(CurrentPlayer());
@@ -192,18 +205,35 @@ void TicTacToeState::ObservationTensor(Player player,
   // Treat `values` as a 2-d tensor.
   TensorView<2> view(values, {kCellStates, kNumCells}, true);
   for (int cell = 0; cell < kNumCells; ++cell) {
-    // std::cerr << "Cell: " << cell << ", Value: " << board_[cell] << ", Value (int): " << static_cast<int>(board_[cell]) << std::endl;
     view[{static_cast<int>(board_[cell]), cell}] = 1.0;
+  }
+
+  // print out each dimension of tensor view 
+//   for (int idx = 0; idx < 3; idx++) {
+//     for (int cell = 0; cell < kNumCells; cell++) {
+//       std::cerr << "idx: " << idx << ", cell: " << cell << ", view: " << view[{idx, cell}] << std::endl;
+//     }
+//     std::cerr << "----" << std::endl;
+//   }
+}
+
+void TicTacToeState::InvertedObservationTensor(Player player,
+                                       absl::Span<float> values) const {
+  SPIEL_CHECK_GE(player, 0);
+  SPIEL_CHECK_LT(player, num_players_);
+
+  // inverted version
+  TensorView<2> view(values, {kCellStates, kNumCells}, true);
+  for (int cell = 0; cell < kNumCells; ++cell) {
+    view[{static_cast<int>(InvertCellState(board_[cell])), cell}] = 1.0;
   }
 
   // print out each dimension of tensor view   
 //   for (int idx = 0; idx < 3; idx++) {
-    // for (int cell = 0; cell < kNumCells; cell++) {
-    //   std::cerr << "idx: " << idx << ", cell: " << cell << ", view: " << view[{static_cast<int>(board_[idx]), cell}] << std::endl;
-    //   std::cerr << "idx: " << idx << ", cell: " << cell << ", view: " << view[{idx, cell}] << std::endl;
-    
-    // }
-    // std::cerr << "----" << std::endl;
+//     for (int cell = 0; cell < kNumCells; cell++) {
+//       std::cerr << "idx: " << idx << ", cell: " << cell << ", inverted_view: " << view[{idx, cell}] << std::endl;
+//     }
+//     std::cerr << "----" << std::endl;
 //   }
 }
 

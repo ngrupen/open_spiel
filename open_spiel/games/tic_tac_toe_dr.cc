@@ -83,6 +83,19 @@ std::string StateToString(CellState state) {
   }
 }
 
+CellState InvertCellState(CellState state) {
+  switch (state) {
+    case CellState::kEmpty:
+      return CellState::kEmpty;
+    case CellState::kNought:
+      return CellState::kCross;
+    case CellState::kCross:
+      return CellState::kNought;
+    default:
+      SpielFatalError("Unknown state.");
+  }
+}
+
 // CellState StringToState(const char *cell_char) {
 //     std::cout << "input char: " << cell_char << std::endl;
 //     bool temp = cell_char == ".";
@@ -219,13 +232,19 @@ void TicTacToeDRState::ObservationTensor(Player player,
 
   // print out each dimension of tensor view   
 //   for (int idx = 0; idx < 3; idx++) {
-    // for (int cell = 0; cell < kNumCells; cell++) {
-    //   std::cerr << "idx: " << idx << ", cell: " << cell << ", view: " << view[{static_cast<int>(board_[idx]), cell}] << std::endl;
-    //   std::cerr << "idx: " << idx << ", cell: " << cell << ", view: " << view[{idx, cell}] << std::endl;
-    
-    // }
-    // std::cerr << "----" << std::endl;
+//     for (int cell = 0; cell < kNumCells; cell++) {
+//       std::cerr << "idx: " << idx << ", cell: " << cell << ", view: " << view[{idx, cell}] << std::endl;
+//     }
+//     std::cerr << "----" << std::endl;
 //   }
+
+  // inverted version
+//   TensorView<2> inverted_view(values, {kCellStates, kNumCells}, true);
+//   for (int cell = 0; cell < kNumCells; ++cell) {
+//     // std::cerr << "Cell: " << cell << ", Value: " << board_[cell] << ", Value (int): " << static_cast<int>(board_[cell]) << std::endl;
+//     inverted_view[{static_cast<int>(InvertCellState(board_[cell])), cell}] = 1.0;
+//   }
+
 }
 
 void TicTacToeDRState::UndoAction(Player player, Action move) {

@@ -95,13 +95,15 @@ struct Trajectory {
     open_spiel::Action action;
     open_spiel::ActionsAndProbs policy;
     double value;
+    bool inverted;
   };
 
   std::vector<State> states;
   std::vector<double> returns;
 };
 
-Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
+// Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
+std::pair<Trajectory, Trajectory> PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
                     std::vector<std::unique_ptr<MCTSBot>>* bots,
                     std::mt19937* rng, double temperature, int temperature_drop,
                     double cutoff_value, int max_simulations, std::shared_ptr<Evaluator> vp_eval,
@@ -110,6 +112,7 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
   std::string init_state_id = state->GetIDString();
   std::vector<std::string> history;
   Trajectory trajectory;
+  Trajectory inverted_trajectory;
 
   while (true) {
     open_spiel::Player player = state->CurrentPlayer();
@@ -144,22 +147,35 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
         root_value = root->total_reward / root->explore_count;
     }
 
+    // store regular states/observations
     trajectory.states.push_back(Trajectory::State{
         state->ObservationTensor(), player, state->LegalActions(), action,
-        std::move(policy), root_value});
+        std::move(policy), root_value, false});
+
+    // store inverted states/observations
+    inverted_trajectory.states.push_back(Trajectory::State{
+        state->InvertedObservationTensor(), player, state->LegalActions(), action,
+        std::move(policy), root_value, true});
+
     std::string action_str = state->ActionToString(player, action);
     history.push_back(action_str);
     state->ApplyAction(action);
+
     if (verbose) {
       logger->Print("Player: %d, action: %s", player, action_str);
     }
     if (state->IsTerminal()) {
       trajectory.returns = state->Returns();
+      inverted_trajectory.returns = state->Returns();
       break;
     } else if (std::abs(root_value) > cutoff_value) {
       trajectory.returns.resize(2);
       trajectory.returns[player] = root_value;
       trajectory.returns[1 - player] = -root_value;
+
+      inverted_trajectory.returns.resize(2);
+      inverted_trajectory.returns[player] = root_value;
+      inverted_trajectory.returns[1 - player] = -root_value;
       break;
     }
   }
@@ -168,77 +184,9 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
                 absl::StrJoin(trajectory.returns, " "),
                 absl::StrJoin(history, " "),
                 init_state_id);
-  return trajectory;
-}
-
-// Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
-//                     std::vector<std::unique_ptr<MCTSBot>>* bots,
-//                     std::mt19937* rng, double temperature, int temperature_drop,
-//                     double cutoff_value, int max_simulations, std::shared_ptr<Evaluator> vp_eval,
-//                     bool verbose = false) {
-//   std::unique_ptr<open_spiel::State> state = game.NewInitialState();
-//   std::vector<std::string> history;
-//   Trajectory trajectory;
-
-//   while (true) {
-//     open_spiel::Player player = state->CurrentPlayer();
-//     open_spiel::ActionsAndProbs policy;
-//     std::unique_ptr<SearchNode> root = (*bots)[player]->MCTSearch(*state);
-//     policy.reserve(root->children.size());
-//     std::cerr << "Root children size: " << root->children.size() << std::endl;
-//     for (const SearchNode& c : root->children) {
-//       policy.emplace_back(c.action,
-//                           std::pow(c.explore_count, 1.0 / temperature));
-//     }
-
-//     std::cerr << "Pre-normalization policy" << std::endl;
-//     for (const std::pair<Action, double>& outcome : policy) {
-//         std::cerr << "Outcome first: " << outcome.first << std::endl;
-//         std::cerr << "Outcome second: " << outcome.second << std::endl;
-//     }
-//     std::cerr << " " << std::endl;
-
-//     NormalizePolicy(&policy);
-//     std::cerr << "Post-normalization policy" << std::endl;
-//     for (const std::pair<Action, double>& outcome : policy) {
-//         std::cerr << "Outcome first: " << outcome.first << std::endl;
-//         std::cerr << "Outcome second: " << outcome.second << std::endl;
-//     }
-//     std::cerr << " " << std::endl;
-
-//     open_spiel::Action action;
-//     if (history.size() >= temperature_drop) {
-//       action = root->BestChild().action;
-//     } else {
-//       action = open_spiel::SampleAction(policy, *rng).first;
-//     }
-
-//     double root_value = root->total_reward / root->explore_count;
-//     trajectory.states.push_back(Trajectory::State{
-//         state->ObservationTensor(), player, state->LegalActions(), action,
-//         std::move(policy), root_value});
-//     std::string action_str = state->ActionToString(player, action);
-//     history.push_back(action_str);
-//     state->ApplyAction(action);
-//     if (verbose) {
-//       logger->Print("Player: %d, action: %s", player, action_str);
-//     }
-//     if (state->IsTerminal()) {
-//       trajectory.returns = state->Returns();
-//       break;
-//     } else if (std::abs(root_value) > cutoff_value) {
-//       trajectory.returns.resize(2);
-//       trajectory.returns[player] = root_value;
-//       trajectory.returns[1 - player] = -root_value;
-//       break;
-//     }
-//   }
-
-//   logger->Print("Game %d: Returns: %s; Actions: %s", game_num,
-//                 absl::StrJoin(trajectory.returns, " "),
-//                 absl::StrJoin(history, " "));
 //   return trajectory;
-// }
+  return std::make_pair(trajectory, inverted_trajectory);
+}
 
 std::unique_ptr<MCTSBot> InitAZBot(const AlphaZeroConfig& config,
                                    const open_spiel::Game& game,
@@ -275,13 +223,24 @@ void actor(const open_spiel::Game& game, const AlphaZeroConfig& config, int num,
     double cutoff =
         (dist(rng) < config.cutoff_probability ? config.cutoff_value
                                                : game.MaxUtility() + 1);
-    if (!trajectory_queue->Push(
-            PlayGame(logger.get(), game_num, game, &bots, &rng,
+    
+    std::pair<Trajectory, Trajectory> game_results = PlayGame(logger.get(), game_num, game, &bots, &rng,
                      config.temperature, config.temperature_drop, cutoff,
-                     config.max_simulations, vp_eval),
-            absl::Seconds(10))) {
+                     config.max_simulations, vp_eval);
+
+    if (!trajectory_queue->Push(game_results.first, absl::Seconds(10))) {
       logger->Print("Failed to push a trajectory after 10 seconds.");
     }
+    if (!trajectory_queue->Push(game_results.second, absl::Seconds(10))) {
+      logger->Print("Failed to push a trajectory after 10 seconds.");
+    }
+    // if (!trajectory_queue->Push(
+    //         PlayGame(logger.get(), game_num, game, &bots, &rng,
+    //                  config.temperature, config.temperature_drop, cutoff,
+    //                  config.max_simulations, vp_eval),
+    //         absl::Seconds(10))) {
+    //   logger->Print("Failed to push a trajectory after 10 seconds.");
+    // }
   }
   logger->Print("Got a quit.");
 }
@@ -362,7 +321,7 @@ void evaluator(const open_spiel::Game& game, const AlphaZeroConfig& config,
     Trajectory trajectory = PlayGame(
         &logger, game_num, game, &bots, &rng, /*temperature=*/1,
         /*temperature_drop=*/0, /*cutoff_value=*/game.MaxUtility() + 1,
-        config.max_simulations, vp_eval);
+        config.max_simulations, vp_eval).first;
 
     results->Add(difficulty, trajectory.returns[az_player]);
     logger.Print("Game %d: AZ: %5.2f, MCTS: %5.2f, MCTS-sims: %d, length: %d",
@@ -436,9 +395,18 @@ void learner(const open_spiel::Game& game, const AlphaZeroConfig& config,
         outcomes.Add(p1_outcome > 0 ? 0 : (p1_outcome < 0 ? 1 : 2));
 
         for (const Trajectory::State& state : trajectory->states) {
-          replay_buffer.Add(VPNetModel::TrainInputs{state.legal_actions,
-                                                    state.observation,
-                                                    state.policy, p1_outcome});
+          if (state.inverted) {
+            replay_buffer.Add(VPNetModel::TrainInputs{state.legal_actions,
+                                        state.observation,
+                                        state.policy, -p1_outcome});
+          } else {
+            replay_buffer.Add(VPNetModel::TrainInputs{state.legal_actions,
+                                        state.observation,
+                                        state.policy, p1_outcome});
+          }
+        //   replay_buffer.Add(VPNetModel::TrainInputs{state.legal_actions,
+        //                                             state.observation,
+        //                                             state.policy, p1_outcome});
           num_states += 1;
         }
 
