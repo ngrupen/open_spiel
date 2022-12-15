@@ -110,6 +110,8 @@ class TicTacToeDRGame : public Game {
 
 CellState PlayerToState(Player player);
 std::string StateToString(CellState state);
+CellState InvertCellState(CellState state);
+
 // CellState StringToState(const char *cell_char);
 
 inline std::ostream& operator<<(std::ostream& stream, const CellState& state) {

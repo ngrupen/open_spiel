@@ -68,6 +68,8 @@ class TicTacToeState : public State {
   std::string ObservationString(Player player) const override;
   void ObservationTensor(Player player,
                          absl::Span<float> values) const override;
+  void InvertedObservationTensor(Player player,
+                         absl::Span<float> values) const override;
   std::unique_ptr<State> Clone() const override;
   void UndoAction(Player player, Action move) override;
   std::vector<Action> LegalActions() const override;
@@ -109,6 +111,7 @@ class TicTacToeGame : public Game {
 
 CellState PlayerToState(Player player);
 std::string StateToString(CellState state);
+CellState InvertCellState(CellState state);
 
 inline std::ostream& operator<<(std::ostream& stream, const CellState& state) {
   return stream << StateToString(state);

@@ -77,6 +77,19 @@ std::string StateToString(CellState state) {
   }
 }
 
+CellState InvertCellState(CellState state) {
+  switch (state) {
+    case CellState::kEmpty:
+      return CellState::kEmpty;
+    case CellState::kNought:
+      return CellState::kCross;
+    case CellState::kCross:
+      return CellState::kNought;
+    default:
+      SpielFatalError("Unknown state.");
+  }
+}
+
 void TicTacToeTurnsState::DoApplyAction(Action move) {
   SPIEL_CHECK_EQ(board_[move], CellState::kEmpty);
   board_[move] = PlayerToState(CurrentPlayer());
@@ -205,12 +218,35 @@ void TicTacToeTurnsState::ObservationTensor(Player player,
 //   for (int idx = 0; idx < 4; idx++) {
 //     for (int cell = 0; cell < kNumCells; cell++) {
 //       std::cerr << "idx: " << idx << ", cell: " << cell << ", view: " << view[{idx, cell}] << std::endl;
-    
 //     }
 //     std::cerr << "----" << std::endl;
 //   }
-//   SpielFatalError("Illegal starting state!");
 
+}
+
+void TicTacToeTurnsState::InvertedObservationTensor(Player player,
+                                       absl::Span<float> values) const {
+  SPIEL_CHECK_GE(player, 0);
+  SPIEL_CHECK_LT(player, num_players_);
+
+  // inverted version
+  TensorView<2> view(values, {kCellStates+1, kNumCells}, true);
+  for (int cell = 0; cell < kNumCells; ++cell) {
+    view[{static_cast<int>(InvertCellState(board_[cell])), cell}] = 1.0;
+  }
+
+  // inverted current player plane
+  for (int cell = 0; cell < kNumCells; ++cell) {
+    view[{3, cell}] = 1 - current_player_;
+  }
+
+  // print out each dimension of tensor view   
+//   for (int idx = 0; idx < 4; idx++) {
+//     for (int cell = 0; cell < kNumCells; cell++) {
+//       std::cerr << "idx: " << idx << ", cell: " << cell << ", inverted_view: " << view[{idx, cell}] << std::endl;
+//     }
+//     std::cerr << "----" << std::endl;
+//   }
 }
 
 void TicTacToeTurnsState::UndoAction(Player player, Action move) {
