@@ -21,6 +21,7 @@
 #include <vector>
 #include <fstream>
 #include <filesystem>
+// #include <experimental/filesystem>
 
 #include "open_spiel/abseil-cpp/absl/flags/flag.h"
 #include "open_spiel/abseil-cpp/absl/flags/parse.h"
@@ -252,6 +253,7 @@ int main(int argc, char **argv) {
   std::vector<std::string> checkpoint_paths;
   const char delim = '-';
   for (const auto const & entry : std::filesystem::directory_iterator(absl::GetFlag(FLAGS_az_path))) {
+  // for (const auto const & entry : std::experimental::filesystem::directory_iterator(absl::GetFlag(FLAGS_az_path))) {
     std::string fname = entry.path().filename().string();
     std::vector<std::string> tokens = tokenize(fname, delim);
     if ((tokens.size() > 1) && (isNumber(tokens[1]))) {
@@ -315,6 +317,9 @@ int main(int argc, char **argv) {
     if (!std::filesystem::is_directory(save_path) || !std::filesystem::exists(save_path)) { // Check if src folder exists
         std::filesystem::create_directory(save_path); // create src folder
     }
+    //   if (!std::experimental::filesystem::is_directory(save_path) || !std::experimental::filesystem::exists(save_path)) { // Check if src folder exists
+    //     std::experimental::filesystem::create_directory(save_path); // create src folder
+    //   }
     save_path += "/actions.txt";
 
     std::string save_path_2 = absl::GetFlag(FLAGS_save_path);
