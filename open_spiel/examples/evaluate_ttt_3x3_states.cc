@@ -62,6 +62,35 @@ ABSL_FLAG(int, az_cache_shards, 1, "Cache shards of AZ algorithm.");
 ABSL_FLAG(std::string, save_path, "", "Path to save test results.");
 
 
+std::vector<double> Softmax(
+    const std::vector<double>& values, double lambda) {
+  std::vector<double> new_values = values;
+  for (double& new_value : new_values) {
+    new_value *= lambda;
+  }
+  double max = *std::max_element(new_values.begin(), new_values.end());
+
+  double denom = 0;
+  for (int idx = 0; idx < values.size(); ++idx) {
+    new_values[idx] = std::exp(new_values[idx] - max);
+    denom += new_values[idx];
+  }
+
+  SPIEL_CHECK_GT(denom, 0);
+  double prob_sum = 0.0;
+  std::vector<double> policy;
+  policy.reserve(new_values.size());
+  for (int idx = 0; idx < values.size(); ++idx) {
+    double prob = new_values[idx] / denom;
+    SPIEL_CHECK_PROB(prob);
+    prob_sum += prob;
+    policy.push_back(prob);
+  }
+
+  SPIEL_CHECK_FLOAT_NEAR(prob_sum, 1.0, 1e-12);
+  return policy;
+}
+
 int main(int argc, char** argv) {
     std::vector<char *> positional_args = absl::ParseCommandLine(argc, argv);
 
@@ -109,13 +138,19 @@ int main(int argc, char** argv) {
     std::vector<std::string> terminal_state_strings;
     std::vector<std::vector<double>> all_az_values;
     std::vector<std::vector<double>> all_az_policies;
+    std::vector<std::vector<double>> all_az_value_policies;
     std::vector<std::vector<Action>> all_legal_moves;
     std::vector<std::vector<double>> all_oracle_values;
     for (auto const & [state_id_str, state] : all_state_ids) {
       switch (state->GetType()) {
         case StateType::kDecision: {
           if (game->GetType().information == GameType::Information::kPerfectInformation) {
+            // current player
             Player player = state->CurrentPlayer();
+
+            // legal actions
+            std::vector<Action> legal_moves = state->OriginalLegalActions(player);
+            all_legal_moves.push_back(legal_moves);
 
             // az evaluation of non-terminal state
             std::vector<double> az_values = az_evaluator->Evaluate(*state);
@@ -129,9 +164,26 @@ int main(int argc, char** argv) {
             }
             all_az_policies.push_back(az_policy);
 
-            // legal actions
-            std::vector<Action> legal_moves = state->OriginalLegalActions(player);
-            all_legal_moves.push_back(legal_moves);
+            // az value probabilities at non-terminal state
+            open_spiel::ActionsAndProbs az_value_policy_probs;
+            az_value_policy_probs.reserve(legal_moves.size());
+            std::vector<double> next_values;
+            for (auto const & act : legal_moves) {
+                std::unique_ptr<State> temp_state = state->Clone();
+                temp_state->ApplyAction(act);
+                
+                double temp_value;
+                if (temp_state->IsTerminal()) {
+                    temp_value = temp_state->Returns().front();
+                } else {
+                    temp_value = az_evaluator->Evaluate(*temp_state).front();
+                }
+
+                next_values.push_back(temp_value);
+            }
+
+            std::vector<double> az_value_policy = Softmax(next_values, 1.0);
+            all_az_value_policies.push_back(az_value_policy);
 
             // oracle evaluation
             std::pair<double, Action> value_action = SupergameAlphaBetaSearch(
@@ -188,6 +240,7 @@ int main(int argc, char** argv) {
         outFile << "AZ Values: " << absl::StrJoin(all_az_values[idx], ",") << std::endl;
         outFile << "Oracle Values: " << absl::StrJoin(all_oracle_values[idx], ",") << std::endl;
         outFile << "AZ Policy: " << absl::StrJoin(all_az_policies[idx], ",") << std::endl;
+        outFile << "AZ Value Policy: " << absl::StrJoin(all_az_value_policies[idx], ",") << std::endl;
         outFile << "Legal Moves: " << absl::StrJoin(all_legal_moves[idx], ",") << std::endl;
       }
     }
