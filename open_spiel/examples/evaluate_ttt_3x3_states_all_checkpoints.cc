@@ -245,7 +245,7 @@ int main(int argc, char** argv) {
             break;
           }
           case StateType::kMeanField:
-            open_spiel::SpielFatalError("kMeanField not handeled.");
+            open_spiel::SpielFatalError("kMeanField not handled.");
         }
       }
       const int num_nonterminal_states = nonterminal_state_strings.size();
