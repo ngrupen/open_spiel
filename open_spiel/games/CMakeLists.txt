@@ -136,22 +136,6 @@ set(GAME_SOURCES
   tic_tac_toe_4x4.h
   tic_tac_toe_5x5.cc
   tic_tac_toe_5x5.h
-  tic_tac_toe_supergame_A.cc
-  tic_tac_toe_supergame_A.h
-  tic_tac_toe_supergame_A_stacked.cc
-  tic_tac_toe_supergame_A_stacked.h
-  tic_tac_toe_supergame_B.cc
-  tic_tac_toe_supergame_B.h
-  tic_tac_toe_supergame_C.cc
-  tic_tac_toe_supergame_C.h
-  tic_tac_toe_supergame_D.cc
-  tic_tac_toe_supergame_D.h
-  tic_tac_toe_supergame_E.cc
-  tic_tac_toe_supergame_E.h
-  tic_tac_toe_supergame_F.cc
-  tic_tac_toe_supergame_F.h
-  tic_tac_toe_supergame_Z.cc
-  tic_tac_toe_supergame_Z.h
   tiny_bridge.cc
   tiny_bridge.h
   tiny_hanabi.cc
@@ -493,38 +477,6 @@ add_test(tic_tac_toe_4x4_test tic_tac_toe_4x4_test)
 add_executable(tic_tac_toe_5x5_test tic_tac_toe_5x5_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
 add_test(tic_tac_toe_5x5_test tic_tac_toe_5x5_test)
-
-add_executable(tic_tac_toe_supergame_A_test tic_tac_toe_supergame_A_test.cc ${OPEN_SPIEL_OBJECTS}
-               $<TARGET_OBJECTS:tests>)
-add_test(tic_tac_toe_supergame_A_test tic_tac_toe_supergame_A_test)
-
-add_executable(tic_tac_toe_supergame_A_stacked_test tic_tac_toe_supergame_A_stacked_test.cc ${OPEN_SPIEL_OBJECTS}
-               $<TARGET_OBJECTS:tests>)
-add_test(tic_tac_toe_supergame_A_stacked_test tic_tac_toe_supergame_A_stacked_test)
-
-add_executable(tic_tac_toe_supergame_B_test tic_tac_toe_supergame_B_test.cc ${OPEN_SPIEL_OBJECTS}
-               $<TARGET_OBJECTS:tests>)
-add_test(tic_tac_toe_supergame_B_test tic_tac_toe_supergame_B_test)
-
-add_executable(tic_tac_toe_supergame_C_test tic_tac_toe_supergame_C_test.cc ${OPEN_SPIEL_OBJECTS}
-               $<TARGET_OBJECTS:tests>)
-add_test(tic_tac_toe_supergame_C_test tic_tac_toe_supergame_C_test)
-
-add_executable(tic_tac_toe_supergame_D_test tic_tac_toe_supergame_D_test.cc ${OPEN_SPIEL_OBJECTS}
-               $<TARGET_OBJECTS:tests>)
-add_test(tic_tac_toe_supergame_D_test tic_tac_toe_supergame_D_test)
-
-add_executable(tic_tac_toe_supergame_E_test tic_tac_toe_supergame_E_test.cc ${OPEN_SPIEL_OBJECTS}
-               $<TARGET_OBJECTS:tests>)
-add_test(tic_tac_toe_supergame_E_test tic_tac_toe_supergame_E_test)
-
-add_executable(tic_tac_toe_supergame_F_test tic_tac_toe_supergame_F_test.cc ${OPEN_SPIEL_OBJECTS}
-               $<TARGET_OBJECTS:tests>)
-add_test(tic_tac_toe_supergame_F_test tic_tac_toe_supergame_F_test)
-
-add_executable(tic_tac_toe_supergame_Z_test tic_tac_toe_supergame_Z_test.cc ${OPEN_SPIEL_OBJECTS}
-               $<TARGET_OBJECTS:tests>)
-add_test(tic_tac_toe_supergame_Z_test tic_tac_toe_supergame_Z_test)
 
 add_executable(laser_tag_test laser_tag_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
