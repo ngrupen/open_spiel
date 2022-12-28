@@ -267,7 +267,7 @@ void TicTacToeDRState::FillBoardFromStr(std::string state_str) {
     else
       current_player_ = 1;
     
-    if (num_os > num_xs) {
+    if ((num_os > num_xs) || (num_xs - num_os > 1)) {
       std::cout << "State ID: " << state_str << std::endl;
       SpielFatalError("Illegal starting state!");
     }
