@@ -553,6 +553,20 @@ class State {
   }
   void ObservationTensor(Player player, std::vector<float>* values) const;
 
+  // Returns an inverted view of the game.
+  //
+  // Implementations should start with (and it's tested in api_test.py):
+  //   SPIEL_CHECK_GE(player, 0);
+  //   SPIEL_CHECK_LT(player, num_players_);
+  virtual void InvertedObservationTensor(Player player,
+                                 absl::Span<float> values) const {
+  }
+  std::vector<float> InvertedObservationTensor(Player player) const;
+  std::vector<float> InvertedObservationTensor() const {
+    return InvertedObservationTensor(CurrentPlayer());
+  }
+  void InvertedObservationTensor(Player player, std::vector<float>* values) const;
+
   // Return a copy of this state.
   virtual std::unique_ptr<State> Clone() const = 0;
 

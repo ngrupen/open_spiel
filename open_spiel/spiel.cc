@@ -769,6 +769,25 @@ void State::ObservationTensor(Player player, std::vector<float>* values) const {
   ObservationTensor(player, absl::MakeSpan(*values));
 }
 
+std::vector<float> State::InvertedObservationTensor(Player player) const {
+  // We add this player check, to prevent errors if the game implementation
+  // lacks that check (in particular as this function is the one used in
+  // Python). This can lead to doing this check twice.
+  // TODO(author2): Do we want to prevent executing this twice for games
+  // that implement it?
+  SPIEL_CHECK_GE(player, 0);
+  SPIEL_CHECK_LT(player, num_players_);
+  std::vector<float> observation(game_->ObservationTensorSize());
+  InvertedObservationTensor(player, absl::MakeSpan(observation));
+  return observation;
+}
+
+void State::InvertedObservationTensor(Player player, std::vector<float>* values) const {
+  // Retained for backwards compatibility.
+  values->resize(game_->ObservationTensorSize());
+  InvertedObservationTensor(player, absl::MakeSpan(*values));
+}
+
 std::vector<float> State::InformationStateTensor(Player player) const {
   // We add this player check, to prevent errors if the game implementation
   // lacks that check (in particular as this function is the one used in

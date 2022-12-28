@@ -83,6 +83,19 @@ std::string StateToString(CellState state) {
   }
 }
 
+CellState InvertCellState(CellState state) {
+  switch (state) {
+    case CellState::kEmpty:
+      return CellState::kEmpty;
+    case CellState::kNought:
+      return CellState::kCross;
+    case CellState::kCross:
+      return CellState::kNought;
+    default:
+      SpielFatalError("Unknown state.");
+  }
+}
+
 // CellState StringToState(const char *cell_char) {
 //     std::cout << "input char: " << cell_char << std::endl;
 //     bool temp = cell_char == ".";
