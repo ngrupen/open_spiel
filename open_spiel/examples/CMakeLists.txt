@@ -71,16 +71,14 @@ if (OPEN_SPIEL_BUILD_WITH_LIBTORCH)
                 $<TARGET_OBJECTS:alpha_zero_torch>
                 $<TARGET_OBJECTS:bots>)
   target_link_libraries (az_ttt_eval_play_all_checkpoints ${TORCH_LIBRARIES})
-
-  add_executable(collect_ttt_4x4_states collect_ttt_4x4_states.cc
-                ${OPEN_SPIEL_OBJECTS}
-                $<TARGET_OBJECTS:bots>)
+#   target_link_libraries (az_ttt_eval_play_all_checkpoints stdc++fs)
 
   add_executable(az_ttt_eval_legal_moves_all_checkpoints az_ttt_eval_legal_moves_all_checkpoints.cc
                 ${OPEN_SPIEL_OBJECTS}
                 $<TARGET_OBJECTS:alpha_zero_torch>
                 $<TARGET_OBJECTS:bots>)
   target_link_libraries (az_ttt_eval_legal_moves_all_checkpoints ${TORCH_LIBRARIES})
+#   target_link_libraries (az_ttt_eval_legal_moves_all_checkpoints stdc++fs)
 
   add_executable(az_ttt_eval_legal_moves_single_checkpoint az_ttt_eval_legal_moves_single_checkpoint.cc
                 ${OPEN_SPIEL_OBJECTS}
@@ -93,15 +91,22 @@ if (OPEN_SPIEL_BUILD_WITH_LIBTORCH)
                 $<TARGET_OBJECTS:alpha_zero_torch>)
   target_link_libraries (evaluate_ttt_3x3_states ${TORCH_LIBRARIES})
 
+  add_executable(evaluate_ttt_3x3_states_all_checkpoints evaluate_ttt_3x3_states_all_checkpoints.cc
+                ${OPEN_SPIEL_OBJECTS}
+                $<TARGET_OBJECTS:alpha_zero_torch>)
+  target_link_libraries (evaluate_ttt_3x3_states_all_checkpoints ${TORCH_LIBRARIES})
+#   target_link_libraries (evaluate_ttt_3x3_states_all_checkpoints stdc++fs)
+
   add_executable(evaluate_ttt_4x4_states evaluate_ttt_4x4_states.cc
                 ${OPEN_SPIEL_OBJECTS}
                 $<TARGET_OBJECTS:alpha_zero_torch>)
   target_link_libraries (evaluate_ttt_4x4_states ${TORCH_LIBRARIES})
 
-  add_executable(evaluate_ttt_3x3_states_all_checkpoints evaluate_ttt_3x3_states_all_checkpoints.cc
+  add_executable(collect_ttt_4x4_states collect_ttt_4x4_states.cc
                 ${OPEN_SPIEL_OBJECTS}
-                $<TARGET_OBJECTS:alpha_zero_torch>)
-  target_link_libraries (evaluate_ttt_3x3_states_all_checkpoints ${TORCH_LIBRARIES})
+                $<TARGET_OBJECTS:alpha_zero_torch>
+                $<TARGET_OBJECTS:bots>)
+  target_link_libraries (collect_ttt_4x4_states ${TORCH_LIBRARIES})
 
   add_executable(mcts_ttt_eval_legal_moves mcts_ttt_eval_legal_moves.cc
                 ${OPEN_SPIEL_OBJECTS}

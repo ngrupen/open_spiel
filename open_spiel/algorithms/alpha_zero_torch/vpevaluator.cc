@@ -72,6 +72,7 @@ LRUCacheInfo VPNetEvaluator::CacheInfo() {
 
 std::vector<double> VPNetEvaluator::Evaluate(const State& state) {
   // TODO(author5): currently assumes zero-sum.
+//   std::cerr << "AZ evaluator" << std::endl;
   double p0value = Inference(state).value;
   return {p0value, -p0value};
 }
@@ -83,6 +84,7 @@ open_spiel::ActionsAndProbs VPNetEvaluator::Prior(const State& state) {
 VPNetModel::InferenceOutputs VPNetEvaluator::Inference(const State& state) {
   VPNetModel::InferenceInputs inputs = {state.LegalActions(),
                                         state.ObservationTensor()};
+//   std::cerr << "AZ inference" << std::endl;
 
   uint64_t key;
   int cache_shard;
@@ -95,6 +97,7 @@ VPNetModel::InferenceOutputs VPNetEvaluator::Inference(const State& state) {
       return *opt_outputs;
     }
   }
+//   std::cerr << "AZ inference mid" << std::endl;
   VPNetModel::InferenceOutputs outputs;
   if (batch_size_ <= 1) {
     outputs = device_manager_.Get(1)->Inference(std::vector{inputs})[0];
@@ -107,6 +110,7 @@ VPNetModel::InferenceOutputs VPNetEvaluator::Inference(const State& state) {
   if (!cache_.empty()) {
     cache_[cache_shard]->Set(key, outputs);
   }
+//   std::cerr << "returning AZ inference" << std::endl;
   return outputs;
 }
 
