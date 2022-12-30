@@ -138,6 +138,10 @@ const SearchNode& SearchNode::BestChild() const {
                            [](const SearchNode& a, const SearchNode& b) {
                              return a.CompareFinal(b);
                            });
+//   return *std::min_element(children.begin(), children.end(),
+//                            [](const SearchNode& a, const SearchNode& b) {
+//                              return a.CompareFinal(b);
+//                            });
 }
 
 std::string SearchNode::ChildrenStr(const State& state) const {
