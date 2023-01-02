@@ -442,6 +442,7 @@ void learner(const open_spiel::Game& game, const AlphaZeroConfig& config,
           // std::cout << "p1 outcome: " << p1_outcome << std::endl;
           replay_buffer.Add(VPNetModel::TrainInputs{state.legal_actions,
                                                     state.observation,
+                                                    state.current_player,
                                                     state.policy, p1_outcome});
           
           open_spiel::GameType game_type = game.GetType();
@@ -461,6 +462,7 @@ void learner(const open_spiel::Game& game, const AlphaZeroConfig& config,
 
             replay_buffer.Add(VPNetModel::TrainInputs{state.legal_actions,
                                                       symmetric,
+                                                      (1 - state.current_player),
                                                       state.policy, -p1_outcome});
 
             num_states += 2;
