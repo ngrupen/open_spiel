@@ -157,6 +157,8 @@ int main(int argc, char** argv) {
 
     // std::cerr << "State: " << std::endl << state->ToString() << std::endl;
     // std::cerr << "is terminal: " << state->IsTerminal() << std::endl;
+    // open_spiel::SpielFatalError("Test!");
+
   }
 
   auto returns = state->Returns();

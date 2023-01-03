@@ -62,6 +62,7 @@ class TicTacToeState : public State {
   std::string ActionToString(Player player, Action action_id) const override;
   std::string ToString() const override;
   std::string GetIDString() override;
+  bool IsInverted() override;
   bool IsTerminal() const override;
   std::vector<double> Returns() const override;
   std::string InformationStateString(Player player) const override;
@@ -78,7 +79,9 @@ class TicTacToeState : public State {
   CellState BoardAt(int row, int column) const {
     return board_[row * kNumCols + column];
   }
-  void FillBoardFromStr(std::string state_str);
+  void FillBoardFromStr(std::string state_str, bool inverted) override;
+//   std::vector<std::unique_ptr<State>> CanonicalStates() override;
+  std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> CanonicalStates() override;
 
  protected:
   std::array<CellState, kNumCells> board_;
@@ -90,6 +93,7 @@ class TicTacToeState : public State {
   Player current_player_ = 0;         // Player zero goes first
   Player outcome_ = kInvalidPlayer;
   int num_moves_ = 0;
+  bool inverted_ = 0;
 };
 
 // Game object.
@@ -100,7 +104,6 @@ class TicTacToeGame : public Game {
   std::unique_ptr<State> NewInitialState() const override {
     return std::unique_ptr<State>(new TicTacToeState(shared_from_this()));
   }
-//   std::unique_ptr<State> LoadStateFromID(std::string state_id) const;
   std::unique_ptr<State> NewInitialState(const std::string& str) const override;
   int NumPlayers() const override { return kNumPlayers; }
   double MinUtility() const override { return -1; }

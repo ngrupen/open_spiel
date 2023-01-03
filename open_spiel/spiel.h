@@ -302,6 +302,10 @@ class State {
 
   virtual std::string GetIDString() {}
 
+//   virtual std::vector<std::unique_ptr<State>> CanonicalStates() {}
+  virtual std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> CanonicalStates() {}
+  virtual void FillBoardFromStr(std::string state_str, bool inverted) {}
+
 
   // Returns true if these states are equal, false otherwise. Two states are
   // equal if they are the same world state; the interpretation might differ
@@ -312,6 +316,9 @@ class State {
   virtual bool operator==(const State& other) const {
     return ToString() == other.ToString();
   }
+
+  // Is this an inverted state? (i.e. has the game ended?)
+  virtual bool IsInverted() {}
 
   // Is this a terminal state? (i.e. has the game ended?)
   virtual bool IsTerminal() const = 0;
