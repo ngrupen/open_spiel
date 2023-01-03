@@ -109,12 +109,18 @@ std::pair<Trajectory, Trajectory> PlayGame(Logger* logger, int game_num, const o
                     double cutoff_value, int max_simulations, std::shared_ptr<Evaluator> vp_eval,
                     bool verbose = false) {
   std::unique_ptr<open_spiel::State> state = game.NewInitialState();
+  // REMOVE B/W THESE LINES AFTER TESTING
+//   std::string current_state_id = "xxoxo..o.";
+//   state->FillBoardFromStr(current_state_id, false);
+  // REMOVE B/W THESE LINES AFTER TESTING
   std::string init_state_id = state->GetIDString();
   std::vector<std::string> history;
   Trajectory trajectory;
-  Trajectory inverted_trajectory;
+  Trajectory sym_trajectory;
+  int num_moves = 0;
 
   while (true) {
+    num_moves++;
     open_spiel::Player player = state->CurrentPlayer();
     open_spiel::ActionsAndProbs policy;
     open_spiel::Action action;
@@ -124,10 +130,16 @@ std::pair<Trajectory, Trajectory> PlayGame(Logger* logger, int game_num, const o
         std::unique_ptr<State> working_state = state->Clone();
         policy = vp_eval->Prior(*working_state);
         NormalizePolicy(&policy);
+
+        // for (auto const & [act, prob] : policy) {
+            // std::cerr << "Action: " << act << ", policy prob: " << prob << std::endl;
+            // temp_policy.push_back(prob);
+        // }
+        // std::cerr << "Temp policy size: " << temp_policy.size() << std::endl;
+
         action = open_spiel::SampleAction(policy, *rng).first;
         root_value = vp_eval->Evaluate(*working_state).front();
-    }
-    else {
+    } else {
         //  MCTS search
         std::unique_ptr<SearchNode> root = (*bots)[player]->MCTSearch(*state);
         policy.reserve(root->children.size());
@@ -137,6 +149,11 @@ std::pair<Trajectory, Trajectory> PlayGame(Logger* logger, int game_num, const o
         }
 
         NormalizePolicy(&policy);
+        // for (auto const & [act, prob] : policy) {
+            // std::cerr << "Action: " << act << ", policy prob: " << prob << std::endl;
+            // temp_policy.push_back(prob);
+        // }
+        // std::cerr << "Temp policy size: " << temp_policy.size() << std::endl;
 
         if (history.size() >= temperature_drop) {
             action = root->BestChild().action;
@@ -147,15 +164,103 @@ std::pair<Trajectory, Trajectory> PlayGame(Logger* logger, int game_num, const o
         root_value = root->total_reward / root->explore_count;
     }
 
+    // std::cerr << "Policy size " << policy.size() << std::endl;
+
+
+    // if (num_moves > 1) {
+        // for (auto const & [act, prob] : policy) {
+        //     std::cerr << "Policy prob: " << prob << std::endl;
+        //     temp_policy.push_back(prob);
+        // }
+    std::vector<double> val_diffs;
+    std::unique_ptr<State> current_state = state->Clone();
+    double state_value = vp_eval->Evaluate(*current_state).front();
+    // std::vector<std::unique_ptr<open_spiel::State>> sym_states = current_state->CanonicalStates();
+    std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> sym_results = current_state->CanonicalStates();
+    // std::cerr << "Sym results size: " << sym_results.size() << std::endl;
+        
+        // std::vector<std::unique_ptr<open_spiel::State>> sym_states = sym_results.first;
+        // std::vector<std::vector<Action>> sym_actions = sym_results.second;
+
+    // std::cerr << "" << std::endl;
+    // std::cerr << "State: " << std::endl << state->ToString() << std::endl;
+    // std::cerr << "State value: " << state_value << std::endl;
+    // std::cerr << "Num sym states: " << sym_results.size() << std::endl;
+    // std::cerr << "Legal moves: " << absl::StrJoin(state->LegalActions(), ", ") << std::endl;
+    // std::cerr << "Policy: " << absl::StrJoin(temp_policy, ", ") << std::endl;
+    int max_idx;
+    double max_diff = -1;
+    for (int idx = 0; idx < sym_results.size(); ++idx) {
+        // std::cerr << "" << std::endl;
+        double sym_value = vp_eval->Evaluate(*sym_results[idx].first).front();
+        // std::cerr << "Sym state " << idx << ": " << std::endl << sym_results[idx].first->ToString() << std::endl;
+        // std::cerr << "Original Legal moves: " << absl::StrJoin(state->LegalActions(), ", ") << std::endl;
+        // std::cerr << "Sym Legal moves: " << absl::StrJoin(sym_results[idx].second, ", ") << std::endl;
+        // std::cerr << "Sym state value: " << sym_value << std::endl;
+        // std::cerr << "Sym state current player:" << sym_results[idx].first->CurrentPlayer() << std::endl;
+        // std::cerr << "Sym state inverted:" << sym_results[idx].first->IsInverted() << std::endl;
+        sym_results[idx].first->ObservationTensor();
+        double diff = std::abs(state_value - sym_value);
+        // std::cerr << "Value difference: " << diff << std::endl;
+        if (diff > max_diff) {
+            max_diff = diff;
+            max_idx = idx;
+        }
+    }
+    // std::cerr << "Max difference: " << max_diff << std::endl;
+    // std::cerr << "Max idx: " << max_idx << std::endl;
+    // open_spiel::SpielFatalError("Test!");
+
+    std::vector<Action> max_idx_actions = sym_results[max_idx].second;
+    // std::cerr << "Max IDX state: " << std::endl << sym_results[max_idx].first->ToString() << std::endl;
+    open_spiel::ActionsAndProbs sym_policy;
+
+    // std::cerr << "Policy size " << policy.size() << std::endl;
+    // std::cerr << "Original policy order:" << std::endl;
+    // for (auto const & [act, prob] : policy) {
+    //     std::cerr << "Action: " << act << ", policy prob: " << prob << std::endl;
+    // }
+
+    std::vector<Action> original_legal_actions = state->LegalActions();
+    for (int i = 0; i < original_legal_actions.size(); ++i) {
+        // std::cerr << "Original action: " << original_legal_actions[i] << std::endl;
+        // int new_idx = std::distance(policy, std::find(policy.begin(), policy.end(), act));
+        int act_idx = std::distance(policy.begin(), std::find_if(policy.begin(), policy.end(), [&](const auto& policy_item) { return policy_item.first == original_legal_actions[i];}));
+        // std::cerr << "Original action idx: " << act_idx << std::endl;
+
+        // std::cerr << "Sym action: " << max_idx_actions[i] << std::endl;
+        sym_policy.emplace_back(max_idx_actions[i], policy[act_idx].second);
+    }
+
+    // std::cerr << "" << std::endl;
+    // std::cerr << "" << std::endl;
+    std::shuffle(sym_policy.begin(), sym_policy.end(), *rng);
+
+    // std::cerr << "Sym policy:" << std::endl;
+    // for (auto const & [act, prob] : sym_policy) {
+    //     std::cerr << "Action: " << act << ", policy prob: " << prob << std::endl;
+    // }
+    open_spiel::Action sym_action = open_spiel::SampleAction(sym_policy, *rng).first;
+
     // store regular states/observations
     trajectory.states.push_back(Trajectory::State{
         state->ObservationTensor(), player, state->LegalActions(), action,
         std::move(policy), root_value, false});
 
+    // store symmetric states/observations
+    sym_trajectory.states.push_back(Trajectory::State{
+        sym_results[max_idx].first->ObservationTensor(),
+        player,
+        sym_results[max_idx].first->LegalActions(),
+        sym_action,
+        std::move(sym_policy),
+        root_value,
+        sym_results[max_idx].first->IsInverted()});
+    
     // store inverted states/observations
-    inverted_trajectory.states.push_back(Trajectory::State{
-        state->InvertedObservationTensor(), player, state->LegalActions(), action,
-        std::move(policy), root_value, true});
+    // inverted_trajectory.states.push_back(Trajectory::State{
+    //     state->InvertedObservationTensor(), player, state->LegalActions(), action,
+    //     std::move(policy), root_value, true});
 
     std::string action_str = state->ActionToString(player, action);
     history.push_back(action_str);
@@ -166,16 +271,16 @@ std::pair<Trajectory, Trajectory> PlayGame(Logger* logger, int game_num, const o
     }
     if (state->IsTerminal()) {
       trajectory.returns = state->Returns();
-      inverted_trajectory.returns = state->Returns();
+      sym_trajectory.returns = state->Returns();
       break;
     } else if (std::abs(root_value) > cutoff_value) {
       trajectory.returns.resize(2);
       trajectory.returns[player] = root_value;
       trajectory.returns[1 - player] = -root_value;
 
-      inverted_trajectory.returns.resize(2);
-      inverted_trajectory.returns[player] = root_value;
-      inverted_trajectory.returns[1 - player] = -root_value;
+      sym_trajectory.returns.resize(2);
+      sym_trajectory.returns[player] = root_value;
+      sym_trajectory.returns[1 - player] = -root_value;
       break;
     }
   }
@@ -184,8 +289,8 @@ std::pair<Trajectory, Trajectory> PlayGame(Logger* logger, int game_num, const o
                 absl::StrJoin(trajectory.returns, " "),
                 absl::StrJoin(history, " "),
                 init_state_id);
-//   return trajectory;
-  return std::make_pair(trajectory, inverted_trajectory);
+
+  return std::make_pair(trajectory, sym_trajectory);
 }
 
 std::unique_ptr<MCTSBot> InitAZBot(const AlphaZeroConfig& config,

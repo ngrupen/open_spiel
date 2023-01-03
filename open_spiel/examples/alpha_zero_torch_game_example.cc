@@ -103,9 +103,16 @@ open_spiel::Action GetAction(const open_spiel::State &state,
 std::pair<std::vector<double>, std::vector<std::string>>
 PlayGame(const open_spiel::Game &game,
          std::vector<std::unique_ptr<open_spiel::Bot>> &bots, std::mt19937 &rng,
-         const std::vector<std::string> &initial_actions) {
+         const std::vector<std::string> &initial_actions,
+         std::shared_ptr<open_spiel::algorithms::torch_az::VPNetEvaluator> az_evaluator) {
   bool quiet = absl::GetFlag(FLAGS_quiet);
   std::unique_ptr<open_spiel::State> state = game.NewInitialState();
+  
+  // delete from here
+//   std::string current_state_id = "xxoxo..o.";
+//   state->FillBoardFromStr(current_state_id, false);
+  // to here
+
   std::vector<std::string> history;
 
   if (!quiet)
@@ -132,6 +139,25 @@ PlayGame(const open_spiel::Game &game,
   while (!state->IsTerminal()) {
     open_spiel::Player current_player = state->CurrentPlayer();
     open_spiel::Player opponent_player = 1 - current_player;
+
+    // delete from here
+    // std::vector<std::pair<std::unique_ptr<open_spiel::State>, std::vector<open_spiel::Action>>> sym_results = state->CanonicalStates();
+    // std::cerr << "State: " << std::endl << state->ToString() << std::endl;
+    // double state_value = az_evaluator->Evaluate(*state).front();
+    // std::cerr << "State value: " << state_value << std::endl;
+    // std::cerr << "Num sym states: " << sym_results.size() << std::endl;
+    // for (int idx = 0; idx < sym_results.size(); ++idx) {
+    //     std::cerr << "" << std::endl;
+    //     double sym_value = az_evaluator->Evaluate(*sym_results[idx].first).front();
+    //     std::cerr << "Sym state " << idx << ": " << std::endl << sym_results[idx].first->ToString() << std::endl;
+    //     std::cerr << "Original Legal moves: " << absl::StrJoin(state->LegalActions(), ", ") << std::endl;
+    //     std::cerr << "Sym Legal moves: " << absl::StrJoin(sym_results[idx].second, ", ") << std::endl;
+    //     std::cerr << "Sym state value: " << sym_value << std::endl;
+    //     std::cerr << "Sym state inverted:" << sym_results[idx].first->IsInverted() << std::endl;
+    //     double diff = std::abs(state_value - sym_value);
+    //     std::cerr << "Value difference: " << diff << std::endl;
+    // }
+    // to here
 
     // The state must be a decision node, ask the right bot to make its action.
     open_spiel::Action action = bots[current_player]->Step(*state);
@@ -216,7 +242,7 @@ int main(int argc, char **argv) {
   std::vector<int> overall_wins(2, 0);
   int num_games = absl::GetFlag(FLAGS_num_games);
   for (int game_num = 0; game_num < num_games; ++game_num) {
-    auto [returns, history] = PlayGame(*game, bots, rng, initial_actions);
+    auto [returns, history] = PlayGame(*game, bots, rng, initial_actions, az_evaluator);
     histories[absl::StrJoin(history, " ")] += 1;
     for (int i = 0; i < returns.size(); ++i) {
       double v = returns[i];
