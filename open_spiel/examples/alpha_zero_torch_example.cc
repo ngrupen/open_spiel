@@ -77,6 +77,8 @@ ABSL_FLAG(int, eval_levels, 7,
 ABSL_FLAG(int, max_steps, 0, "How many learn steps to run.");
 ABSL_FLAG(int, evaluation_window, 100,
           "Number of games to average results over.");
+ABSL_FLAG(bool, value_action_selection, false, "Use value function for action selection.");
+ABSL_FLAG(double, use_value_probability, 0.5, "Prob of using value function for actions.");
 
 open_spiel::StopToken stop_token;
 
@@ -153,6 +155,8 @@ int main(int argc, char** argv) {
     config.evaluators = absl::GetFlag(FLAGS_evaluators);
     config.eval_levels = absl::GetFlag(FLAGS_eval_levels);
     config.max_steps = absl::GetFlag(FLAGS_max_steps);
+    config.value_action_selection = absl::GetFlag(FLAGS_value_action_selection);
+    config.use_value_probability = absl::GetFlag(FLAGS_use_value_probability);
   }
 
   return !AlphaZero(config, &stop_token, resuming);
