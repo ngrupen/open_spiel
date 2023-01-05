@@ -62,6 +62,9 @@ struct AlphaZeroConfig {
   int eval_levels;
   int max_steps;
 
+  bool value_action_selection;
+  double use_value_probability;
+
   json::Object ToJson() const {
     return json::Object({
         {"game", game},
@@ -94,6 +97,8 @@ struct AlphaZeroConfig {
         {"evaluators", evaluators},
         {"eval_levels", eval_levels},
         {"max_steps", max_steps},
+        {"value_action_selection", value_action_selection},
+        {"use_value_probability", use_value_probability},
     });
   }
 
@@ -128,6 +133,8 @@ struct AlphaZeroConfig {
     evaluators = config_json.at("evaluators").GetInt();
     eval_levels = config_json.at("eval_levels").GetInt();
     max_steps = config_json.at("max_steps").GetInt();
+    value_action_selection = config_json.at("value_action_selection").GetBool();
+    use_value_probability = config_json.at("use_value_probability").GetDouble();
   }
 };
 

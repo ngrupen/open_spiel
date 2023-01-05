@@ -25,6 +25,7 @@
 
 #include "open_spiel/abseil-cpp/absl/algorithm/container.h"
 #include "open_spiel/abseil-cpp/absl/random/uniform_real_distribution.h"
+#include "open_spiel/abseil-cpp/absl/random/random.h"
 #include "open_spiel/abseil-cpp/absl/strings/str_cat.h"
 #include "open_spiel/abseil-cpp/absl/strings/str_join.h"
 #include "open_spiel/abseil-cpp/absl/strings/str_split.h"
@@ -102,11 +103,41 @@ struct Trajectory {
   std::vector<double> returns;
 };
 
+std::vector<double> Softmax(
+    const std::vector<double>& values, double lambda) {
+  std::vector<double> new_values = values;
+  for (double& new_value : new_values) {
+    new_value *= lambda;
+  }
+  double max = *std::max_element(new_values.begin(), new_values.end());
+
+  double denom = 0;
+  for (int idx = 0; idx < values.size(); ++idx) {
+    new_values[idx] = std::exp(new_values[idx] - max);
+    denom += new_values[idx];
+  }
+
+  SPIEL_CHECK_GT(denom, 0);
+  double prob_sum = 0.0;
+  std::vector<double> policy;
+  policy.reserve(new_values.size());
+  for (int idx = 0; idx < values.size(); ++idx) {
+    double prob = new_values[idx] / denom;
+    SPIEL_CHECK_PROB(prob);
+    prob_sum += prob;
+    policy.push_back(prob);
+  }
+
+  SPIEL_CHECK_FLOAT_NEAR(prob_sum, 1.0, 1e-12);
+  return policy;
+}
+
 // Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
 std::pair<Trajectory, Trajectory> PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
                     std::vector<std::unique_ptr<MCTSBot>>* bots,
                     std::mt19937* rng, double temperature, int temperature_drop,
                     double cutoff_value, int max_simulations, std::shared_ptr<Evaluator> vp_eval,
+                    bool value_action_selection = false, double use_value_probability = 0.5,
                     bool verbose = false) {
   std::unique_ptr<open_spiel::State> state = game.NewInitialState();
   // REMOVE B/W THESE LINES AFTER TESTING
@@ -143,12 +174,59 @@ std::pair<Trajectory, Trajectory> PlayGame(Logger* logger, int game_num, const o
         //  MCTS search
         std::unique_ptr<SearchNode> root = (*bots)[player]->MCTSearch(*state);
         policy.reserve(root->children.size());
-        for (const SearchNode& c : root->children) {
-        policy.emplace_back(c.action,
-                            std::pow(c.explore_count, 1.0 / temperature));
+        
+        // ----------------------------------
+        // If using policy do this
+        // ----------------------------------
+        //for (const SearchNode& c : root->children) {
+        //  policy.emplace_back(c.action,
+        //                     std::pow(c.explore_count, 1.0 / temperature));
+        //}
+
+        // ----------------------------------
+        // If using policy and value do this
+        // ----------------------------------
+        if (value_action_selection && absl::Uniform(*rng, 0.0, 1.0) < use_value_probability) {
+            // open_spiel::SpielFatalError("Test!");
+
+            // Use value function for action selection
+            // Collect next state values
+            std::vector<double> values;
+            for (const SearchNode& c : root->children) {
+                std::unique_ptr<State> temp_state = state->Clone();
+                temp_state->ApplyAction(c.action);
+                
+                double temp_value;
+                if (temp_state->IsTerminal()) {
+                    temp_value = temp_state->Returns().front();
+                } else {
+                    temp_value = vp_eval->Evaluate(*temp_state).front();
+                }
+
+                values.push_back(temp_value);
+            }
+
+            // Derive policy from next state values
+            std::vector<double> policy_probs = Softmax(values, 1.0);
+            int idx = 0;
+            for (const SearchNode& c : root->children) {
+                policy.emplace_back(c.action,
+                                std::pow(policy_probs[idx], 1.0 / temperature));
+            }
+            // root value = value network's estimate
+            std::unique_ptr<State> working_state = state->Clone();
+            root_value = vp_eval->Evaluate(*working_state).front();
+        } else {
+            // Normal AZ policy construction
+            for (const SearchNode& c : root->children) {
+                policy.emplace_back(c.action,
+                                std::pow(c.explore_count, 1.0 / temperature));
+            }
+            root_value = root->total_reward / root->explore_count;
         }
 
         NormalizePolicy(&policy);
+
         // for (auto const & [act, prob] : policy) {
             // std::cerr << "Action: " << act << ", policy prob: " << prob << std::endl;
             // temp_policy.push_back(prob);
@@ -310,7 +388,8 @@ std::unique_ptr<MCTSBot> InitAZBot(const AlphaZeroConfig& config,
 // An actor thread runner that generates games and returns trajectories.
 void actor(const open_spiel::Game& game, const AlphaZeroConfig& config, int num,
            ThreadedQueue<Trajectory>* trajectory_queue,
-           std::shared_ptr<VPNetEvaluator> vp_eval, StopToken* stop) {
+           std::shared_ptr<VPNetEvaluator> vp_eval, StopToken* stop,
+           bool value_action_selection = false, double use_value_probability = 0.5) {
   std::unique_ptr<Logger> logger;
   if (num < 20) {  // Limit the number of open files.
     logger.reset(new FileLogger(config.path, absl::StrCat("actor-", num)));
@@ -331,7 +410,8 @@ void actor(const open_spiel::Game& game, const AlphaZeroConfig& config, int num,
     
     std::pair<Trajectory, Trajectory> game_results = PlayGame(logger.get(), game_num, game, &bots, &rng,
                      config.temperature, config.temperature_drop, cutoff,
-                     config.max_simulations, vp_eval);
+                     config.max_simulations, vp_eval, value_action_selection,
+                     use_value_probability);
 
     if (!trajectory_queue->Push(game_results.first, absl::Seconds(10))) {
       logger->Print("Failed to push a trajectory after 10 seconds.");
@@ -426,7 +506,8 @@ void evaluator(const open_spiel::Game& game, const AlphaZeroConfig& config,
     Trajectory trajectory = PlayGame(
         &logger, game_num, game, &bots, &rng, /*temperature=*/1,
         /*temperature_drop=*/0, /*cutoff_value=*/game.MaxUtility() + 1,
-        config.max_simulations, vp_eval).first;
+        config.max_simulations, vp_eval, /*value_action_selection=*/false,
+        /*use_value_probability=*/0.5).first;
 
     results->Add(difficulty, trajectory.returns[az_player]);
     logger.Print("Game %d: AZ: %5.2f, MCTS: %5.2f, MCTS-sims: %d, length: %d",
@@ -754,7 +835,8 @@ bool AlphaZero(AlphaZeroConfig config, StopToken* stop, bool resuming) {
   actors.reserve(config.actors);
   for (int i = 0; i < config.actors; ++i) {
     actors.emplace_back(
-        [&, i]() { actor(*game, config, i, &trajectory_queue, eval, stop); });
+        [&, i]() { actor(*game, config, i, &trajectory_queue, eval, stop,
+        config.value_action_selection, config.use_value_probability); });
   }
   std::vector<Thread> evaluators;
   evaluators.reserve(config.evaluators);
