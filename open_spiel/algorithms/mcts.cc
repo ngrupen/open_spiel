@@ -427,24 +427,30 @@ std::unique_ptr<SearchNode> MCTSBot::MCTSearch(const State& state) {
   std::vector<SearchNode*> visit_path;
   std::vector<double> returns;
   visit_path.reserve(64);
+//   std::cerr << "starting simulations" << std::endl;
   for (int i = 0; i < max_simulations_; ++i) {
     visit_path.clear();
     returns.clear();
 
+    // std::cerr << "Applying tree policy" << std::endl;
     std::unique_ptr<State> working_state =
         ApplyTreePolicy(root.get(), state, &visit_path);
 
+    // std::cerr << "evaluating" << std::endl;
     bool solved;
     if (working_state->IsTerminal()) {
       returns = working_state->Returns();
       visit_path[visit_path.size() - 1]->outcome = returns;
       solved = solve_;
     } else {
+    //   std::cerr << "passing state to evaluator" << std::endl;
       returns = evaluator_->Evaluate(*working_state);
+    //   std::cerr << "got returns back from evaluator" << std::endl;
       solved = false;
     }
 
     // Propagate values back.
+    // std::cerr << "propagating" << std::endl;
     for (auto it = visit_path.rbegin(); it != visit_path.rend(); ++it) {
       SearchNode* node = *it;
 
@@ -520,6 +526,7 @@ std::unique_ptr<SearchNode> MCTSBot::MCTSearch(const State& state) {
       }
     }
   }
+//   std::cerr << "done with simulations!" << std::endl;
 
   return root;
 }

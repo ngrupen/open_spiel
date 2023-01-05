@@ -283,4 +283,8 @@ int main(int argc, char **argv) {
   std::cerr << "Overall returns: " << absl::StrJoin(overall_returns, ", ") << std::endl;
 
   return 0;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f3c28fda7c5605da9206989eb7191f8bc014f8d9

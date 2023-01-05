@@ -271,4 +271,8 @@ int main(int argc, char** argv) {
     // }
 
     outFile.close();
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f3c28fda7c5605da9206989eb7191f8bc014f8d9

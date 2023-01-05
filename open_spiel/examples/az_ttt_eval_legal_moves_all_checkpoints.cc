@@ -257,7 +257,11 @@ int main(int argc, char **argv) {
   std::vector<std::string> checkpoint_paths;
   const char delim = '-';
   for (const auto const & entry : std::filesystem::directory_iterator(absl::GetFlag(FLAGS_az_path))) {
+<<<<<<< HEAD
   // for (const auto const & entry : std::experimental::filesystem::directory_iterator(absl::GetFlag(FLAGS_az_path))) {
+=======
+//   for (const auto const & entry : std::experimental::filesystem::directory_iterator(absl::GetFlag(FLAGS_az_path))) {
+>>>>>>> f3c28fda7c5605da9206989eb7191f8bc014f8d9
     std::string fname = entry.path().filename().string();
     std::vector<std::string> tokens = tokenize(fname, delim);
     if ((tokens.size() > 1) && (isNumber(tokens[1]))) {

@@ -248,7 +248,7 @@ int main(int argc, char** argv) {
             break;
           }
           case StateType::kMeanField:
-            open_spiel::SpielFatalError("kMeanField not handeled.");
+            open_spiel::SpielFatalError("kMeanField not handled.");
         }
       }
       const int num_nonterminal_states = nonterminal_state_strings.size();
@@ -269,7 +269,11 @@ int main(int argc, char** argv) {
         std::filesystem::create_directory(save_path); // create src folder
       }
     //   if (!std::experimental::filesystem::is_directory(save_path) || !std::experimental::filesystem::exists(save_path)) { // Check if src folder exists
+<<<<<<< HEAD
     //     std::experimental::filesystem::create_directory(save_path); // create src folder
+=======
+        // std::experimental::filesystem::create_directory(save_path); // create src folder
+>>>>>>> f3c28fda7c5605da9206989eb7191f8bc014f8d9
     //   }
       save_path += "/state_values.txt";
       std::cout << "save path: " << save_path << std::endl;
