@@ -1,0 +1,8322 @@
+Game: tic_tac_toe_4x4
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,3)
+Next state:
+....
+....
+...x
+....
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+....
+...x
+....
+Player 0 chose action: x(3,1)
+Next state:
+..o.
+....
+...x
+.x..
+Player 1 chose action: o(2,0)
+Next state:
+..o.
+....
+o..x
+.x..
+Player 0 chose action: x(2,2)
+Next state:
+..o.
+....
+o.xx
+.x..
+Player 1 chose action: o(3,2)
+Next state:
+..o.
+....
+o.xx
+.xo.
+Player 0 chose action: x(1,2)
+Next state:
+..o.
+..x.
+o.xx
+.xo.
+Player 1 chose action: o(2,1)
+Next state:
+..o.
+..x.
+ooxx
+.xo.
+Player 0 chose action: x(3,0)
+Next state:
+..o.
+..x.
+ooxx
+xxo.
+Player 1 chose action: o(3,3)
+Next state:
+..o.
+..x.
+ooxx
+xxoo
+Player 0 chose action: x(1,3)
+Next state:
+..o.
+..xx
+ooxx
+xxoo
+Player 1 chose action: o(0,0)
+Next state:
+o.o.
+..xx
+ooxx
+xxoo
+Player 0 chose action: x(1,0)
+Next state:
+o.o.
+x.xx
+ooxx
+xxoo
+Player 1 chose action: o(0,1)
+Next state:
+ooo.
+x.xx
+ooxx
+xxoo
+Player 0 chose action: x(0,3)
+Next state:
+ooox
+x.xx
+ooxx
+xxoo
+Player 1 chose action: o(1,1)
+Next state:
+ooox
+xoxx
+ooxx
+xxoo
+Returns: 0, 0
+Game actions: x(2,3), o(0,2), x(3,1), o(2,0), x(2,2), o(3,2), x(1,2), o(2,1), x(3,0), o(3,3), x(1,3), o(0,0), x(1,0), o(0,1), x(0,3), o(1,1)
+Game 0
+History: x(2,3),o(0,2),x(3,1),o(2,0),x(2,2),o(3,2),x(1,2),o(2,1),x(3,0),o(3,3),x(1,3),o(0,0),x(1,0),o(0,1),x(0,3),o(1,1)
+State: ooo.x.xxooxxxxoo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,3)
+Next state:
+....
+...x
+....
+....
+Player 1 chose action: o(3,1)
+Next state:
+....
+...x
+....
+.o..
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+...x
+....
+.o..
+Player 1 chose action: o(2,0)
+Next state:
+..x.
+...x
+o...
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+..x.
+...x
+o...
+.ox.
+Player 1 chose action: o(3,3)
+Next state:
+..x.
+...x
+o...
+.oxo
+Player 0 chose action: x(2,3)
+Next state:
+..x.
+...x
+o..x
+.oxo
+Player 1 chose action: o(1,0)
+Next state:
+..x.
+o..x
+o..x
+.oxo
+Player 0 chose action: x(2,1)
+Next state:
+..x.
+o..x
+ox.x
+.oxo
+Player 1 chose action: o(3,0)
+Next state:
+..x.
+o..x
+ox.x
+ooxo
+Player 0 chose action: x(0,1)
+Next state:
+.xx.
+o..x
+ox.x
+ooxo
+Player 1 chose action: o(2,2)
+Next state:
+.xx.
+o..x
+oxox
+ooxo
+Player 0 chose action: x(0,3)
+Next state:
+.xxx
+o..x
+oxox
+ooxo
+Player 1 chose action: o(1,2)
+Next state:
+.xxx
+o.ox
+oxox
+ooxo
+Player 0 chose action: x(1,1)
+Next state:
+.xxx
+oxox
+oxox
+ooxo
+Player 1 chose action: o(0,0)
+Next state:
+oxxx
+oxox
+oxox
+ooxo
+Returns: -1, 1
+Game actions: x(1,3), o(3,1), x(0,2), o(2,0), x(3,2), o(3,3), x(2,3), o(1,0), x(2,1), o(3,0), x(0,1), o(2,2), x(0,3), o(1,2), x(1,1), o(0,0)
+Game 1
+History: x(1,3),o(3,1),x(0,2),o(2,0),x(3,2),o(3,3),x(2,3),o(1,0),x(2,1),o(3,0),x(0,1),o(2,2),x(0,3),o(1,2),x(1,1),o(0,0)
+State: .xx.o..xox.xooxo
+Value: 1
+ 
+State: .xxxo..xoxoxooxo
+Value: 1
+ 
+State: .xxxo.oxoxoxooxo
+Value: 1
+ 
+State: .xxxoxoxoxoxooxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,0)
+Next state:
+....
+....
+x...
+....
+Player 1 chose action: o(0,1)
+Next state:
+.o..
+....
+x...
+....
+Player 0 chose action: x(1,3)
+Next state:
+.o..
+...x
+x...
+....
+Player 1 chose action: o(3,2)
+Next state:
+.o..
+...x
+x...
+..o.
+Player 0 chose action: x(0,2)
+Next state:
+.ox.
+...x
+x...
+..o.
+Player 1 chose action: o(1,2)
+Next state:
+.ox.
+..ox
+x...
+..o.
+Player 0 chose action: x(1,0)
+Next state:
+.ox.
+x.ox
+x...
+..o.
+Player 1 chose action: o(0,3)
+Next state:
+.oxo
+x.ox
+x...
+..o.
+Player 0 chose action: x(0,0)
+Next state:
+xoxo
+x.ox
+x...
+..o.
+Player 1 chose action: o(1,1)
+Next state:
+xoxo
+xoox
+x...
+..o.
+Player 0 chose action: x(3,1)
+Next state:
+xoxo
+xoox
+x...
+.xo.
+Player 1 chose action: o(2,3)
+Next state:
+xoxo
+xoox
+x..o
+.xo.
+Player 0 chose action: x(2,2)
+Next state:
+xoxo
+xoox
+x.xo
+.xo.
+Player 1 chose action: o(3,3)
+Next state:
+xoxo
+xoox
+x.xo
+.xoo
+Player 0 chose action: x(2,1)
+Next state:
+xoxo
+xoox
+xxxo
+.xoo
+Player 1 chose action: o(3,0)
+Next state:
+xoxo
+xoox
+xxxo
+oxoo
+Returns: 0, 0
+Game actions: x(2,0), o(0,1), x(1,3), o(3,2), x(0,2), o(1,2), x(1,0), o(0,3), x(0,0), o(1,1), x(3,1), o(2,3), x(2,2), o(3,3), x(2,1), o(3,0)
+Game 2
+History: x(2,0),o(0,1),x(1,3),o(3,2),x(0,2),o(1,2),x(1,0),o(0,3),x(0,0),o(1,1),x(3,1),o(2,3),x(2,2),o(3,3),x(2,1),o(3,0)
+State: xoxoxooxx..o.xo.
+Value: 1
+ 
+State: xoxoxooxx.xo.xoo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,0)
+Next state:
+....
+....
+x...
+....
+Player 1 chose action: o(3,1)
+Next state:
+....
+....
+x...
+.o..
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+x...
+.o..
+Player 1 chose action: o(1,0)
+Next state:
+..x.
+o...
+x...
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+..x.
+o...
+x...
+.ox.
+Player 1 chose action: o(3,0)
+Next state:
+..x.
+o...
+x...
+oox.
+Player 0 chose action: x(2,2)
+Next state:
+..x.
+o...
+x.x.
+oox.
+Player 1 chose action: o(0,0)
+Next state:
+o.x.
+o...
+x.x.
+oox.
+Player 0 chose action: x(2,3)
+Next state:
+o.x.
+o...
+x.xx
+oox.
+Player 1 chose action: o(3,3)
+Next state:
+o.x.
+o...
+x.xx
+ooxo
+Player 0 chose action: x(1,3)
+Next state:
+o.x.
+o..x
+x.xx
+ooxo
+Player 1 chose action: o(0,3)
+Next state:
+o.xo
+o..x
+x.xx
+ooxo
+Player 0 chose action: x(1,1)
+Next state:
+o.xo
+ox.x
+x.xx
+ooxo
+Player 1 chose action: o(0,1)
+Next state:
+ooxo
+ox.x
+x.xx
+ooxo
+Player 0 chose action: x(1,2)
+Next state:
+ooxo
+oxxx
+x.xx
+ooxo
+Returns: 1, -1
+Game actions: x(2,0), o(3,1), x(0,2), o(1,0), x(3,2), o(3,0), x(2,2), o(0,0), x(2,3), o(3,3), x(1,3), o(0,3), x(1,1), o(0,1), x(1,2)
+Game 3
+History: x(2,0),o(3,1),x(0,2),o(1,0),x(3,2),o(3,0),x(2,2),o(0,0),x(2,3),o(3,3),x(1,3),o(0,3),x(1,1),o(0,1),x(1,2)
+State: o.x.o..xx.xxooxo
+Value: -1
+ 
+State: o.xoo..xx.xxooxo
+Value: 1
+ 
+State: o.xoox.xx.xxooxo
+Value: -1
+ 
+State: ooxoox.xx.xxooxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+....
+....
+....
+Player 1 chose action: o(1,0)
+Next state:
+.x..
+o...
+....
+....
+Player 0 chose action: x(1,3)
+Next state:
+.x..
+o..x
+....
+....
+Player 1 chose action: o(3,2)
+Next state:
+.x..
+o..x
+....
+..o.
+Player 0 chose action: x(2,0)
+Next state:
+.x..
+o..x
+x...
+..o.
+Player 1 chose action: o(1,1)
+Next state:
+.x..
+oo.x
+x...
+..o.
+Player 0 chose action: x(3,1)
+Next state:
+.x..
+oo.x
+x...
+.xo.
+Player 1 chose action: o(3,0)
+Next state:
+.x..
+oo.x
+x...
+oxo.
+Player 0 chose action: x(2,1)
+Next state:
+.x..
+oo.x
+xx..
+oxo.
+Player 1 chose action: o(0,0)
+Next state:
+ox..
+oo.x
+xx..
+oxo.
+Player 0 chose action: x(2,3)
+Next state:
+ox..
+oo.x
+xx.x
+oxo.
+Player 1 chose action: o(0,2)
+Next state:
+oxo.
+oo.x
+xx.x
+oxo.
+Player 0 chose action: x(1,2)
+Next state:
+oxo.
+ooxx
+xx.x
+oxo.
+Player 1 chose action: o(0,3)
+Next state:
+oxoo
+ooxx
+xx.x
+oxo.
+Player 0 chose action: x(3,3)
+Next state:
+oxoo
+ooxx
+xx.x
+oxox
+Player 1 chose action: o(2,2)
+Next state:
+oxoo
+ooxx
+xxox
+oxox
+Returns: 0, 0
+Game actions: x(0,1), o(1,0), x(1,3), o(3,2), x(2,0), o(1,1), x(3,1), o(3,0), x(2,1), o(0,0), x(2,3), o(0,2), x(1,2), o(0,3), x(3,3), o(2,2)
+Game 4
+History: x(0,1),o(1,0),x(1,3),o(3,2),x(2,0),o(1,1),x(3,1),o(3,0),x(2,1),o(0,0),x(2,3),o(0,2),x(1,2),o(0,3),x(3,3),o(2,2)
+State: oxo.oo.xxx.xoxo.
+Value: 1
+ 
+State: oxooooxxxx.xoxo.
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,0)
+Next state:
+....
+x...
+....
+....
+Player 1 chose action: o(3,1)
+Next state:
+....
+x...
+....
+.o..
+Player 0 chose action: x(2,3)
+Next state:
+....
+x...
+...x
+.o..
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+x...
+...x
+.o..
+Player 0 chose action: x(0,1)
+Next state:
+.xo.
+x...
+...x
+.o..
+Player 1 chose action: o(2,1)
+Next state:
+.xo.
+x...
+.o.x
+.o..
+Player 0 chose action: x(2,0)
+Next state:
+.xo.
+x...
+xo.x
+.o..
+Player 1 chose action: o(1,1)
+Next state:
+.xo.
+xo..
+xo.x
+.o..
+Player 0 chose action: x(0,0)
+Next state:
+xxo.
+xo..
+xo.x
+.o..
+Player 1 chose action: o(3,2)
+Next state:
+xxo.
+xo..
+xo.x
+.oo.
+Player 0 chose action: x(0,3)
+Next state:
+xxox
+xo..
+xo.x
+.oo.
+Player 1 chose action: o(1,2)
+Next state:
+xxox
+xoo.
+xo.x
+.oo.
+Player 0 chose action: x(1,3)
+Next state:
+xxox
+xoox
+xo.x
+.oo.
+Player 1 chose action: o(3,3)
+Next state:
+xxox
+xoox
+xo.x
+.ooo
+Player 0 chose action: x(2,2)
+Next state:
+xxox
+xoox
+xoxx
+.ooo
+Player 1 chose action: o(3,0)
+Next state:
+xxox
+xoox
+xoxx
+oooo
+Returns: -1, 1
+Game actions: x(1,0), o(3,1), x(2,3), o(0,2), x(0,1), o(2,1), x(2,0), o(1,1), x(0,0), o(3,2), x(0,3), o(1,2), x(1,3), o(3,3), x(2,2), o(3,0)
+Game 5
+History: x(1,0),o(3,1),x(2,3),o(0,2),x(0,1),o(2,1),x(2,0),o(1,1),x(0,0),o(3,2),x(0,3),o(1,2),x(1,3),o(3,3),x(2,2),o(3,0)
+State: xxoxxoo.xo.x.oo.
+Value: 1
+ 
+State: xxoxxooxxo.x.oo.
+Value: 1
+ 
+State: xxoxxooxxo.x.ooo
+Value: 1
+ 
+State: xxoxxooxxoxx.ooo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+....
+....
+....
+Player 1 chose action: o(3,2)
+Next state:
+.x..
+....
+....
+..o.
+Player 0 chose action: x(2,3)
+Next state:
+.x..
+....
+...x
+..o.
+Player 1 chose action: o(1,0)
+Next state:
+.x..
+o...
+...x
+..o.
+Player 0 chose action: x(0,2)
+Next state:
+.xx.
+o...
+...x
+..o.
+Player 1 chose action: o(3,1)
+Next state:
+.xx.
+o...
+...x
+.oo.
+Player 0 chose action: x(1,2)
+Next state:
+.xx.
+o.x.
+...x
+.oo.
+Player 1 chose action: o(1,1)
+Next state:
+.xx.
+oox.
+...x
+.oo.
+Player 0 chose action: x(1,3)
+Next state:
+.xx.
+ooxx
+...x
+.oo.
+Player 1 chose action: o(2,0)
+Next state:
+.xx.
+ooxx
+o..x
+.oo.
+Player 0 chose action: x(2,1)
+Next state:
+.xx.
+ooxx
+ox.x
+.oo.
+Player 1 chose action: o(2,2)
+Next state:
+.xx.
+ooxx
+oxox
+.oo.
+Player 0 chose action: x(3,0)
+Next state:
+.xx.
+ooxx
+oxox
+xoo.
+Player 1 chose action: o(0,0)
+Next state:
+oxx.
+ooxx
+oxox
+xoo.
+Player 0 chose action: x(3,3)
+Next state:
+oxx.
+ooxx
+oxox
+xoox
+Player 1 chose action: o(0,3)
+Next state:
+oxxo
+ooxx
+oxox
+xoox
+Returns: 0, 0
+Game actions: x(0,1), o(3,2), x(2,3), o(1,0), x(0,2), o(3,1), x(1,2), o(1,1), x(1,3), o(2,0), x(2,1), o(2,2), x(3,0), o(0,0), x(3,3), o(0,3)
+Game 6
+History: x(0,1),o(3,2),x(2,3),o(1,0),x(0,2),o(3,1),x(1,2),o(1,1),x(1,3),o(2,0),x(2,1),o(2,2),x(3,0),o(0,0),x(3,3),o(0,3)
+State: .xx.ooxxox.x.oo.
+Value: 1
+ 
+State: .xx.ooxxoxox.oo.
+Value: 1
+ 
+State: oxx.ooxxoxoxxoo.
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+....
+....
+....
+Player 1 chose action: o(2,3)
+Next state:
+.x..
+....
+...o
+....
+Player 0 chose action: x(1,0)
+Next state:
+.x..
+x...
+...o
+....
+Player 1 chose action: o(3,1)
+Next state:
+.x..
+x...
+...o
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+.x..
+x...
+...o
+.ox.
+Player 1 chose action: o(3,0)
+Next state:
+.x..
+x...
+...o
+oox.
+Player 0 chose action: x(2,0)
+Next state:
+.x..
+x...
+x..o
+oox.
+Player 1 chose action: o(2,1)
+Next state:
+.x..
+x...
+xo.o
+oox.
+Player 0 chose action: x(3,3)
+Next state:
+.x..
+x...
+xo.o
+ooxx
+Player 1 chose action: o(0,3)
+Next state:
+.x.o
+x...
+xo.o
+ooxx
+Player 0 chose action: x(0,2)
+Next state:
+.xxo
+x...
+xo.o
+ooxx
+Player 1 chose action: o(0,0)
+Next state:
+oxxo
+x...
+xo.o
+ooxx
+Player 0 chose action: x(1,1)
+Next state:
+oxxo
+xx..
+xo.o
+ooxx
+Player 1 chose action: o(2,2)
+Next state:
+oxxo
+xx..
+xooo
+ooxx
+Player 0 chose action: x(1,3)
+Next state:
+oxxo
+xx.x
+xooo
+ooxx
+Player 1 chose action: o(1,2)
+Next state:
+oxxo
+xxox
+xooo
+ooxx
+Returns: -1, 1
+Game actions: x(0,1), o(2,3), x(1,0), o(3,1), x(3,2), o(3,0), x(2,0), o(2,1), x(3,3), o(0,3), x(0,2), o(0,0), x(1,1), o(2,2), x(1,3), o(1,2)
+Game 7
+History: x(0,1),o(2,3),x(1,0),o(3,1),x(3,2),o(3,0),x(2,0),o(2,1),x(3,3),o(0,3),x(0,2),o(0,0),x(1,1),o(2,2),x(1,3),o(1,2)
+State: .xxox...xo.oooxx
+Value: 1
+ 
+State: oxxoxx..xo.oooxx
+Value: 1
+ 
+State: oxxoxx.xxoooooxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(3,2)
+Next state:
+....
+....
+....
+..x.
+Player 1 chose action: o(2,0)
+Next state:
+....
+....
+o...
+..x.
+Player 0 chose action: x(3,1)
+Next state:
+....
+....
+o...
+.xx.
+Player 1 chose action: o(1,3)
+Next state:
+....
+...o
+o...
+.xx.
+Player 0 chose action: x(3,3)
+Next state:
+....
+...o
+o...
+.xxx
+Player 1 chose action: o(2,2)
+Next state:
+....
+...o
+o.o.
+.xxx
+Player 0 chose action: x(2,1)
+Next state:
+....
+...o
+oxo.
+.xxx
+Player 1 chose action: o(0,1)
+Next state:
+.o..
+...o
+oxo.
+.xxx
+Player 0 chose action: x(1,0)
+Next state:
+.o..
+x..o
+oxo.
+.xxx
+Player 1 chose action: o(2,3)
+Next state:
+.o..
+x..o
+oxoo
+.xxx
+Player 0 chose action: x(1,2)
+Next state:
+.o..
+x.xo
+oxoo
+.xxx
+Player 1 chose action: o(0,2)
+Next state:
+.oo.
+x.xo
+oxoo
+.xxx
+Player 0 chose action: x(1,1)
+Next state:
+.oo.
+xxxo
+oxoo
+.xxx
+Player 1 chose action: o(0,0)
+Next state:
+ooo.
+xxxo
+oxoo
+.xxx
+Player 0 chose action: x(0,3)
+Next state:
+ooox
+xxxo
+oxoo
+.xxx
+Player 1 chose action: o(3,0)
+Next state:
+ooox
+xxxo
+oxoo
+oxxx
+Returns: 0, 0
+Game actions: x(3,2), o(2,0), x(3,1), o(1,3), x(3,3), o(2,2), x(2,1), o(0,1), x(1,0), o(2,3), x(1,2), o(0,2), x(1,1), o(0,0), x(0,3), o(3,0)
+Game 8
+History: x(3,2),o(2,0),x(3,1),o(1,3),x(3,3),o(2,2),x(2,1),o(0,1),x(1,0),o(2,3),x(1,2),o(0,2),x(1,1),o(0,0),x(0,3),o(3,0)
+State: .oo.x.xooxoo.xxx
+Value: 1
+ 
+State: ooo.xxxooxoo.xxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(2,3)
+Next state:
+..x.
+....
+...o
+....
+Player 0 chose action: x(2,0)
+Next state:
+..x.
+....
+x..o
+....
+Player 1 chose action: o(1,0)
+Next state:
+..x.
+o...
+x..o
+....
+Player 0 chose action: x(3,1)
+Next state:
+..x.
+o...
+x..o
+.x..
+Player 1 chose action: o(2,2)
+Next state:
+..x.
+o...
+x.oo
+.x..
+Player 0 chose action: x(3,2)
+Next state:
+..x.
+o...
+x.oo
+.xx.
+Player 1 chose action: o(2,1)
+Next state:
+..x.
+o...
+xooo
+.xx.
+Player 0 chose action: x(3,0)
+Next state:
+..x.
+o...
+xooo
+xxx.
+Player 1 chose action: o(1,3)
+Next state:
+..x.
+o..o
+xooo
+xxx.
+Player 0 chose action: x(0,1)
+Next state:
+.xx.
+o..o
+xooo
+xxx.
+Player 1 chose action: o(1,1)
+Next state:
+.xx.
+oo.o
+xooo
+xxx.
+Player 0 chose action: x(0,3)
+Next state:
+.xxx
+oo.o
+xooo
+xxx.
+Player 1 chose action: o(3,3)
+Next state:
+.xxx
+oo.o
+xooo
+xxxo
+Player 0 chose action: x(1,2)
+Next state:
+.xxx
+ooxo
+xooo
+xxxo
+Player 1 chose action: o(0,0)
+Next state:
+oxxx
+ooxo
+xooo
+xxxo
+Returns: -1, 1
+Game actions: x(0,2), o(2,3), x(2,0), o(1,0), x(3,1), o(2,2), x(3,2), o(2,1), x(3,0), o(1,3), x(0,1), o(1,1), x(0,3), o(3,3), x(1,2), o(0,0)
+Game 9
+History: x(0,2),o(2,3),x(2,0),o(1,0),x(3,1),o(2,2),x(3,2),o(2,1),x(3,0),o(1,3),x(0,1),o(1,1),x(0,3),o(3,3),x(1,2),o(0,0)
+State: .xx.oo.oxoooxxx.
+Value: 1
+ 
+State: .xxxoo.oxoooxxx.
+Value: 1
+ 
+State: .xxxoo.oxoooxxxo
+Value: 1
+ 
+State: .xxxooxoxoooxxxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(3,2)
+Next state:
+..x.
+....
+....
+..o.
+Player 0 chose action: x(2,0)
+Next state:
+..x.
+....
+x...
+..o.
+Player 1 chose action: o(1,3)
+Next state:
+..x.
+...o
+x...
+..o.
+Player 0 chose action: x(3,1)
+Next state:
+..x.
+...o
+x...
+.xo.
+Player 1 chose action: o(3,0)
+Next state:
+..x.
+...o
+x...
+oxo.
+Player 0 chose action: x(1,0)
+Next state:
+..x.
+x..o
+x...
+oxo.
+Player 1 chose action: o(1,2)
+Next state:
+..x.
+x.oo
+x...
+oxo.
+Player 0 chose action: x(2,2)
+Next state:
+..x.
+x.oo
+x.x.
+oxo.
+Player 1 chose action: o(0,3)
+Next state:
+..xo
+x.oo
+x.x.
+oxo.
+Player 0 chose action: x(3,3)
+Next state:
+..xo
+x.oo
+x.x.
+oxox
+Player 1 chose action: o(0,0)
+Next state:
+o.xo
+x.oo
+x.x.
+oxox
+Player 0 chose action: x(2,3)
+Next state:
+o.xo
+x.oo
+x.xx
+oxox
+Player 1 chose action: o(0,1)
+Next state:
+ooxo
+x.oo
+x.xx
+oxox
+Player 0 chose action: x(1,1)
+Next state:
+ooxo
+xxoo
+x.xx
+oxox
+Player 1 chose action: o(2,1)
+Next state:
+ooxo
+xxoo
+xoxx
+oxox
+Returns: -1, 1
+Game actions: x(0,2), o(3,2), x(2,0), o(1,3), x(3,1), o(3,0), x(1,0), o(1,2), x(2,2), o(0,3), x(3,3), o(0,0), x(2,3), o(0,1), x(1,1), o(2,1)
+Game 10
+History: x(0,2),o(3,2),x(2,0),o(1,3),x(3,1),o(3,0),x(1,0),o(1,2),x(2,2),o(0,3),x(3,3),o(0,0),x(2,3),o(0,1),x(1,1),o(2,1)
+State: ..xox.oox.x.oxox
+Value: 1
+ 
+State: o.xox.oox.xxoxox
+Value: 1
+ 
+State: ooxox.oox.xxoxox
+Value: 1
+ 
+State: ooxoxxoox.xxoxox
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,3)
+Next state:
+....
+....
+...x
+....
+Player 1 chose action: o(2,0)
+Next state:
+....
+....
+o..x
+....
+Player 0 chose action: x(3,2)
+Next state:
+....
+....
+o..x
+..x.
+Player 1 chose action: o(2,1)
+Next state:
+....
+....
+oo.x
+..x.
+Player 0 chose action: x(1,0)
+Next state:
+....
+x...
+oo.x
+..x.
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+x...
+oo.x
+..x.
+Player 0 chose action: x(2,2)
+Next state:
+..o.
+x...
+ooxx
+..x.
+Player 1 chose action: o(1,2)
+Next state:
+..o.
+x.o.
+ooxx
+..x.
+Player 0 chose action: x(1,3)
+Next state:
+..o.
+x.ox
+ooxx
+..x.
+Player 1 chose action: o(3,0)
+Next state:
+..o.
+x.ox
+ooxx
+o.x.
+Player 0 chose action: x(0,1)
+Next state:
+.xo.
+x.ox
+ooxx
+o.x.
+Player 1 chose action: o(1,1)
+Next state:
+.xo.
+xoox
+ooxx
+o.x.
+Player 0 chose action: x(3,1)
+Next state:
+.xo.
+xoox
+ooxx
+oxx.
+Player 1 chose action: o(3,3)
+Next state:
+.xo.
+xoox
+ooxx
+oxxo
+Player 0 chose action: x(0,0)
+Next state:
+xxo.
+xoox
+ooxx
+oxxo
+Player 1 chose action: o(0,3)
+Next state:
+xxoo
+xoox
+ooxx
+oxxo
+Returns: -1, 1
+Game actions: x(2,3), o(2,0), x(3,2), o(2,1), x(1,0), o(0,2), x(2,2), o(1,2), x(1,3), o(3,0), x(0,1), o(1,1), x(3,1), o(3,3), x(0,0), o(0,3)
+Game 11
+History: x(2,3),o(2,0),x(3,2),o(2,1),x(1,0),o(0,2),x(2,2),o(1,2),x(1,3),o(3,0),x(0,1),o(1,1),x(3,1),o(3,3),x(0,0),o(0,3)
+State: .xo.x.oxooxxo.x.
+Value: 1
+ 
+State: .xo.xooxooxxoxx.
+Value: 1
+ 
+State: xxo.xooxooxxoxxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(2,3)
+Next state:
+..x.
+....
+...o
+....
+Player 0 chose action: x(3,1)
+Next state:
+..x.
+....
+...o
+.x..
+Player 1 chose action: o(1,0)
+Next state:
+..x.
+o...
+...o
+.x..
+Player 0 chose action: x(1,3)
+Next state:
+..x.
+o..x
+...o
+.x..
+Player 1 chose action: o(1,2)
+Next state:
+..x.
+o.ox
+...o
+.x..
+Player 0 chose action: x(3,2)
+Next state:
+..x.
+o.ox
+...o
+.xx.
+Player 1 chose action: o(0,3)
+Next state:
+..xo
+o.ox
+...o
+.xx.
+Player 0 chose action: x(3,3)
+Next state:
+..xo
+o.ox
+...o
+.xxx
+Player 1 chose action: o(0,0)
+Next state:
+o.xo
+o.ox
+...o
+.xxx
+Player 0 chose action: x(0,1)
+Next state:
+oxxo
+o.ox
+...o
+.xxx
+Player 1 chose action: o(2,2)
+Next state:
+oxxo
+o.ox
+..oo
+.xxx
+Player 0 chose action: x(2,1)
+Next state:
+oxxo
+o.ox
+.xoo
+.xxx
+Player 1 chose action: o(2,0)
+Next state:
+oxxo
+o.ox
+oxoo
+.xxx
+Player 0 chose action: x(3,0)
+Next state:
+oxxo
+o.ox
+oxoo
+xxxx
+Returns: 1, -1
+Game actions: x(0,2), o(2,3), x(3,1), o(1,0), x(1,3), o(1,2), x(3,2), o(0,3), x(3,3), o(0,0), x(0,1), o(2,2), x(2,1), o(2,0), x(3,0)
+Game 12
+History: x(0,2),o(2,3),x(3,1),o(1,0),x(1,3),o(1,2),x(3,2),o(0,3),x(3,3),o(0,0),x(0,1),o(2,2),x(2,1),o(2,0),x(3,0)
+State: oxxoo.ox...o.xxx
+Value: 1
+ 
+State: oxxoo.ox..oo.xxx
+Value: 1
+ 
+State: oxxoo.ox.xoo.xxx
+Value: -1
+ 
+State: oxxoo.oxoxoo.xxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,3)
+Next state:
+....
+...x
+....
+....
+Player 1 chose action: o(2,0)
+Next state:
+....
+...x
+o...
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+...x
+o...
+....
+Player 1 chose action: o(0,1)
+Next state:
+.ox.
+...x
+o...
+....
+Player 0 chose action: x(3,1)
+Next state:
+.ox.
+...x
+o...
+.x..
+Player 1 chose action: o(0,3)
+Next state:
+.oxo
+...x
+o...
+.x..
+Player 0 chose action: x(2,3)
+Next state:
+.oxo
+...x
+o..x
+.x..
+Player 1 chose action: o(2,1)
+Next state:
+.oxo
+...x
+oo.x
+.x..
+Player 0 chose action: x(3,3)
+Next state:
+.oxo
+...x
+oo.x
+.x.x
+Player 1 chose action: o(1,2)
+Next state:
+.oxo
+..ox
+oo.x
+.x.x
+Player 0 chose action: x(3,2)
+Next state:
+.oxo
+..ox
+oo.x
+.xxx
+Player 1 chose action: o(2,2)
+Next state:
+.oxo
+..ox
+ooox
+.xxx
+Player 0 chose action: x(0,0)
+Next state:
+xoxo
+..ox
+ooox
+.xxx
+Player 1 chose action: o(1,1)
+Next state:
+xoxo
+.oox
+ooox
+.xxx
+Player 0 chose action: x(1,0)
+Next state:
+xoxo
+xoox
+ooox
+.xxx
+Player 1 chose action: o(3,0)
+Next state:
+xoxo
+xoox
+ooox
+oxxx
+Returns: -1, 1
+Game actions: x(1,3), o(2,0), x(0,2), o(0,1), x(3,1), o(0,3), x(2,3), o(2,1), x(3,3), o(1,2), x(3,2), o(2,2), x(0,0), o(1,1), x(1,0), o(3,0)
+Game 13
+History: x(1,3),o(2,0),x(0,2),o(0,1),x(3,1),o(0,3),x(2,3),o(2,1),x(3,3),o(1,2),x(3,2),o(2,2),x(0,0),o(1,1),x(1,0),o(3,0)
+State: .oxo..oxoo.x.xxx
+Value: 1
+ 
+State: .oxo..oxooox.xxx
+Value: 1
+ 
+State: xoxo..oxooox.xxx
+Value: 1
+ 
+State: xoxo.ooxooox.xxx
+Value: 1
+ 
+State: xoxoxooxooox.xxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(3,1)
+Next state:
+....
+....
+....
+.x..
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+....
+....
+.x..
+Player 0 chose action: x(2,0)
+Next state:
+..o.
+....
+x...
+.x..
+Player 1 chose action: o(2,3)
+Next state:
+..o.
+....
+x..o
+.x..
+Player 0 chose action: x(3,2)
+Next state:
+..o.
+....
+x..o
+.xx.
+Player 1 chose action: o(2,2)
+Next state:
+..o.
+....
+x.oo
+.xx.
+Player 0 chose action: x(3,3)
+Next state:
+..o.
+....
+x.oo
+.xxx
+Player 1 chose action: o(0,0)
+Next state:
+o.o.
+....
+x.oo
+.xxx
+Player 0 chose action: x(2,1)
+Next state:
+o.o.
+....
+xxoo
+.xxx
+Player 1 chose action: o(1,0)
+Next state:
+o.o.
+o...
+xxoo
+.xxx
+Player 0 chose action: x(1,2)
+Next state:
+o.o.
+o.x.
+xxoo
+.xxx
+Player 1 chose action: o(1,3)
+Next state:
+o.o.
+o.xo
+xxoo
+.xxx
+Player 0 chose action: x(0,1)
+Next state:
+oxo.
+o.xo
+xxoo
+.xxx
+Player 1 chose action: o(0,3)
+Next state:
+oxoo
+o.xo
+xxoo
+.xxx
+Player 0 chose action: x(3,0)
+Next state:
+oxoo
+o.xo
+xxoo
+xxxx
+Returns: 1, -1
+Game actions: x(3,1), o(0,2), x(2,0), o(2,3), x(3,2), o(2,2), x(3,3), o(0,0), x(2,1), o(1,0), x(1,2), o(1,3), x(0,1), o(0,3), x(3,0)
+Game 14
+History: x(3,1),o(0,2),x(2,0),o(2,3),x(3,2),o(2,2),x(3,3),o(0,0),x(2,1),o(1,0),x(1,2),o(1,3),x(0,1),o(0,3),x(3,0)
+State: o.o.o.xoxxoo.xxx
+Value: 1
+ 
+State: oxo.o.xoxxoo.xxx
+Value: -1
+ 
+State: oxooo.xoxxoo.xxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(1,0)
+Next state:
+..x.
+o...
+....
+....
+Player 0 chose action: x(3,1)
+Next state:
+..x.
+o...
+....
+.x..
+Player 1 chose action: o(2,3)
+Next state:
+..x.
+o...
+...o
+.x..
+Player 0 chose action: x(2,0)
+Next state:
+..x.
+o...
+x..o
+.x..
+Player 1 chose action: o(2,2)
+Next state:
+..x.
+o...
+x.oo
+.x..
+Player 0 chose action: x(3,2)
+Next state:
+..x.
+o...
+x.oo
+.xx.
+Player 1 chose action: o(2,1)
+Next state:
+..x.
+o...
+xooo
+.xx.
+Player 0 chose action: x(3,0)
+Next state:
+..x.
+o...
+xooo
+xxx.
+Player 1 chose action: o(1,3)
+Next state:
+..x.
+o..o
+xooo
+xxx.
+Player 0 chose action: x(0,3)
+Next state:
+..xx
+o..o
+xooo
+xxx.
+Player 1 chose action: o(0,1)
+Next state:
+.oxx
+o..o
+xooo
+xxx.
+Player 0 chose action: x(1,2)
+Next state:
+.oxx
+o.xo
+xooo
+xxx.
+Player 1 chose action: o(1,1)
+Next state:
+.oxx
+ooxo
+xooo
+xxx.
+Player 0 chose action: x(0,0)
+Next state:
+xoxx
+ooxo
+xooo
+xxx.
+Player 1 chose action: o(3,3)
+Next state:
+xoxx
+ooxo
+xooo
+xxxo
+Returns: 0, 0
+Game actions: x(0,2), o(1,0), x(3,1), o(2,3), x(2,0), o(2,2), x(3,2), o(2,1), x(3,0), o(1,3), x(0,3), o(0,1), x(1,2), o(1,1), x(0,0), o(3,3)
+Game 15
+History: x(0,2),o(1,0),x(3,1),o(2,3),x(2,0),o(2,2),x(3,2),o(2,1),x(3,0),o(1,3),x(0,3),o(0,1),x(1,2),o(1,1),x(0,0),o(3,3)
+State: .oxxo..oxoooxxx.
+Value: 1
+ 
+State: .oxxooxoxoooxxx.
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(3,2)
+Next state:
+....
+....
+....
+..x.
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+....
+....
+..x.
+Player 0 chose action: x(2,2)
+Next state:
+..o.
+....
+..x.
+..x.
+Player 1 chose action: o(1,2)
+Next state:
+..o.
+..o.
+..x.
+..x.
+Player 0 chose action: x(0,1)
+Next state:
+.xo.
+..o.
+..x.
+..x.
+Player 1 chose action: o(0,0)
+Next state:
+oxo.
+..o.
+..x.
+..x.
+Player 0 chose action: x(1,3)
+Next state:
+oxo.
+..ox
+..x.
+..x.
+Player 1 chose action: o(1,1)
+Next state:
+oxo.
+.oox
+..x.
+..x.
+Player 0 chose action: x(3,1)
+Next state:
+oxo.
+.oox
+..x.
+.xx.
+Player 1 chose action: o(2,1)
+Next state:
+oxo.
+.oox
+.ox.
+.xx.
+Player 0 chose action: x(3,3)
+Next state:
+oxo.
+.oox
+.ox.
+.xxx
+Player 1 chose action: o(2,3)
+Next state:
+oxo.
+.oox
+.oxo
+.xxx
+Player 0 chose action: x(2,0)
+Next state:
+oxo.
+.oox
+xoxo
+.xxx
+Player 1 chose action: o(1,0)
+Next state:
+oxo.
+ooox
+xoxo
+.xxx
+Player 0 chose action: x(0,3)
+Next state:
+oxox
+ooox
+xoxo
+.xxx
+Player 1 chose action: o(3,0)
+Next state:
+oxox
+ooox
+xoxo
+oxxx
+Returns: 0, 0
+Game actions: x(3,2), o(0,2), x(2,2), o(1,2), x(0,1), o(0,0), x(1,3), o(1,1), x(3,1), o(2,1), x(3,3), o(2,3), x(2,0), o(1,0), x(0,3), o(3,0)
+Game 16
+History: x(3,2),o(0,2),x(2,2),o(1,2),x(0,1),o(0,0),x(1,3),o(1,1),x(3,1),o(2,1),x(3,3),o(2,3),x(2,0),o(1,0),x(0,3),o(3,0)
+State: oxo..oox.oxo.xxx
+Value: 1
+ 
+State: oxo.oooxxoxo.xxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(3,2)
+Next state:
+....
+....
+....
+..x.
+Player 1 chose action: o(1,3)
+Next state:
+....
+...o
+....
+..x.
+Player 0 chose action: x(2,0)
+Next state:
+....
+...o
+x...
+..x.
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+...o
+x...
+..x.
+Player 0 chose action: x(0,1)
+Next state:
+.xo.
+...o
+x...
+..x.
+Player 1 chose action: o(0,0)
+Next state:
+oxo.
+...o
+x...
+..x.
+Player 0 chose action: x(1,0)
+Next state:
+oxo.
+x..o
+x...
+..x.
+Player 1 chose action: o(1,2)
+Next state:
+oxo.
+x.oo
+x...
+..x.
+Player 0 chose action: x(3,0)
+Next state:
+oxo.
+x.oo
+x...
+x.x.
+Player 1 chose action: o(2,2)
+Next state:
+oxo.
+x.oo
+x.o.
+x.x.
+Player 0 chose action: x(3,1)
+Next state:
+oxo.
+x.oo
+x.o.
+xxx.
+Player 1 chose action: o(2,1)
+Next state:
+oxo.
+x.oo
+xoo.
+xxx.
+Player 0 chose action: x(1,1)
+Next state:
+oxo.
+xxoo
+xoo.
+xxx.
+Player 1 chose action: o(2,3)
+Next state:
+oxo.
+xxoo
+xooo
+xxx.
+Player 0 chose action: x(0,3)
+Next state:
+oxox
+xxoo
+xooo
+xxx.
+Player 1 chose action: o(3,3)
+Next state:
+oxox
+xxoo
+xooo
+xxxo
+Returns: 0, 0
+Game actions: x(3,2), o(1,3), x(2,0), o(0,2), x(0,1), o(0,0), x(1,0), o(1,2), x(3,0), o(2,2), x(3,1), o(2,1), x(1,1), o(2,3), x(0,3), o(3,3)
+Game 17
+History: x(3,2),o(1,3),x(2,0),o(0,2),x(0,1),o(0,0),x(1,0),o(1,2),x(3,0),o(2,2),x(3,1),o(2,1),x(1,1),o(2,3),x(0,3),o(3,3)
+State: oxo.x.ooxoo.xxx.
+Value: 1
+ 
+State: oxo.xxooxoooxxx.
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,3)
+Next state:
+....
+...x
+....
+....
+Player 1 chose action: o(1,0)
+Next state:
+....
+o..x
+....
+....
+Player 0 chose action: x(3,1)
+Next state:
+....
+o..x
+....
+.x..
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+o..x
+....
+.x..
+Player 0 chose action: x(2,3)
+Next state:
+..o.
+o..x
+...x
+.x..
+Player 1 chose action: o(1,1)
+Next state:
+..o.
+oo.x
+...x
+.x..
+Player 0 chose action: x(0,1)
+Next state:
+.xo.
+oo.x
+...x
+.x..
+Player 1 chose action: o(2,1)
+Next state:
+.xo.
+oo.x
+.o.x
+.x..
+Player 0 chose action: x(2,0)
+Next state:
+.xo.
+oo.x
+xo.x
+.x..
+Player 1 chose action: o(0,0)
+Next state:
+oxo.
+oo.x
+xo.x
+.x..
+Player 0 chose action: x(0,3)
+Next state:
+oxox
+oo.x
+xo.x
+.x..
+Player 1 chose action: o(3,0)
+Next state:
+oxox
+oo.x
+xo.x
+ox..
+Player 0 chose action: x(1,2)
+Next state:
+oxox
+ooxx
+xo.x
+ox..
+Player 1 chose action: o(3,2)
+Next state:
+oxox
+ooxx
+xo.x
+oxo.
+Player 0 chose action: x(2,2)
+Next state:
+oxox
+ooxx
+xoxx
+oxo.
+Player 1 chose action: o(3,3)
+Next state:
+oxox
+ooxx
+xoxx
+oxoo
+Returns: 0, 0
+Game actions: x(1,3), o(1,0), x(3,1), o(0,2), x(2,3), o(1,1), x(0,1), o(2,1), x(2,0), o(0,0), x(0,3), o(3,0), x(1,2), o(3,2), x(2,2), o(3,3)
+Game 18
+History: x(1,3),o(1,0),x(3,1),o(0,2),x(2,3),o(1,1),x(0,1),o(2,1),x(2,0),o(0,0),x(0,3),o(3,0),x(1,2),o(3,2),x(2,2),o(3,3)
+State: oxoxoo.xxo.xox..
+Value: 1
+ 
+State: oxoxooxxxo.xoxo.
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(3,1)
+Next state:
+..x.
+....
+....
+.o..
+Player 0 chose action: x(2,0)
+Next state:
+..x.
+....
+x...
+.o..
+Player 1 chose action: o(2,3)
+Next state:
+..x.
+....
+x..o
+.o..
+Player 0 chose action: x(2,1)
+Next state:
+..x.
+....
+xx.o
+.o..
+Player 1 chose action: o(0,1)
+Next state:
+.ox.
+....
+xx.o
+.o..
+Player 0 chose action: x(1,1)
+Next state:
+.ox.
+.x..
+xx.o
+.o..
+Player 1 chose action: o(0,0)
+Next state:
+oox.
+.x..
+xx.o
+.o..
+Player 0 chose action: x(1,0)
+Next state:
+oox.
+xx..
+xx.o
+.o..
+Player 1 chose action: o(2,2)
+Next state:
+oox.
+xx..
+xxoo
+.o..
+Player 0 chose action: x(1,2)
+Next state:
+oox.
+xxx.
+xxoo
+.o..
+Player 1 chose action: o(3,2)
+Next state:
+oox.
+xxx.
+xxoo
+.oo.
+Player 0 chose action: x(3,0)
+Next state:
+oox.
+xxx.
+xxoo
+xoo.
+Player 1 chose action: o(3,3)
+Next state:
+oox.
+xxx.
+xxoo
+xooo
+Player 0 chose action: x(1,3)
+Next state:
+oox.
+xxxx
+xxoo
+xooo
+Returns: 1, -1
+Game actions: x(0,2), o(3,1), x(2,0), o(2,3), x(2,1), o(0,1), x(1,1), o(0,0), x(1,0), o(2,2), x(1,2), o(3,2), x(3,0), o(3,3), x(1,3)
+Game 19
+History: x(0,2),o(3,1),x(2,0),o(2,3),x(2,1),o(0,1),x(1,1),o(0,0),x(1,0),o(2,2),x(1,2),o(3,2),x(3,0),o(3,3),x(1,3)
+State: oox.xxx.xxoo.oo.
+Value: 1
+ 
+State: oox.xxx.xxooxoo.
+Value: -1
+ 
+State: oox.xxx.xxooxooo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(2,3)
+Next state:
+..x.
+....
+...o
+....
+Player 0 chose action: x(1,0)
+Next state:
+..x.
+x...
+...o
+....
+Player 1 chose action: o(3,2)
+Next state:
+..x.
+x...
+...o
+..o.
+Player 0 chose action: x(2,2)
+Next state:
+..x.
+x...
+..xo
+..o.
+Player 1 chose action: o(2,0)
+Next state:
+..x.
+x...
+o.xo
+..o.
+Player 0 chose action: x(2,1)
+Next state:
+..x.
+x...
+oxxo
+..o.
+Player 1 chose action: o(1,3)
+Next state:
+..x.
+x..o
+oxxo
+..o.
+Player 0 chose action: x(1,2)
+Next state:
+..x.
+x.xo
+oxxo
+..o.
+Player 1 chose action: o(3,3)
+Next state:
+..x.
+x.xo
+oxxo
+..oo
+Player 0 chose action: x(0,0)
+Next state:
+x.x.
+x.xo
+oxxo
+..oo
+Player 1 chose action: o(0,1)
+Next state:
+xox.
+x.xo
+oxxo
+..oo
+Player 0 chose action: x(3,1)
+Next state:
+xox.
+x.xo
+oxxo
+.xoo
+Player 1 chose action: o(3,0)
+Next state:
+xox.
+x.xo
+oxxo
+oxoo
+Player 0 chose action: x(1,1)
+Next state:
+xox.
+xxxo
+oxxo
+oxoo
+Player 1 chose action: o(0,3)
+Next state:
+xoxo
+xxxo
+oxxo
+oxoo
+Returns: -1, 1
+Game actions: x(0,2), o(2,3), x(1,0), o(3,2), x(2,2), o(2,0), x(2,1), o(1,3), x(1,2), o(3,3), x(0,0), o(0,1), x(3,1), o(3,0), x(1,1), o(0,3)
+Game 20
+History: x(0,2),o(2,3),x(1,0),o(3,2),x(2,2),o(2,0),x(2,1),o(1,3),x(1,2),o(3,3),x(0,0),o(0,1),x(3,1),o(3,0),x(1,1),o(0,3)
+State: x.x.x.xooxxo..oo
+Value: 1
+ 
+State: xox.x.xooxxo.xoo
+Value: 1
+ 
+State: xox.xxxooxxooxoo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,3)
+Next state:
+....
+....
+...x
+....
+Player 1 chose action: o(2,0)
+Next state:
+....
+....
+o..x
+....
+Player 0 chose action: x(1,3)
+Next state:
+....
+...x
+o..x
+....
+Player 1 chose action: o(2,2)
+Next state:
+....
+...x
+o.ox
+....
+Player 0 chose action: x(3,3)
+Next state:
+....
+...x
+o.ox
+...x
+Player 1 chose action: o(3,1)
+Next state:
+....
+...x
+o.ox
+.o.x
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+...x
+o.ox
+.o.x
+Player 1 chose action: o(1,1)
+Next state:
+.x..
+.o.x
+o.ox
+.o.x
+Player 0 chose action: x(2,1)
+Next state:
+.x..
+.o.x
+oxox
+.o.x
+Player 1 chose action: o(1,0)
+Next state:
+.x..
+oo.x
+oxox
+.o.x
+Player 0 chose action: x(0,0)
+Next state:
+xx..
+oo.x
+oxox
+.o.x
+Player 1 chose action: o(3,0)
+Next state:
+xx..
+oo.x
+oxox
+oo.x
+Player 0 chose action: x(0,2)
+Next state:
+xxx.
+oo.x
+oxox
+oo.x
+Player 1 chose action: o(3,2)
+Next state:
+xxx.
+oo.x
+oxox
+ooox
+Player 0 chose action: x(1,2)
+Next state:
+xxx.
+ooxx
+oxox
+ooox
+Player 1 chose action: o(0,3)
+Next state:
+xxxo
+ooxx
+oxox
+ooox
+Returns: 0, 0
+Game actions: x(2,3), o(2,0), x(1,3), o(2,2), x(3,3), o(3,1), x(0,1), o(1,1), x(2,1), o(1,0), x(0,0), o(3,0), x(0,2), o(3,2), x(1,2), o(0,3)
+Game 21
+History: x(2,3),o(2,0),x(1,3),o(2,2),x(3,3),o(3,1),x(0,1),o(1,1),x(2,1),o(1,0),x(0,0),o(3,0),x(0,2),o(3,2),x(1,2),o(0,3)
+State: xx..oo.xoxoxoo.x
+Value: 1
+ 
+State: xxx.oo.xoxoxooox
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(1,3)
+Next state:
+..x.
+...o
+....
+....
+Player 0 chose action: x(3,1)
+Next state:
+..x.
+...o
+....
+.x..
+Player 1 chose action: o(2,0)
+Next state:
+..x.
+...o
+o...
+.x..
+Player 0 chose action: x(1,0)
+Next state:
+..x.
+x..o
+o...
+.x..
+Player 1 chose action: o(3,2)
+Next state:
+..x.
+x..o
+o...
+.xo.
+Player 0 chose action: x(1,2)
+Next state:
+..x.
+x.xo
+o...
+.xo.
+Player 1 chose action: o(3,0)
+Next state:
+..x.
+x.xo
+o...
+oxo.
+Player 0 chose action: x(1,1)
+Next state:
+..x.
+xxxo
+o...
+oxo.
+Player 1 chose action: o(0,0)
+Next state:
+o.x.
+xxxo
+o...
+oxo.
+Player 0 chose action: x(0,1)
+Next state:
+oxx.
+xxxo
+o...
+oxo.
+Player 1 chose action: o(2,3)
+Next state:
+oxx.
+xxxo
+o..o
+oxo.
+Player 0 chose action: x(0,3)
+Next state:
+oxxx
+xxxo
+o..o
+oxo.
+Player 1 chose action: o(3,3)
+Next state:
+oxxx
+xxxo
+o..o
+oxoo
+Player 0 chose action: x(2,2)
+Next state:
+oxxx
+xxxo
+o.xo
+oxoo
+Player 1 chose action: o(2,1)
+Next state:
+oxxx
+xxxo
+ooxo
+oxoo
+Returns: 0, 0
+Game actions: x(0,2), o(1,3), x(3,1), o(2,0), x(1,0), o(3,2), x(1,2), o(3,0), x(1,1), o(0,0), x(0,1), o(2,3), x(0,3), o(3,3), x(2,2), o(2,1)
+Game 22
+History: x(0,2),o(1,3),x(3,1),o(2,0),x(1,0),o(3,2),x(1,2),o(3,0),x(1,1),o(0,0),x(0,1),o(2,3),x(0,3),o(3,3),x(2,2),o(2,1)
+State: oxx.xxxoo..ooxo.
+Value: 1
+ 
+State: oxxxxxxoo..ooxoo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(0,1)
+Next state:
+.ox.
+....
+....
+....
+Player 0 chose action: x(2,0)
+Next state:
+.ox.
+....
+x...
+....
+Player 1 chose action: o(1,3)
+Next state:
+.ox.
+...o
+x...
+....
+Player 0 chose action: x(2,3)
+Next state:
+.ox.
+...o
+x..x
+....
+Player 1 chose action: o(0,3)
+Next state:
+.oxo
+...o
+x..x
+....
+Player 0 chose action: x(2,2)
+Next state:
+.oxo
+...o
+x.xx
+....
+Player 1 chose action: o(0,0)
+Next state:
+ooxo
+...o
+x.xx
+....
+Player 0 chose action: x(1,0)
+Next state:
+ooxo
+x..o
+x.xx
+....
+Player 1 chose action: o(1,2)
+Next state:
+ooxo
+x.oo
+x.xx
+....
+Player 0 chose action: x(3,3)
+Next state:
+ooxo
+x.oo
+x.xx
+...x
+Player 1 chose action: o(3,2)
+Next state:
+ooxo
+x.oo
+x.xx
+..ox
+Player 0 chose action: x(3,0)
+Next state:
+ooxo
+x.oo
+x.xx
+x.ox
+Player 1 chose action: o(3,1)
+Next state:
+ooxo
+x.oo
+x.xx
+xoox
+Player 0 chose action: x(1,1)
+Next state:
+ooxo
+xxoo
+x.xx
+xoox
+Player 1 chose action: o(2,1)
+Next state:
+ooxo
+xxoo
+xoxx
+xoox
+Returns: 0, 0
+Game actions: x(0,2), o(0,1), x(2,0), o(1,3), x(2,3), o(0,3), x(2,2), o(0,0), x(1,0), o(1,2), x(3,3), o(3,2), x(3,0), o(3,1), x(1,1), o(2,1)
+Game 23
+History: x(0,2),o(0,1),x(2,0),o(1,3),x(2,3),o(0,3),x(2,2),o(0,0),x(1,0),o(1,2),x(3,3),o(3,2),x(3,0),o(3,1),x(1,1),o(2,1)
+State: ooxox.oox.xx..ox
+Value: 1
+ 
+State: ooxox.oox.xxxoox
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(3,1)
+Next state:
+....
+....
+....
+.x..
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+....
+....
+.x..
+Player 0 chose action: x(1,3)
+Next state:
+..o.
+...x
+....
+.x..
+Player 1 chose action: o(1,0)
+Next state:
+..o.
+o..x
+....
+.x..
+Player 0 chose action: x(2,0)
+Next state:
+..o.
+o..x
+x...
+.x..
+Player 1 chose action: o(1,1)
+Next state:
+..o.
+oo.x
+x...
+.x..
+Player 0 chose action: x(0,1)
+Next state:
+.xo.
+oo.x
+x...
+.x..
+Player 1 chose action: o(0,0)
+Next state:
+oxo.
+oo.x
+x...
+.x..
+Player 0 chose action: x(2,1)
+Next state:
+oxo.
+oo.x
+xx..
+.x..
+Player 1 chose action: o(3,3)
+Next state:
+oxo.
+oo.x
+xx..
+.x.o
+Player 0 chose action: x(3,2)
+Next state:
+oxo.
+oo.x
+xx..
+.xxo
+Player 1 chose action: o(3,0)
+Next state:
+oxo.
+oo.x
+xx..
+oxxo
+Player 0 chose action: x(0,3)
+Next state:
+oxox
+oo.x
+xx..
+oxxo
+Player 1 chose action: o(1,2)
+Next state:
+oxox
+ooox
+xx..
+oxxo
+Player 0 chose action: x(2,3)
+Next state:
+oxox
+ooox
+xx.x
+oxxo
+Player 1 chose action: o(2,2)
+Next state:
+oxox
+ooox
+xxox
+oxxo
+Returns: -1, 1
+Game actions: x(3,1), o(0,2), x(1,3), o(1,0), x(2,0), o(1,1), x(0,1), o(0,0), x(2,1), o(3,3), x(3,2), o(3,0), x(0,3), o(1,2), x(2,3), o(2,2)
+Game 24
+History: x(3,1),o(0,2),x(1,3),o(1,0),x(2,0),o(1,1),x(0,1),o(0,0),x(2,1),o(3,3),x(3,2),o(3,0),x(0,3),o(1,2),x(2,3),o(2,2)
+State: oxo.oo.xxx...xxo
+Value: 1
+ 
+State: oxoxoo.xxx..oxxo
+Value: 1
+ 
+State: oxoxoooxxx.xoxxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+....
+....
+....
+Player 1 chose action: o(3,2)
+Next state:
+.x..
+....
+....
+..o.
+Player 0 chose action: x(2,3)
+Next state:
+.x..
+....
+...x
+..o.
+Player 1 chose action: o(1,0)
+Next state:
+.x..
+o...
+...x
+..o.
+Player 0 chose action: x(3,1)
+Next state:
+.x..
+o...
+...x
+.xo.
+Player 1 chose action: o(3,3)
+Next state:
+.x..
+o...
+...x
+.xoo
+Player 0 chose action: x(1,3)
+Next state:
+.x..
+o..x
+...x
+.xoo
+Player 1 chose action: o(0,3)
+Next state:
+.x.o
+o..x
+...x
+.xoo
+Player 0 chose action: x(0,2)
+Next state:
+.xxo
+o..x
+...x
+.xoo
+Player 1 chose action: o(1,2)
+Next state:
+.xxo
+o.ox
+...x
+.xoo
+Player 0 chose action: x(1,1)
+Next state:
+.xxo
+oxox
+...x
+.xoo
+Player 1 chose action: o(0,0)
+Next state:
+oxxo
+oxox
+...x
+.xoo
+Player 0 chose action: x(2,2)
+Next state:
+oxxo
+oxox
+..xx
+.xoo
+Player 1 chose action: o(2,0)
+Next state:
+oxxo
+oxox
+o.xx
+.xoo
+Player 0 chose action: x(3,0)
+Next state:
+oxxo
+oxox
+o.xx
+xxoo
+Player 1 chose action: o(2,1)
+Next state:
+oxxo
+oxox
+ooxx
+xxoo
+Returns: 0, 0
+Game actions: x(0,1), o(3,2), x(2,3), o(1,0), x(3,1), o(3,3), x(1,3), o(0,3), x(0,2), o(1,2), x(1,1), o(0,0), x(2,2), o(2,0), x(3,0), o(2,1)
+Game 25
+History: x(0,1),o(3,2),x(2,3),o(1,0),x(3,1),o(3,3),x(1,3),o(0,3),x(0,2),o(1,2),x(1,1),o(0,0),x(2,2),o(2,0),x(3,0),o(2,1)
+State: oxxooxox...x.xoo
+Value: 1
+ 
+State: oxxooxoxo.xx.xoo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,3)
+Next state:
+....
+....
+...x
+....
+Player 1 chose action: o(3,1)
+Next state:
+....
+....
+...x
+.o..
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+...x
+.o..
+Player 1 chose action: o(1,0)
+Next state:
+..x.
+o...
+...x
+.o..
+Player 0 chose action: x(0,1)
+Next state:
+.xx.
+o...
+...x
+.o..
+Player 1 chose action: o(2,0)
+Next state:
+.xx.
+o...
+o..x
+.o..
+Player 0 chose action: x(2,1)
+Next state:
+.xx.
+o...
+ox.x
+.o..
+Player 1 chose action: o(3,2)
+Next state:
+.xx.
+o...
+ox.x
+.oo.
+Player 0 chose action: x(1,2)
+Next state:
+.xx.
+o.x.
+ox.x
+.oo.
+Player 1 chose action: o(2,2)
+Next state:
+.xx.
+o.x.
+oxox
+.oo.
+Player 0 chose action: x(1,1)
+Next state:
+.xx.
+oxx.
+oxox
+.oo.
+Player 1 chose action: o(0,0)
+Next state:
+oxx.
+oxx.
+oxox
+.oo.
+Player 0 chose action: x(1,3)
+Next state:
+oxx.
+oxxx
+oxox
+.oo.
+Player 1 chose action: o(3,3)
+Next state:
+oxx.
+oxxx
+oxox
+.ooo
+Player 0 chose action: x(0,3)
+Next state:
+oxxx
+oxxx
+oxox
+.ooo
+Player 1 chose action: o(3,0)
+Next state:
+oxxx
+oxxx
+oxox
+oooo
+Returns: -1, 1
+Game actions: x(2,3), o(3,1), x(0,2), o(1,0), x(0,1), o(2,0), x(2,1), o(3,2), x(1,2), o(2,2), x(1,1), o(0,0), x(1,3), o(3,3), x(0,3), o(3,0)
+Game 26
+History: x(2,3),o(3,1),x(0,2),o(1,0),x(0,1),o(2,0),x(2,1),o(3,2),x(1,2),o(2,2),x(1,1),o(0,0),x(1,3),o(3,3),x(0,3),o(3,0)
+State: .xx.oxx.oxox.oo.
+Value: 1
+ 
+State: oxx.oxxxoxox.oo.
+Value: 1
+ 
+State: oxxxoxxxoxox.ooo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,0)
+Next state:
+....
+....
+x...
+....
+Player 1 chose action: o(3,2)
+Next state:
+....
+....
+x...
+..o.
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+....
+x...
+..o.
+Player 1 chose action: o(1,3)
+Next state:
+.x..
+...o
+x...
+..o.
+Player 0 chose action: x(2,3)
+Next state:
+.x..
+...o
+x..x
+..o.
+Player 1 chose action: o(3,1)
+Next state:
+.x..
+...o
+x..x
+.oo.
+Player 0 chose action: x(1,1)
+Next state:
+.x..
+.x.o
+x..x
+.oo.
+Player 1 chose action: o(1,0)
+Next state:
+.x..
+ox.o
+x..x
+.oo.
+Player 0 chose action: x(2,1)
+Next state:
+.x..
+ox.o
+xx.x
+.oo.
+Player 1 chose action: o(3,3)
+Next state:
+.x..
+ox.o
+xx.x
+.ooo
+Player 0 chose action: x(0,0)
+Next state:
+xx..
+ox.o
+xx.x
+.ooo
+Player 1 chose action: o(0,2)
+Next state:
+xxo.
+ox.o
+xx.x
+.ooo
+Player 0 chose action: x(0,3)
+Next state:
+xxox
+ox.o
+xx.x
+.ooo
+Player 1 chose action: o(2,2)
+Next state:
+xxox
+ox.o
+xxox
+.ooo
+Player 0 chose action: x(1,2)
+Next state:
+xxox
+oxxo
+xxox
+.ooo
+Player 1 chose action: o(3,0)
+Next state:
+xxox
+oxxo
+xxox
+oooo
+Returns: -1, 1
+Game actions: x(2,0), o(3,2), x(0,1), o(1,3), x(2,3), o(3,1), x(1,1), o(1,0), x(2,1), o(3,3), x(0,0), o(0,2), x(0,3), o(2,2), x(1,2), o(3,0)
+Game 27
+History: x(2,0),o(3,2),x(0,1),o(1,3),x(2,3),o(3,1),x(1,1),o(1,0),x(2,1),o(3,3),x(0,0),o(0,2),x(0,3),o(2,2),x(1,2),o(3,0)
+State: xx..ox.oxx.x.ooo
+Value: 1
+ 
+State: xxo.ox.oxx.x.ooo
+Value: 1
+ 
+State: xxoxox.oxx.x.ooo
+Value: 1
+ 
+State: xxoxox.oxxox.ooo
+Value: -1
+ 
+State: xxoxoxxoxxox.ooo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(2,0)
+Next state:
+..x.
+....
+o...
+....
+Player 0 chose action: x(1,0)
+Next state:
+..x.
+x...
+o...
+....
+Player 1 chose action: o(3,1)
+Next state:
+..x.
+x...
+o...
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+..x.
+x...
+o...
+.ox.
+Player 1 chose action: o(3,0)
+Next state:
+..x.
+x...
+o...
+oox.
+Player 0 chose action: x(3,3)
+Next state:
+..x.
+x...
+o...
+ooxx
+Player 1 chose action: o(1,3)
+Next state:
+..x.
+x..o
+o...
+ooxx
+Player 0 chose action: x(1,2)
+Next state:
+..x.
+x.xo
+o...
+ooxx
+Player 1 chose action: o(1,1)
+Next state:
+..x.
+xoxo
+o...
+ooxx
+Player 0 chose action: x(2,3)
+Next state:
+..x.
+xoxo
+o..x
+ooxx
+Player 1 chose action: o(0,0)
+Next state:
+o.x.
+xoxo
+o..x
+ooxx
+Player 0 chose action: x(0,1)
+Next state:
+oxx.
+xoxo
+o..x
+ooxx
+Player 1 chose action: o(2,1)
+Next state:
+oxx.
+xoxo
+oo.x
+ooxx
+Player 0 chose action: x(0,3)
+Next state:
+oxxx
+xoxo
+oo.x
+ooxx
+Player 1 chose action: o(2,2)
+Next state:
+oxxx
+xoxo
+ooox
+ooxx
+Returns: 0, 0
+Game actions: x(0,2), o(2,0), x(1,0), o(3,1), x(3,2), o(3,0), x(3,3), o(1,3), x(1,2), o(1,1), x(2,3), o(0,0), x(0,1), o(2,1), x(0,3), o(2,2)
+Game 28
+History: x(0,2),o(2,0),x(1,0),o(3,1),x(3,2),o(3,0),x(3,3),o(1,3),x(1,2),o(1,1),x(2,3),o(0,0),x(0,1),o(2,1),x(0,3),o(2,2)
+State: o.x.xoxoo..xooxx
+Value: 1
+ 
+State: oxx.xoxooo.xooxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(3,1)
+Next state:
+..x.
+....
+....
+.o..
+Player 0 chose action: x(1,0)
+Next state:
+..x.
+x...
+....
+.o..
+Player 1 chose action: o(2,3)
+Next state:
+..x.
+x...
+...o
+.o..
+Player 0 chose action: x(2,0)
+Next state:
+..x.
+x...
+x..o
+.o..
+Player 1 chose action: o(2,2)
+Next state:
+..x.
+x...
+x.oo
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+..x.
+x...
+x.oo
+.ox.
+Player 1 chose action: o(0,1)
+Next state:
+.ox.
+x...
+x.oo
+.ox.
+Player 0 chose action: x(0,3)
+Next state:
+.oxx
+x...
+x.oo
+.ox.
+Player 1 chose action: o(2,1)
+Next state:
+.oxx
+x...
+xooo
+.ox.
+Player 0 chose action: x(1,3)
+Next state:
+.oxx
+x..x
+xooo
+.ox.
+Player 1 chose action: o(1,2)
+Next state:
+.oxx
+x.ox
+xooo
+.ox.
+Player 0 chose action: x(0,0)
+Next state:
+xoxx
+x.ox
+xooo
+.ox.
+Player 1 chose action: o(3,0)
+Next state:
+xoxx
+x.ox
+xooo
+oox.
+Player 0 chose action: x(3,3)
+Next state:
+xoxx
+x.ox
+xooo
+ooxx
+Player 1 chose action: o(1,1)
+Next state:
+xoxx
+xoox
+xooo
+ooxx
+Returns: -1, 1
+Game actions: x(0,2), o(3,1), x(1,0), o(2,3), x(2,0), o(2,2), x(3,2), o(0,1), x(0,3), o(2,1), x(1,3), o(1,2), x(0,0), o(3,0), x(3,3), o(1,1)
+Game 29
+History: x(0,2),o(3,1),x(1,0),o(2,3),x(2,0),o(2,2),x(3,2),o(0,1),x(0,3),o(2,1),x(1,3),o(1,2),x(0,0),o(3,0),x(3,3),o(1,1)
+State: .oxxx..xxooo.ox.
+Value: 1
+ 
+State: xoxxx.oxxooo.ox.
+Value: 1
+ 
+State: xoxxx.oxxoooooxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,0)
+Next state:
+....
+....
+x...
+....
+Player 1 chose action: o(0,1)
+Next state:
+.o..
+....
+x...
+....
+Player 0 chose action: x(3,1)
+Next state:
+.o..
+....
+x...
+.x..
+Player 1 chose action: o(1,3)
+Next state:
+.o..
+...o
+x...
+.x..
+Player 0 chose action: x(0,2)
+Next state:
+.ox.
+...o
+x...
+.x..
+Player 1 chose action: o(0,0)
+Next state:
+oox.
+...o
+x...
+.x..
+Player 0 chose action: x(1,0)
+Next state:
+oox.
+x..o
+x...
+.x..
+Player 1 chose action: o(1,1)
+Next state:
+oox.
+xo.o
+x...
+.x..
+Player 0 chose action: x(0,3)
+Next state:
+ooxx
+xo.o
+x...
+.x..
+Player 1 chose action: o(3,3)
+Next state:
+ooxx
+xo.o
+x...
+.x.o
+Player 0 chose action: x(3,0)
+Next state:
+ooxx
+xo.o
+x...
+xx.o
+Player 1 chose action: o(3,2)
+Next state:
+ooxx
+xo.o
+x...
+xxoo
+Player 0 chose action: x(1,2)
+Next state:
+ooxx
+xoxo
+x...
+xxoo
+Player 1 chose action: o(2,3)
+Next state:
+ooxx
+xoxo
+x..o
+xxoo
+Player 0 chose action: x(2,2)
+Next state:
+ooxx
+xoxo
+x.xo
+xxoo
+Player 1 chose action: o(2,1)
+Next state:
+ooxx
+xoxo
+xoxo
+xxoo
+Returns: 0, 0
+Game actions: x(2,0), o(0,1), x(3,1), o(1,3), x(0,2), o(0,0), x(1,0), o(1,1), x(0,3), o(3,3), x(3,0), o(3,2), x(1,2), o(2,3), x(2,2), o(2,1)
+Game 30
+History: x(2,0),o(0,1),x(3,1),o(1,3),x(0,2),o(0,0),x(1,0),o(1,1),x(0,3),o(3,3),x(3,0),o(3,2),x(1,2),o(2,3),x(2,2),o(2,1)
+State: ooxxxo.ox...xx.o
+Value: 1
+ 
+State: ooxxxoxox...xxoo
+Value: 1
+ 
+State: ooxxxoxox..oxxoo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,3)
+Next state:
+....
+...x
+....
+....
+Player 1 chose action: o(2,0)
+Next state:
+....
+...x
+o...
+....
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+...x
+o...
+....
+Player 1 chose action: o(3,2)
+Next state:
+.x..
+...x
+o...
+..o.
+Player 0 chose action: x(2,3)
+Next state:
+.x..
+...x
+o..x
+..o.
+Player 1 chose action: o(2,1)
+Next state:
+.x..
+...x
+oo.x
+..o.
+Player 0 chose action: x(3,1)
+Next state:
+.x..
+...x
+oo.x
+.xo.
+Player 1 chose action: o(1,1)
+Next state:
+.x..
+.o.x
+oo.x
+.xo.
+Player 0 chose action: x(1,0)
+Next state:
+.x..
+xo.x
+oo.x
+.xo.
+Player 1 chose action: o(3,0)
+Next state:
+.x..
+xo.x
+oo.x
+oxo.
+Player 0 chose action: x(3,3)
+Next state:
+.x..
+xo.x
+oo.x
+oxox
+Player 1 chose action: o(2,2)
+Next state:
+.x..
+xo.x
+ooox
+oxox
+Player 0 chose action: x(0,2)
+Next state:
+.xx.
+xo.x
+ooox
+oxox
+Player 1 chose action: o(1,2)
+Next state:
+.xx.
+xoox
+ooox
+oxox
+Player 0 chose action: x(0,0)
+Next state:
+xxx.
+xoox
+ooox
+oxox
+Player 1 chose action: o(0,3)
+Next state:
+xxxo
+xoox
+ooox
+oxox
+Returns: -1, 1
+Game actions: x(1,3), o(2,0), x(0,1), o(3,2), x(2,3), o(2,1), x(3,1), o(1,1), x(1,0), o(3,0), x(3,3), o(2,2), x(0,2), o(1,2), x(0,0), o(0,3)
+Game 31
+History: x(1,3),o(2,0),x(0,1),o(3,2),x(2,3),o(2,1),x(3,1),o(1,1),x(1,0),o(3,0),x(3,3),o(2,2),x(0,2),o(1,2),x(0,0),o(0,3)
+State: .x..xo.xoooxoxox
+Value: 1
+ 
+State: .xx.xooxoooxoxox
+Value: 1
+ 
+State: xxx.xooxoooxoxox
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,0)
+Next state:
+....
+x...
+....
+....
+Player 1 chose action: o(3,1)
+Next state:
+....
+x...
+....
+.o..
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+x...
+....
+.o..
+Player 1 chose action: o(2,3)
+Next state:
+..x.
+x...
+...o
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+..x.
+x...
+...o
+.ox.
+Player 1 chose action: o(3,0)
+Next state:
+..x.
+x...
+...o
+oox.
+Player 0 chose action: x(2,0)
+Next state:
+..x.
+x...
+x..o
+oox.
+Player 1 chose action: o(0,0)
+Next state:
+o.x.
+x...
+x..o
+oox.
+Player 0 chose action: x(1,3)
+Next state:
+o.x.
+x..x
+x..o
+oox.
+Player 1 chose action: o(0,1)
+Next state:
+oox.
+x..x
+x..o
+oox.
+Player 0 chose action: x(3,3)
+Next state:
+oox.
+x..x
+x..o
+ooxx
+Player 1 chose action: o(0,3)
+Next state:
+ooxo
+x..x
+x..o
+ooxx
+Player 0 chose action: x(1,1)
+Next state:
+ooxo
+xx.x
+x..o
+ooxx
+Player 1 chose action: o(2,1)
+Next state:
+ooxo
+xx.x
+xo.o
+ooxx
+Player 0 chose action: x(2,2)
+Next state:
+ooxo
+xx.x
+xoxo
+ooxx
+Player 1 chose action: o(1,2)
+Next state:
+ooxo
+xxox
+xoxo
+ooxx
+Returns: -1, 1
+Game actions: x(1,0), o(3,1), x(0,2), o(2,3), x(3,2), o(3,0), x(2,0), o(0,0), x(1,3), o(0,1), x(3,3), o(0,3), x(1,1), o(2,1), x(2,2), o(1,2)
+Game 32
+History: x(1,0),o(3,1),x(0,2),o(2,3),x(3,2),o(3,0),x(2,0),o(0,0),x(1,3),o(0,1),x(3,3),o(0,3),x(1,1),o(2,1),x(2,2),o(1,2)
+State: ooxox..xx..oooxx
+Value: 1
+ 
+State: ooxoxx.xxo.oooxx
+Value: 1
+ 
+State: ooxoxx.xxoxoooxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,0)
+Next state:
+....
+....
+x...
+....
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+....
+x...
+....
+Player 0 chose action: x(1,3)
+Next state:
+..o.
+...x
+x...
+....
+Player 1 chose action: o(3,1)
+Next state:
+..o.
+...x
+x...
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+..o.
+...x
+x...
+.ox.
+Player 1 chose action: o(1,2)
+Next state:
+..o.
+..ox
+x...
+.ox.
+Player 0 chose action: x(1,0)
+Next state:
+..o.
+x.ox
+x...
+.ox.
+Player 1 chose action: o(2,2)
+Next state:
+..o.
+x.ox
+x.o.
+.ox.
+Player 0 chose action: x(3,0)
+Next state:
+..o.
+x.ox
+x.o.
+xox.
+Player 1 chose action: o(0,3)
+Next state:
+..oo
+x.ox
+x.o.
+xox.
+Player 0 chose action: x(2,1)
+Next state:
+..oo
+x.ox
+xxo.
+xox.
+Player 1 chose action: o(2,3)
+Next state:
+..oo
+x.ox
+xxoo
+xox.
+Player 0 chose action: x(1,1)
+Next state:
+..oo
+xxox
+xxoo
+xox.
+Player 1 chose action: o(3,3)
+Next state:
+..oo
+xxox
+xxoo
+xoxo
+Player 0 chose action: x(0,1)
+Next state:
+.xoo
+xxox
+xxoo
+xoxo
+Player 1 chose action: o(0,0)
+Next state:
+oxoo
+xxox
+xxoo
+xoxo
+Returns: 0, 0
+Game actions: x(2,0), o(0,2), x(1,3), o(3,1), x(3,2), o(1,2), x(1,0), o(2,2), x(3,0), o(0,3), x(2,1), o(2,3), x(1,1), o(3,3), x(0,1), o(0,0)
+Game 33
+History: x(2,0),o(0,2),x(1,3),o(3,1),x(3,2),o(1,2),x(1,0),o(2,2),x(3,0),o(0,3),x(2,1),o(2,3),x(1,1),o(3,3),x(0,1),o(0,0)
+State: ..oox.oxxxooxox.
+Value: 1
+ 
+State: ..ooxxoxxxooxoxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(3,2)
+Next state:
+....
+....
+....
+..x.
+Player 1 chose action: o(1,3)
+Next state:
+....
+...o
+....
+..x.
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+...o
+....
+..x.
+Player 1 chose action: o(2,0)
+Next state:
+.x..
+...o
+o...
+..x.
+Player 0 chose action: x(1,0)
+Next state:
+.x..
+x..o
+o...
+..x.
+Player 1 chose action: o(3,0)
+Next state:
+.x..
+x..o
+o...
+o.x.
+Player 0 chose action: x(3,1)
+Next state:
+.x..
+x..o
+o...
+oxx.
+Player 1 chose action: o(0,0)
+Next state:
+ox..
+x..o
+o...
+oxx.
+Player 0 chose action: x(1,1)
+Next state:
+ox..
+xx.o
+o...
+oxx.
+Player 1 chose action: o(2,2)
+Next state:
+ox..
+xx.o
+o.o.
+oxx.
+Player 0 chose action: x(1,2)
+Next state:
+ox..
+xxxo
+o.o.
+oxx.
+Player 1 chose action: o(3,3)
+Next state:
+ox..
+xxxo
+o.o.
+oxxo
+Player 0 chose action: x(0,2)
+Next state:
+oxx.
+xxxo
+o.o.
+oxxo
+Player 1 chose action: o(0,3)
+Next state:
+oxxo
+xxxo
+o.o.
+oxxo
+Player 0 chose action: x(2,3)
+Next state:
+oxxo
+xxxo
+o.ox
+oxxo
+Player 1 chose action: o(2,1)
+Next state:
+oxxo
+xxxo
+ooox
+oxxo
+Returns: 0, 0
+Game actions: x(3,2), o(1,3), x(0,1), o(2,0), x(1,0), o(3,0), x(3,1), o(0,0), x(1,1), o(2,2), x(1,2), o(3,3), x(0,2), o(0,3), x(2,3), o(2,1)
+Game 34
+History: x(3,2),o(1,3),x(0,1),o(2,0),x(1,0),o(3,0),x(3,1),o(0,0),x(1,1),o(2,2),x(1,2),o(3,3),x(0,2),o(0,3),x(2,3),o(2,1)
+State: ox..xxxoo.o.oxxo
+Value: 1
+ 
+State: oxxoxxxoo.o.oxxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(3,1)
+Next state:
+..x.
+....
+....
+.o..
+Player 0 chose action: x(1,0)
+Next state:
+..x.
+x...
+....
+.o..
+Player 1 chose action: o(2,3)
+Next state:
+..x.
+x...
+...o
+.o..
+Player 0 chose action: x(1,3)
+Next state:
+..x.
+x..x
+...o
+.o..
+Player 1 chose action: o(2,0)
+Next state:
+..x.
+x..x
+o..o
+.o..
+Player 0 chose action: x(3,0)
+Next state:
+..x.
+x..x
+o..o
+xo..
+Player 1 chose action: o(3,2)
+Next state:
+..x.
+x..x
+o..o
+xoo.
+Player 0 chose action: x(3,3)
+Next state:
+..x.
+x..x
+o..o
+xoox
+Player 1 chose action: o(2,1)
+Next state:
+..x.
+x..x
+oo.o
+xoox
+Player 0 chose action: x(0,1)
+Next state:
+.xx.
+x..x
+oo.o
+xoox
+Player 1 chose action: o(1,1)
+Next state:
+.xx.
+xo.x
+oo.o
+xoox
+Player 0 chose action: x(1,2)
+Next state:
+.xx.
+xoxx
+oo.o
+xoox
+Player 1 chose action: o(0,3)
+Next state:
+.xxo
+xoxx
+oo.o
+xoox
+Player 0 chose action: x(0,0)
+Next state:
+xxxo
+xoxx
+oo.o
+xoox
+Player 1 chose action: o(2,2)
+Next state:
+xxxo
+xoxx
+oooo
+xoox
+Returns: -1, 1
+Game actions: x(0,2), o(3,1), x(1,0), o(2,3), x(1,3), o(2,0), x(3,0), o(3,2), x(3,3), o(2,1), x(0,1), o(1,1), x(1,2), o(0,3), x(0,0), o(2,2)
+Game 35
+History: x(0,2),o(3,1),x(1,0),o(2,3),x(1,3),o(2,0),x(3,0),o(3,2),x(3,3),o(2,1),x(0,1),o(1,1),x(1,2),o(0,3),x(0,0),o(2,2)
+State: .xx.x..xoo.oxoox
+Value: 1
+ 
+State: .xx.xoxxoo.oxoox
+Value: 1
+ 
+State: xxxoxoxxoo.oxoox
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,3)
+Next state:
+....
+...x
+....
+....
+Player 1 chose action: o(3,1)
+Next state:
+....
+...x
+....
+.o..
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+...x
+....
+.o..
+Player 1 chose action: o(2,0)
+Next state:
+..x.
+...x
+o...
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+..x.
+...x
+o...
+.ox.
+Player 1 chose action: o(3,3)
+Next state:
+..x.
+...x
+o...
+.oxo
+Player 0 chose action: x(2,3)
+Next state:
+..x.
+...x
+o..x
+.oxo
+Player 1 chose action: o(0,3)
+Next state:
+..xo
+...x
+o..x
+.oxo
+Player 0 chose action: x(0,1)
+Next state:
+.xxo
+...x
+o..x
+.oxo
+Player 1 chose action: o(2,1)
+Next state:
+.xxo
+...x
+oo.x
+.oxo
+Player 0 chose action: x(2,2)
+Next state:
+.xxo
+...x
+ooxx
+.oxo
+Player 1 chose action: o(0,0)
+Next state:
+oxxo
+...x
+ooxx
+.oxo
+Player 0 chose action: x(1,0)
+Next state:
+oxxo
+x..x
+ooxx
+.oxo
+Player 1 chose action: o(3,0)
+Next state:
+oxxo
+x..x
+ooxx
+ooxo
+Player 0 chose action: x(1,1)
+Next state:
+oxxo
+xx.x
+ooxx
+ooxo
+Player 1 chose action: o(1,2)
+Next state:
+oxxo
+xxox
+ooxx
+ooxo
+Returns: -1, 1
+Game actions: x(1,3), o(3,1), x(0,2), o(2,0), x(3,2), o(3,3), x(2,3), o(0,3), x(0,1), o(2,1), x(2,2), o(0,0), x(1,0), o(3,0), x(1,1), o(1,2)
+Game 36
+History: x(1,3),o(3,1),x(0,2),o(2,0),x(3,2),o(3,3),x(2,3),o(0,3),x(0,1),o(2,1),x(2,2),o(0,0),x(1,0),o(3,0),x(1,1),o(1,2)
+State: oxxo...xooxx.oxo
+Value: 1
+ 
+State: oxxox..xooxxooxo
+Value: 1
+ 
+State: oxxoxx.xooxxooxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,3)
+Next state:
+....
+....
+...x
+....
+Player 1 chose action: o(1,0)
+Next state:
+....
+o...
+...x
+....
+Player 0 chose action: x(3,1)
+Next state:
+....
+o...
+...x
+.x..
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+o...
+...x
+.x..
+Player 0 chose action: x(2,0)
+Next state:
+..o.
+o...
+x..x
+.x..
+Player 1 chose action: o(3,0)
+Next state:
+..o.
+o...
+x..x
+ox..
+Player 0 chose action: x(3,2)
+Next state:
+..o.
+o...
+x..x
+oxx.
+Player 1 chose action: o(3,3)
+Next state:
+..o.
+o...
+x..x
+oxxo
+Player 0 chose action: x(1,3)
+Next state:
+..o.
+o..x
+x..x
+oxxo
+Player 1 chose action: o(1,2)
+Next state:
+..o.
+o.ox
+x..x
+oxxo
+Player 0 chose action: x(2,2)
+Next state:
+..o.
+o.ox
+x.xx
+oxxo
+Player 1 chose action: o(0,0)
+Next state:
+o.o.
+o.ox
+x.xx
+oxxo
+Player 0 chose action: x(0,3)
+Next state:
+o.ox
+o.ox
+x.xx
+oxxo
+Player 1 chose action: o(1,1)
+Next state:
+o.ox
+ooox
+x.xx
+oxxo
+Player 0 chose action: x(0,1)
+Next state:
+oxox
+ooox
+x.xx
+oxxo
+Player 1 chose action: o(2,1)
+Next state:
+oxox
+ooox
+xoxx
+oxxo
+Returns: 0, 0
+Game actions: x(2,3), o(1,0), x(3,1), o(0,2), x(2,0), o(3,0), x(3,2), o(3,3), x(1,3), o(1,2), x(2,2), o(0,0), x(0,3), o(1,1), x(0,1), o(2,1)
+Game 37
+History: x(2,3),o(1,0),x(3,1),o(0,2),x(2,0),o(3,0),x(3,2),o(3,3),x(1,3),o(1,2),x(2,2),o(0,0),x(0,3),o(1,1),x(0,1),o(2,1)
+State: o.o.o.oxx.xxoxxo
+Value: 1
+ 
+State: o.oxoooxx.xxoxxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(3,2)
+Next state:
+....
+....
+....
+..x.
+Player 1 chose action: o(2,0)
+Next state:
+....
+....
+o...
+..x.
+Player 0 chose action: x(1,0)
+Next state:
+....
+x...
+o...
+..x.
+Player 1 chose action: o(3,1)
+Next state:
+....
+x...
+o...
+.ox.
+Player 0 chose action: x(3,0)
+Next state:
+....
+x...
+o...
+xox.
+Player 1 chose action: o(0,0)
+Next state:
+o...
+x...
+o...
+xox.
+Player 0 chose action: x(2,3)
+Next state:
+o...
+x...
+o..x
+xox.
+Player 1 chose action: o(0,2)
+Next state:
+o.o.
+x...
+o..x
+xox.
+Player 0 chose action: x(2,2)
+Next state:
+o.o.
+x...
+o.xx
+xox.
+Player 1 chose action: o(0,1)
+Next state:
+ooo.
+x...
+o.xx
+xox.
+Player 0 chose action: x(1,2)
+Next state:
+ooo.
+x.x.
+o.xx
+xox.
+Player 1 chose action: o(1,1)
+Next state:
+ooo.
+xox.
+o.xx
+xox.
+Player 0 chose action: x(1,3)
+Next state:
+ooo.
+xoxx
+o.xx
+xox.
+Player 1 chose action: o(3,3)
+Next state:
+ooo.
+xoxx
+o.xx
+xoxo
+Player 0 chose action: x(2,1)
+Next state:
+ooo.
+xoxx
+oxxx
+xoxo
+Player 1 chose action: o(0,3)
+Next state:
+oooo
+xoxx
+oxxx
+xoxo
+Returns: -1, 1
+Game actions: x(3,2), o(2,0), x(1,0), o(3,1), x(3,0), o(0,0), x(2,3), o(0,2), x(2,2), o(0,1), x(1,2), o(1,1), x(1,3), o(3,3), x(2,1), o(0,3)
+Game 38
+History: x(3,2),o(2,0),x(1,0),o(3,1),x(3,0),o(0,0),x(2,3),o(0,2),x(2,2),o(0,1),x(1,2),o(1,1),x(1,3),o(3,3),x(2,1),o(0,3)
+State: ooo.x.x.o.xxxox.
+Value: 1
+ 
+State: ooo.xox.o.xxxox.
+Value: -1
+ 
+State: ooo.xoxxo.xxxox.
+Value: 1
+ 
+State: ooo.xoxxo.xxxoxo
+Value: -1
+ 
+State: ooo.xoxxoxxxxoxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(2,3)
+Next state:
+..x.
+....
+...o
+....
+Player 0 chose action: x(0,1)
+Next state:
+.xx.
+....
+...o
+....
+Player 1 chose action: o(1,0)
+Next state:
+.xx.
+o...
+...o
+....
+Player 0 chose action: x(0,0)
+Next state:
+xxx.
+o...
+...o
+....
+Player 1 chose action: o(2,1)
+Next state:
+xxx.
+o...
+.o.o
+....
+Player 0 chose action: x(1,1)
+Next state:
+xxx.
+ox..
+.o.o
+....
+Player 1 chose action: o(3,1)
+Next state:
+xxx.
+ox..
+.o.o
+.o..
+Player 0 chose action: x(3,3)
+Next state:
+xxx.
+ox..
+.o.o
+.o.x
+Player 1 chose action: o(1,3)
+Next state:
+xxx.
+ox.o
+.o.o
+.o.x
+Player 0 chose action: x(2,0)
+Next state:
+xxx.
+ox.o
+xo.o
+.o.x
+Player 1 chose action: o(3,0)
+Next state:
+xxx.
+ox.o
+xo.o
+oo.x
+Player 0 chose action: x(1,2)
+Next state:
+xxx.
+oxxo
+xo.o
+oo.x
+Player 1 chose action: o(3,2)
+Next state:
+xxx.
+oxxo
+xo.o
+ooox
+Player 0 chose action: x(0,3)
+Next state:
+xxxx
+oxxo
+xo.o
+ooox
+Returns: 1, -1
+Game actions: x(0,2), o(2,3), x(0,1), o(1,0), x(0,0), o(2,1), x(1,1), o(3,1), x(3,3), o(1,3), x(2,0), o(3,0), x(1,2), o(3,2), x(0,3)
+Game 39
+History: x(0,2),o(2,3),x(0,1),o(1,0),x(0,0),o(2,1),x(1,1),o(3,1),x(3,3),o(1,3),x(2,0),o(3,0),x(1,2),o(3,2),x(0,3)
+State: xxx.ox.oxo.o.o.x
+Value: -1
+ 
+State: xxx.ox.oxo.ooo.x
+Value: 1
+ 
+State: xxx.oxxoxo.ooo.x
+Value: -1
+ 
+State: xxx.oxxoxo.oooox
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(3,1)
+Next state:
+....
+....
+....
+.x..
+Player 1 chose action: o(1,3)
+Next state:
+....
+...o
+....
+.x..
+Player 0 chose action: x(2,0)
+Next state:
+....
+...o
+x...
+.x..
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+...o
+x...
+.x..
+Player 0 chose action: x(3,2)
+Next state:
+..o.
+...o
+x...
+.xx.
+Player 1 chose action: o(2,2)
+Next state:
+..o.
+...o
+x.o.
+.xx.
+Player 0 chose action: x(1,2)
+Next state:
+..o.
+..xo
+x.o.
+.xx.
+Player 1 chose action: o(2,3)
+Next state:
+..o.
+..xo
+x.oo
+.xx.
+Player 0 chose action: x(3,0)
+Next state:
+..o.
+..xo
+x.oo
+xxx.
+Player 1 chose action: o(0,3)
+Next state:
+..oo
+..xo
+x.oo
+xxx.
+Player 0 chose action: x(1,0)
+Next state:
+..oo
+x.xo
+x.oo
+xxx.
+Player 1 chose action: o(0,1)
+Next state:
+.ooo
+x.xo
+x.oo
+xxx.
+Player 0 chose action: x(1,1)
+Next state:
+.ooo
+xxxo
+x.oo
+xxx.
+Player 1 chose action: o(3,3)
+Next state:
+.ooo
+xxxo
+x.oo
+xxxo
+Returns: -1, 1
+Game actions: x(3,1), o(1,3), x(2,0), o(0,2), x(3,2), o(2,2), x(1,2), o(2,3), x(3,0), o(0,3), x(1,0), o(0,1), x(1,1), o(3,3)
+Game 40
+History: x(3,1),o(1,3),x(2,0),o(0,2),x(3,2),o(2,2),x(1,2),o(2,3),x(3,0),o(0,3),x(1,0),o(0,1),x(1,1),o(3,3)
+State: ..oox.xox.ooxxx.
+Value: 1
+ 
+State: .ooox.xox.ooxxx.
+Value: 1
+ 
+State: .oooxxxox.ooxxx.
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,3)
+Next state:
+....
+....
+...x
+....
+Player 1 chose action: o(1,3)
+Next state:
+....
+...o
+...x
+....
+Player 0 chose action: x(3,1)
+Next state:
+....
+...o
+...x
+.x..
+Player 1 chose action: o(2,0)
+Next state:
+....
+...o
+o..x
+.x..
+Player 0 chose action: x(0,3)
+Next state:
+...x
+...o
+o..x
+.x..
+Player 1 chose action: o(3,3)
+Next state:
+...x
+...o
+o..x
+.x.o
+Player 0 chose action: x(3,2)
+Next state:
+...x
+...o
+o..x
+.xxo
+Player 1 chose action: o(2,2)
+Next state:
+...x
+...o
+o.ox
+.xxo
+Player 0 chose action: x(3,0)
+Next state:
+...x
+...o
+o.ox
+xxxo
+Player 1 chose action: o(1,1)
+Next state:
+...x
+.o.o
+o.ox
+xxxo
+Player 0 chose action: x(0,1)
+Next state:
+.x.x
+.o.o
+o.ox
+xxxo
+Player 1 chose action: o(1,2)
+Next state:
+.x.x
+.ooo
+o.ox
+xxxo
+Player 0 chose action: x(2,1)
+Next state:
+.x.x
+.ooo
+oxox
+xxxo
+Player 1 chose action: o(1,0)
+Next state:
+.x.x
+oooo
+oxox
+xxxo
+Returns: -1, 1
+Game actions: x(2,3), o(1,3), x(3,1), o(2,0), x(0,3), o(3,3), x(3,2), o(2,2), x(3,0), o(1,1), x(0,1), o(1,2), x(2,1), o(1,0)
+Game 41
+History: x(2,3),o(1,3),x(3,1),o(2,0),x(0,3),o(3,3),x(3,2),o(2,2),x(3,0),o(1,1),x(0,1),o(1,2),x(2,1),o(1,0)
+State: .x.x.o.oo.oxxxxo
+Value: 1
+ 
+State: .x.x.oooo.oxxxxo
+Value: -1
+ 
+State: .x.x.ooooxoxxxxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,0)
+Next state:
+....
+x...
+....
+....
+Player 1 chose action: o(2,3)
+Next state:
+....
+x...
+...o
+....
+Player 0 chose action: x(3,2)
+Next state:
+....
+x...
+...o
+..x.
+Player 1 chose action: o(0,1)
+Next state:
+.o..
+x...
+...o
+..x.
+Player 0 chose action: x(0,2)
+Next state:
+.ox.
+x...
+...o
+..x.
+Player 1 chose action: o(0,0)
+Next state:
+oox.
+x...
+...o
+..x.
+Player 0 chose action: x(2,0)
+Next state:
+oox.
+x...
+x..o
+..x.
+Player 1 chose action: o(3,0)
+Next state:
+oox.
+x...
+x..o
+o.x.
+Player 0 chose action: x(3,1)
+Next state:
+oox.
+x...
+x..o
+oxx.
+Player 1 chose action: o(2,1)
+Next state:
+oox.
+x...
+xo.o
+oxx.
+Player 0 chose action: x(2,2)
+Next state:
+oox.
+x...
+xoxo
+oxx.
+Player 1 chose action: o(1,3)
+Next state:
+oox.
+x..o
+xoxo
+oxx.
+Player 0 chose action: x(3,3)
+Next state:
+oox.
+x..o
+xoxo
+oxxx
+Player 1 chose action: o(1,1)
+Next state:
+oox.
+xo.o
+xoxo
+oxxx
+Player 0 chose action: x(0,3)
+Next state:
+ooxx
+xo.o
+xoxo
+oxxx
+Player 1 chose action: o(1,2)
+Next state:
+ooxx
+xooo
+xoxo
+oxxx
+Returns: 0, 0
+Game actions: x(1,0), o(2,3), x(3,2), o(0,1), x(0,2), o(0,0), x(2,0), o(3,0), x(3,1), o(2,1), x(2,2), o(1,3), x(3,3), o(1,1), x(0,3), o(1,2)
+Game 42
+History: x(1,0),o(2,3),x(3,2),o(0,1),x(0,2),o(0,0),x(2,0),o(3,0),x(3,1),o(2,1),x(2,2),o(1,3),x(3,3),o(1,1),x(0,3),o(1,2)
+State: oox.x..oxoxooxx.
+Value: 1
+ 
+State: oox.xo.oxoxooxxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(3,2)
+Next state:
+....
+....
+....
+..x.
+Player 1 chose action: o(0,1)
+Next state:
+.o..
+....
+....
+..x.
+Player 0 chose action: x(1,3)
+Next state:
+.o..
+...x
+....
+..x.
+Player 1 chose action: o(2,0)
+Next state:
+.o..
+...x
+o...
+..x.
+Player 0 chose action: x(3,1)
+Next state:
+.o..
+...x
+o...
+.xx.
+Player 1 chose action: o(0,2)
+Next state:
+.oo.
+...x
+o...
+.xx.
+Player 0 chose action: x(2,2)
+Next state:
+.oo.
+...x
+o.x.
+.xx.
+Player 1 chose action: o(2,1)
+Next state:
+.oo.
+...x
+oox.
+.xx.
+Player 0 chose action: x(2,3)
+Next state:
+.oo.
+...x
+ooxx
+.xx.
+Player 1 chose action: o(1,0)
+Next state:
+.oo.
+o..x
+ooxx
+.xx.
+Player 0 chose action: x(1,1)
+Next state:
+.oo.
+ox.x
+ooxx
+.xx.
+Player 1 chose action: o(1,2)
+Next state:
+.oo.
+oxox
+ooxx
+.xx.
+Player 0 chose action: x(3,0)
+Next state:
+.oo.
+oxox
+ooxx
+xxx.
+Player 1 chose action: o(0,3)
+Next state:
+.ooo
+oxox
+ooxx
+xxx.
+Player 0 chose action: x(0,0)
+Next state:
+xooo
+oxox
+ooxx
+xxx.
+Player 1 chose action: o(3,3)
+Next state:
+xooo
+oxox
+ooxx
+xxxo
+Returns: 0, 0
+Game actions: x(3,2), o(0,1), x(1,3), o(2,0), x(3,1), o(0,2), x(2,2), o(2,1), x(2,3), o(1,0), x(1,1), o(1,2), x(3,0), o(0,3), x(0,0), o(3,3)
+Game 43
+History: x(3,2),o(0,1),x(1,3),o(2,0),x(3,1),o(0,2),x(2,2),o(2,1),x(2,3),o(1,0),x(1,1),o(1,2),x(3,0),o(0,3),x(0,0),o(3,3)
+State: .oo.ox.xooxx.xx.
+Value: 1
+ 
+State: .oo.oxoxooxx.xx.
+Value: 1
+ 
+State: .ooooxoxooxxxxx.
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+....
+....
+....
+Player 1 chose action: o(0,2)
+Next state:
+.xo.
+....
+....
+....
+Player 0 chose action: x(0,0)
+Next state:
+xxo.
+....
+....
+....
+Player 1 chose action: o(3,1)
+Next state:
+xxo.
+....
+....
+.o..
+Player 0 chose action: x(2,3)
+Next state:
+xxo.
+....
+...x
+.o..
+Player 1 chose action: o(0,3)
+Next state:
+xxoo
+....
+...x
+.o..
+Player 0 chose action: x(1,3)
+Next state:
+xxoo
+...x
+...x
+.o..
+Player 1 chose action: o(2,1)
+Next state:
+xxoo
+...x
+.o.x
+.o..
+Player 0 chose action: x(2,0)
+Next state:
+xxoo
+...x
+xo.x
+.o..
+Player 1 chose action: o(1,2)
+Next state:
+xxoo
+..ox
+xo.x
+.o..
+Player 0 chose action: x(2,2)
+Next state:
+xxoo
+..ox
+xoxx
+.o..
+Player 1 chose action: o(1,1)
+Next state:
+xxoo
+.oox
+xoxx
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+xxoo
+.oox
+xoxx
+.ox.
+Player 1 chose action: o(1,0)
+Next state:
+xxoo
+ooox
+xoxx
+.ox.
+Player 0 chose action: x(3,3)
+Next state:
+xxoo
+ooox
+xoxx
+.oxx
+Player 1 chose action: o(3,0)
+Next state:
+xxoo
+ooox
+xoxx
+ooxx
+Returns: -1, 1
+Game actions: x(0,1), o(0,2), x(0,0), o(3,1), x(2,3), o(0,3), x(1,3), o(2,1), x(2,0), o(1,2), x(2,2), o(1,1), x(3,2), o(1,0), x(3,3), o(3,0)
+Game 44
+History: x(0,1),o(0,2),x(0,0),o(3,1),x(2,3),o(0,3),x(1,3),o(2,1),x(2,0),o(1,2),x(2,2),o(1,1),x(3,2),o(1,0),x(3,3),o(3,0)
+State: xxoo..oxxoxx.o..
+Value: 1
+ 
+State: xxoo.ooxxoxx.ox.
+Value: 1
+ 
+State: xxoooooxxoxx.oxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(3,2)
+Next state:
+....
+....
+....
+..x.
+Player 1 chose action: o(2,0)
+Next state:
+....
+....
+o...
+..x.
+Player 0 chose action: x(1,3)
+Next state:
+....
+...x
+o...
+..x.
+Player 1 chose action: o(0,1)
+Next state:
+.o..
+...x
+o...
+..x.
+Player 0 chose action: x(3,1)
+Next state:
+.o..
+...x
+o...
+.xx.
+Player 1 chose action: o(1,1)
+Next state:
+.o..
+.o.x
+o...
+.xx.
+Player 0 chose action: x(2,1)
+Next state:
+.o..
+.o.x
+ox..
+.xx.
+Player 1 chose action: o(2,3)
+Next state:
+.o..
+.o.x
+ox.o
+.xx.
+Player 0 chose action: x(3,3)
+Next state:
+.o..
+.o.x
+ox.o
+.xxx
+Player 1 chose action: o(0,3)
+Next state:
+.o.o
+.o.x
+ox.o
+.xxx
+Player 0 chose action: x(0,0)
+Next state:
+xo.o
+.o.x
+ox.o
+.xxx
+Player 1 chose action: o(1,2)
+Next state:
+xo.o
+.oox
+ox.o
+.xxx
+Player 0 chose action: x(1,0)
+Next state:
+xo.o
+xoox
+ox.o
+.xxx
+Player 1 chose action: o(2,2)
+Next state:
+xo.o
+xoox
+oxoo
+.xxx
+Player 0 chose action: x(0,2)
+Next state:
+xoxo
+xoox
+oxoo
+.xxx
+Player 1 chose action: o(3,0)
+Next state:
+xoxo
+xoox
+oxoo
+oxxx
+Returns: 0, 0
+Game actions: x(3,2), o(2,0), x(1,3), o(0,1), x(3,1), o(1,1), x(2,1), o(2,3), x(3,3), o(0,3), x(0,0), o(1,2), x(1,0), o(2,2), x(0,2), o(3,0)
+Game 45
+History: x(3,2),o(2,0),x(1,3),o(0,1),x(3,1),o(1,1),x(2,1),o(2,3),x(3,3),o(0,3),x(0,0),o(1,2),x(1,0),o(2,2),x(0,2),o(3,0)
+State: xo.o.ooxox.o.xxx
+Value: 1
+ 
+State: xo.oxooxoxoo.xxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+....
+....
+....
+Player 1 chose action: o(1,0)
+Next state:
+.x..
+o...
+....
+....
+Player 0 chose action: x(2,3)
+Next state:
+.x..
+o...
+...x
+....
+Player 1 chose action: o(3,2)
+Next state:
+.x..
+o...
+...x
+..o.
+Player 0 chose action: x(0,2)
+Next state:
+.xx.
+o...
+...x
+..o.
+Player 1 chose action: o(1,3)
+Next state:
+.xx.
+o..o
+...x
+..o.
+Player 0 chose action: x(3,1)
+Next state:
+.xx.
+o..o
+...x
+.xo.
+Player 1 chose action: o(2,2)
+Next state:
+.xx.
+o..o
+..ox
+.xo.
+Player 0 chose action: x(0,3)
+Next state:
+.xxx
+o..o
+..ox
+.xo.
+Player 1 chose action: o(3,0)
+Next state:
+.xxx
+o..o
+..ox
+oxo.
+Player 0 chose action: x(3,3)
+Next state:
+.xxx
+o..o
+..ox
+oxox
+Player 1 chose action: o(1,2)
+Next state:
+.xxx
+o.oo
+..ox
+oxox
+Player 0 chose action: x(1,1)
+Next state:
+.xxx
+oxoo
+..ox
+oxox
+Player 1 chose action: o(2,0)
+Next state:
+.xxx
+oxoo
+o.ox
+oxox
+Player 0 chose action: x(2,1)
+Next state:
+.xxx
+oxoo
+oxox
+oxox
+Returns: 1, -1
+Game actions: x(0,1), o(1,0), x(2,3), o(3,2), x(0,2), o(1,3), x(3,1), o(2,2), x(0,3), o(3,0), x(3,3), o(1,2), x(1,1), o(2,0), x(2,1)
+Game 46
+History: x(0,1),o(1,0),x(2,3),o(3,2),x(0,2),o(1,3),x(3,1),o(2,2),x(0,3),o(3,0),x(3,3),o(1,2),x(1,1),o(2,0),x(2,1)
+State: .xxxo.oo..oxoxox
+Value: 1
+ 
+State: .xxxoxoo..oxoxox
+Value: -1
+ 
+State: .xxxoxooo.oxoxox
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,3)
+Next state:
+....
+....
+...x
+....
+Player 1 chose action: o(1,0)
+Next state:
+....
+o...
+...x
+....
+Player 0 chose action: x(3,2)
+Next state:
+....
+o...
+...x
+..x.
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+o...
+...x
+..x.
+Player 0 chose action: x(0,1)
+Next state:
+.xo.
+o...
+...x
+..x.
+Player 1 chose action: o(0,3)
+Next state:
+.xoo
+o...
+...x
+..x.
+Player 0 chose action: x(1,3)
+Next state:
+.xoo
+o..x
+...x
+..x.
+Player 1 chose action: o(1,2)
+Next state:
+.xoo
+o.ox
+...x
+..x.
+Player 0 chose action: x(3,3)
+Next state:
+.xoo
+o.ox
+...x
+..xx
+Player 1 chose action: o(2,1)
+Next state:
+.xoo
+o.ox
+.o.x
+..xx
+Player 0 chose action: x(2,0)
+Next state:
+.xoo
+o.ox
+xo.x
+..xx
+Player 1 chose action: o(3,1)
+Next state:
+.xoo
+o.ox
+xo.x
+.oxx
+Player 0 chose action: x(1,1)
+Next state:
+.xoo
+oxox
+xo.x
+.oxx
+Player 1 chose action: o(0,0)
+Next state:
+oxoo
+oxox
+xo.x
+.oxx
+Player 0 chose action: x(2,2)
+Next state:
+oxoo
+oxox
+xoxx
+.oxx
+Player 1 chose action: o(3,0)
+Next state:
+oxoo
+oxox
+xoxx
+ooxx
+Returns: -1, 1
+Game actions: x(2,3), o(1,0), x(3,2), o(0,2), x(0,1), o(0,3), x(1,3), o(1,2), x(3,3), o(2,1), x(2,0), o(3,1), x(1,1), o(0,0), x(2,2), o(3,0)
+Game 47
+History: x(2,3),o(1,0),x(3,2),o(0,2),x(0,1),o(0,3),x(1,3),o(1,2),x(3,3),o(2,1),x(2,0),o(3,1),x(1,1),o(0,0),x(2,2),o(3,0)
+State: .xooo.oxxo.x..xx
+Value: 1
+ 
+State: .xoooxoxxo.x.oxx
+Value: 1
+ 
+State: oxoooxoxxoxx.oxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,3)
+Next state:
+....
+...x
+....
+....
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+...x
+....
+....
+Player 0 chose action: x(3,2)
+Next state:
+..o.
+...x
+....
+..x.
+Player 1 chose action: o(2,0)
+Next state:
+..o.
+...x
+o...
+..x.
+Player 0 chose action: x(0,1)
+Next state:
+.xo.
+...x
+o...
+..x.
+Player 1 chose action: o(1,2)
+Next state:
+.xo.
+..ox
+o...
+..x.
+Player 0 chose action: x(1,0)
+Next state:
+.xo.
+x.ox
+o...
+..x.
+Player 1 chose action: o(0,0)
+Next state:
+oxo.
+x.ox
+o...
+..x.
+Player 0 chose action: x(1,1)
+Next state:
+oxo.
+xxox
+o...
+..x.
+Player 1 chose action: o(0,3)
+Next state:
+oxoo
+xxox
+o...
+..x.
+Player 0 chose action: x(3,1)
+Next state:
+oxoo
+xxox
+o...
+.xx.
+Player 1 chose action: o(3,0)
+Next state:
+oxoo
+xxox
+o...
+oxx.
+Player 0 chose action: x(3,3)
+Next state:
+oxoo
+xxox
+o...
+oxxx
+Player 1 chose action: o(2,2)
+Next state:
+oxoo
+xxox
+o.o.
+oxxx
+Player 0 chose action: x(2,3)
+Next state:
+oxoo
+xxox
+o.ox
+oxxx
+Player 1 chose action: o(2,1)
+Next state:
+oxoo
+xxox
+ooox
+oxxx
+Returns: -1, 1
+Game actions: x(1,3), o(0,2), x(3,2), o(2,0), x(0,1), o(1,2), x(1,0), o(0,0), x(1,1), o(0,3), x(3,1), o(3,0), x(3,3), o(2,2), x(2,3), o(2,1)
+Game 48
+History: x(1,3),o(0,2),x(3,2),o(2,0),x(0,1),o(1,2),x(1,0),o(0,0),x(1,1),o(0,3),x(3,1),o(3,0),x(3,3),o(2,2),x(2,3),o(2,1)
+State: oxooxxoxo...oxx.
+Value: 1
+ 
+State: oxooxxoxo...oxxx
+Value: 1
+ 
+State: oxooxxoxo.o.oxxx
+Value: 1
+ 
+State: oxooxxoxo.oxoxxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,0)
+Next state:
+....
+....
+x...
+....
+Player 1 chose action: o(3,2)
+Next state:
+....
+....
+x...
+..o.
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+x...
+..o.
+Player 1 chose action: o(0,1)
+Next state:
+.ox.
+....
+x...
+..o.
+Player 0 chose action: x(1,2)
+Next state:
+.ox.
+..x.
+x...
+..o.
+Player 1 chose action: o(1,3)
+Next state:
+.ox.
+..xo
+x...
+..o.
+Player 0 chose action: x(1,0)
+Next state:
+.ox.
+x.xo
+x...
+..o.
+Player 1 chose action: o(2,2)
+Next state:
+.ox.
+x.xo
+x.o.
+..o.
+Player 0 chose action: x(2,3)
+Next state:
+.ox.
+x.xo
+x.ox
+..o.
+Player 1 chose action: o(0,3)
+Next state:
+.oxo
+x.xo
+x.ox
+..o.
+Player 0 chose action: x(0,0)
+Next state:
+xoxo
+x.xo
+x.ox
+..o.
+Player 1 chose action: o(1,1)
+Next state:
+xoxo
+xoxo
+x.ox
+..o.
+Player 0 chose action: x(3,3)
+Next state:
+xoxo
+xoxo
+x.ox
+..ox
+Player 1 chose action: o(3,1)
+Next state:
+xoxo
+xoxo
+x.ox
+.oox
+Player 0 chose action: x(2,1)
+Next state:
+xoxo
+xoxo
+xxox
+.oox
+Player 1 chose action: o(3,0)
+Next state:
+xoxo
+xoxo
+xxox
+ooox
+Returns: 0, 0
+Game actions: x(2,0), o(3,2), x(0,2), o(0,1), x(1,2), o(1,3), x(1,0), o(2,2), x(2,3), o(0,3), x(0,0), o(1,1), x(3,3), o(3,1), x(2,1), o(3,0)
+Game 49
+History: x(2,0),o(3,2),x(0,2),o(0,1),x(1,2),o(1,3),x(1,0),o(2,2),x(2,3),o(0,3),x(0,0),o(1,1),x(3,3),o(3,1),x(2,1),o(3,0)
+State: xoxoxoxox.ox..o.
+Value: 1
+ 
+State: xoxoxoxox.ox.oox
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,0)
+Next state:
+....
+....
+x...
+....
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+....
+x...
+....
+Player 0 chose action: x(3,1)
+Next state:
+..o.
+....
+x...
+.x..
+Player 1 chose action: o(1,3)
+Next state:
+..o.
+...o
+x...
+.x..
+Player 0 chose action: x(3,2)
+Next state:
+..o.
+...o
+x...
+.xx.
+Player 1 chose action: o(1,2)
+Next state:
+..o.
+..oo
+x...
+.xx.
+Player 0 chose action: x(0,1)
+Next state:
+.xo.
+..oo
+x...
+.xx.
+Player 1 chose action: o(2,2)
+Next state:
+.xo.
+..oo
+x.o.
+.xx.
+Player 0 chose action: x(2,3)
+Next state:
+.xo.
+..oo
+x.ox
+.xx.
+Player 1 chose action: o(1,0)
+Next state:
+.xo.
+o.oo
+x.ox
+.xx.
+Player 0 chose action: x(3,3)
+Next state:
+.xo.
+o.oo
+x.ox
+.xxx
+Player 1 chose action: o(3,0)
+Next state:
+.xo.
+o.oo
+x.ox
+oxxx
+Player 0 chose action: x(0,0)
+Next state:
+xxo.
+o.oo
+x.ox
+oxxx
+Player 1 chose action: o(2,1)
+Next state:
+xxo.
+o.oo
+xoox
+oxxx
+Player 0 chose action: x(1,1)
+Next state:
+xxo.
+oxoo
+xoox
+oxxx
+Player 1 chose action: o(0,3)
+Next state:
+xxoo
+oxoo
+xoox
+oxxx
+Returns: -1, 1
+Game actions: x(2,0), o(0,2), x(3,1), o(1,3), x(3,2), o(1,2), x(0,1), o(2,2), x(2,3), o(1,0), x(3,3), o(3,0), x(0,0), o(2,1), x(1,1), o(0,3)
+Game 50
+History: x(2,0),o(0,2),x(3,1),o(1,3),x(3,2),o(1,2),x(0,1),o(2,2),x(2,3),o(1,0),x(3,3),o(3,0),x(0,0),o(2,1),x(1,1),o(0,3)
+State: .xo.o.oox.ox.xxx
+Value: 1
+ 
+State: xxo.o.oox.oxoxxx
+Value: 1
+ 
+State: xxo.o.ooxooxoxxx
+Value: -1
+ 
+State: xxo.oxooxooxoxxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,0)
+Next state:
+....
+....
+x...
+....
+Player 1 chose action: o(1,3)
+Next state:
+....
+...o
+x...
+....
+Player 0 chose action: x(3,1)
+Next state:
+....
+...o
+x...
+.x..
+Player 1 chose action: o(3,2)
+Next state:
+....
+...o
+x...
+.xo.
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+...o
+x...
+.xo.
+Player 1 chose action: o(3,0)
+Next state:
+..x.
+...o
+x...
+oxo.
+Player 0 chose action: x(1,0)
+Next state:
+..x.
+x..o
+x...
+oxo.
+Player 1 chose action: o(1,2)
+Next state:
+..x.
+x.oo
+x...
+oxo.
+Player 0 chose action: x(2,2)
+Next state:
+..x.
+x.oo
+x.x.
+oxo.
+Player 1 chose action: o(0,3)
+Next state:
+..xo
+x.oo
+x.x.
+oxo.
+Player 0 chose action: x(0,0)
+Next state:
+x.xo
+x.oo
+x.x.
+oxo.
+Player 1 chose action: o(2,3)
+Next state:
+x.xo
+x.oo
+x.xo
+oxo.
+Player 0 chose action: x(1,1)
+Next state:
+x.xo
+xxoo
+x.xo
+oxo.
+Player 1 chose action: o(2,1)
+Next state:
+x.xo
+xxoo
+xoxo
+oxo.
+Returns: -1, 1
+Game actions: x(2,0), o(1,3), x(3,1), o(3,2), x(0,2), o(3,0), x(1,0), o(1,2), x(2,2), o(0,3), x(0,0), o(2,3), x(1,1), o(2,1)
+Game 51
+History: x(2,0),o(1,3),x(3,1),o(3,2),x(0,2),o(3,0),x(1,0),o(1,2),x(2,2),o(0,3),x(0,0),o(2,3),x(1,1),o(2,1)
+State: x.xox.oox.x.oxo.
+Value: 1
+ 
+State: x.xox.oox.xooxo.
+Value: -1
+ 
+State: x.xoxxoox.xooxo.
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(2,3)
+Next state:
+..x.
+....
+...o
+....
+Player 0 chose action: x(3,1)
+Next state:
+..x.
+....
+...o
+.x..
+Player 1 chose action: o(1,0)
+Next state:
+..x.
+o...
+...o
+.x..
+Player 0 chose action: x(1,3)
+Next state:
+..x.
+o..x
+...o
+.x..
+Player 1 chose action: o(1,2)
+Next state:
+..x.
+o.ox
+...o
+.x..
+Player 0 chose action: x(3,2)
+Next state:
+..x.
+o.ox
+...o
+.xx.
+Player 1 chose action: o(1,1)
+Next state:
+..x.
+ooox
+...o
+.xx.
+Player 0 chose action: x(3,3)
+Next state:
+..x.
+ooox
+...o
+.xxx
+Player 1 chose action: o(2,0)
+Next state:
+..x.
+ooox
+o..o
+.xxx
+Player 0 chose action: x(2,1)
+Next state:
+..x.
+ooox
+ox.o
+.xxx
+Player 1 chose action: o(0,3)
+Next state:
+..xo
+ooox
+ox.o
+.xxx
+Player 0 chose action: x(2,2)
+Next state:
+..xo
+ooox
+oxxo
+.xxx
+Player 1 chose action: o(0,1)
+Next state:
+.oxo
+ooox
+oxxo
+.xxx
+Player 0 chose action: x(0,0)
+Next state:
+xoxo
+ooox
+oxxo
+.xxx
+Player 1 chose action: o(3,0)
+Next state:
+xoxo
+ooox
+oxxo
+oxxx
+Returns: 0, 0
+Game actions: x(0,2), o(2,3), x(3,1), o(1,0), x(1,3), o(1,2), x(3,2), o(1,1), x(3,3), o(2,0), x(2,1), o(0,3), x(2,2), o(0,1), x(0,0), o(3,0)
+Game 52
+History: x(0,2),o(2,3),x(3,1),o(1,0),x(1,3),o(1,2),x(3,2),o(1,1),x(3,3),o(2,0),x(2,1),o(0,3),x(2,2),o(0,1),x(0,0),o(3,0)
+State: ..xooooxox.o.xxx
+Value: 1
+ 
+State: .oxooooxoxxo.xxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+....
+....
+....
+Player 1 chose action: o(2,0)
+Next state:
+.x..
+....
+o...
+....
+Player 0 chose action: x(3,2)
+Next state:
+.x..
+....
+o...
+..x.
+Player 1 chose action: o(1,3)
+Next state:
+.x..
+...o
+o...
+..x.
+Player 0 chose action: x(1,0)
+Next state:
+.x..
+x..o
+o...
+..x.
+Player 1 chose action: o(0,0)
+Next state:
+ox..
+x..o
+o...
+..x.
+Player 0 chose action: x(0,2)
+Next state:
+oxx.
+x..o
+o...
+..x.
+Player 1 chose action: o(1,1)
+Next state:
+oxx.
+xo.o
+o...
+..x.
+Player 0 chose action: x(1,2)
+Next state:
+oxx.
+xoxo
+o...
+..x.
+Player 1 chose action: o(0,3)
+Next state:
+oxxo
+xoxo
+o...
+..x.
+Player 0 chose action: x(2,3)
+Next state:
+oxxo
+xoxo
+o..x
+..x.
+Player 1 chose action: o(3,0)
+Next state:
+oxxo
+xoxo
+o..x
+o.x.
+Player 0 chose action: x(3,1)
+Next state:
+oxxo
+xoxo
+o..x
+oxx.
+Player 1 chose action: o(2,1)
+Next state:
+oxxo
+xoxo
+oo.x
+oxx.
+Player 0 chose action: x(3,3)
+Next state:
+oxxo
+xoxo
+oo.x
+oxxx
+Player 1 chose action: o(2,2)
+Next state:
+oxxo
+xoxo
+ooox
+oxxx
+Returns: 0, 0
+Game actions: x(0,1), o(2,0), x(3,2), o(1,3), x(1,0), o(0,0), x(0,2), o(1,1), x(1,2), o(0,3), x(2,3), o(3,0), x(3,1), o(2,1), x(3,3), o(2,2)
+Game 53
+History: x(0,1),o(2,0),x(3,2),o(1,3),x(1,0),o(0,0),x(0,2),o(1,1),x(1,2),o(0,3),x(2,3),o(3,0),x(3,1),o(2,1),x(3,3),o(2,2)
+State: oxxoxoxoo..xo.x.
+Value: 1
+ 
+State: oxxoxoxooo.xoxx.
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,3)
+Next state:
+....
+...x
+....
+....
+Player 1 chose action: o(1,0)
+Next state:
+....
+o..x
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+o..x
+....
+....
+Player 1 chose action: o(1,1)
+Next state:
+..x.
+oo.x
+....
+....
+Player 0 chose action: x(2,0)
+Next state:
+..x.
+oo.x
+x...
+....
+Player 1 chose action: o(3,0)
+Next state:
+..x.
+oo.x
+x...
+o...
+Player 0 chose action: x(3,2)
+Next state:
+..x.
+oo.x
+x...
+o.x.
+Player 1 chose action: o(3,1)
+Next state:
+..x.
+oo.x
+x...
+oox.
+Player 0 chose action: x(1,2)
+Next state:
+..x.
+ooxx
+x...
+oox.
+Player 1 chose action: o(0,3)
+Next state:
+..xo
+ooxx
+x...
+oox.
+Player 0 chose action: x(0,0)
+Next state:
+x.xo
+ooxx
+x...
+oox.
+Player 1 chose action: o(2,3)
+Next state:
+x.xo
+ooxx
+x..o
+oox.
+Player 0 chose action: x(2,1)
+Next state:
+x.xo
+ooxx
+xx.o
+oox.
+Player 1 chose action: o(3,3)
+Next state:
+x.xo
+ooxx
+xx.o
+ooxo
+Player 0 chose action: x(0,1)
+Next state:
+xxxo
+ooxx
+xx.o
+ooxo
+Player 1 chose action: o(2,2)
+Next state:
+xxxo
+ooxx
+xxoo
+ooxo
+Returns: 0, 0
+Game actions: x(1,3), o(1,0), x(0,2), o(1,1), x(2,0), o(3,0), x(3,2), o(3,1), x(1,2), o(0,3), x(0,0), o(2,3), x(2,1), o(3,3), x(0,1), o(2,2)
+Game 54
+History: x(1,3),o(1,0),x(0,2),o(1,1),x(2,0),o(3,0),x(3,2),o(3,1),x(1,2),o(0,3),x(0,0),o(2,3),x(2,1),o(3,3),x(0,1),o(2,2)
+State: x.xoooxxx..ooox.
+Value: 1
+ 
+State: x.xoooxxxx.oooxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,3)
+Next state:
+....
+....
+...x
+....
+Player 1 chose action: o(1,0)
+Next state:
+....
+o...
+...x
+....
+Player 0 chose action: x(3,1)
+Next state:
+....
+o...
+...x
+.x..
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+o...
+...x
+.x..
+Player 0 chose action: x(1,3)
+Next state:
+..o.
+o..x
+...x
+.x..
+Player 1 chose action: o(1,1)
+Next state:
+..o.
+oo.x
+...x
+.x..
+Player 0 chose action: x(0,1)
+Next state:
+.xo.
+oo.x
+...x
+.x..
+Player 1 chose action: o(3,2)
+Next state:
+.xo.
+oo.x
+...x
+.xo.
+Player 0 chose action: x(3,3)
+Next state:
+.xo.
+oo.x
+...x
+.xox
+Player 1 chose action: o(2,0)
+Next state:
+.xo.
+oo.x
+o..x
+.xox
+Player 0 chose action: x(2,1)
+Next state:
+.xo.
+oo.x
+ox.x
+.xox
+Player 1 chose action: o(3,0)
+Next state:
+.xo.
+oo.x
+ox.x
+oxox
+Player 0 chose action: x(2,2)
+Next state:
+.xo.
+oo.x
+oxxx
+oxox
+Player 1 chose action: o(1,2)
+Next state:
+.xo.
+ooox
+oxxx
+oxox
+Player 0 chose action: x(0,0)
+Next state:
+xxo.
+ooox
+oxxx
+oxox
+Player 1 chose action: o(0,3)
+Next state:
+xxoo
+ooox
+oxxx
+oxox
+Returns: 0, 0
+Game actions: x(2,3), o(1,0), x(3,1), o(0,2), x(1,3), o(1,1), x(0,1), o(3,2), x(3,3), o(2,0), x(2,1), o(3,0), x(2,2), o(1,2), x(0,0), o(0,3)
+Game 55
+History: x(2,3),o(1,0),x(3,1),o(0,2),x(1,3),o(1,1),x(0,1),o(3,2),x(3,3),o(2,0),x(2,1),o(3,0),x(2,2),o(1,2),x(0,0),o(0,3)
+State: .xo.oo.xox.xoxox
+Value: 1
+ 
+State: .xo.oo.xoxxxoxox
+Value: 1
+ 
+State: .xo.oooxoxxxoxox
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+....
+....
+....
+Player 1 chose action: o(2,3)
+Next state:
+.x..
+....
+...o
+....
+Player 0 chose action: x(3,1)
+Next state:
+.x..
+....
+...o
+.x..
+Player 1 chose action: o(3,2)
+Next state:
+.x..
+....
+...o
+.xo.
+Player 0 chose action: x(1,1)
+Next state:
+.x..
+.x..
+...o
+.xo.
+Player 1 chose action: o(3,3)
+Next state:
+.x..
+.x..
+...o
+.xoo
+Player 0 chose action: x(1,2)
+Next state:
+.x..
+.xx.
+...o
+.xoo
+Player 1 chose action: o(2,2)
+Next state:
+.x..
+.xx.
+..oo
+.xoo
+Player 0 chose action: x(0,2)
+Next state:
+.xx.
+.xx.
+..oo
+.xoo
+Player 1 chose action: o(1,0)
+Next state:
+.xx.
+oxx.
+..oo
+.xoo
+Player 0 chose action: x(3,0)
+Next state:
+.xx.
+oxx.
+..oo
+xxoo
+Player 1 chose action: o(1,3)
+Next state:
+.xx.
+oxxo
+..oo
+xxoo
+Player 0 chose action: x(0,3)
+Next state:
+.xxx
+oxxo
+..oo
+xxoo
+Player 1 chose action: o(2,0)
+Next state:
+.xxx
+oxxo
+o.oo
+xxoo
+Player 0 chose action: x(2,1)
+Next state:
+.xxx
+oxxo
+oxoo
+xxoo
+Returns: 1, -1
+Game actions: x(0,1), o(2,3), x(3,1), o(3,2), x(1,1), o(3,3), x(1,2), o(2,2), x(0,2), o(1,0), x(3,0), o(1,3), x(0,3), o(2,0), x(2,1)
+Game 56
+History: x(0,1),o(2,3),x(3,1),o(3,2),x(1,1),o(3,3),x(1,2),o(2,2),x(0,2),o(1,0),x(3,0),o(1,3),x(0,3),o(2,0),x(2,1)
+State: .xx.oxxo..ooxxoo
+Value: 1
+ 
+State: .xxxoxxo..ooxxoo
+Value: -1
+ 
+State: .xxxoxxoo.ooxxoo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,0)
+Next state:
+....
+x...
+....
+....
+Player 1 chose action: o(0,1)
+Next state:
+.o..
+x...
+....
+....
+Player 0 chose action: x(3,2)
+Next state:
+.o..
+x...
+....
+..x.
+Player 1 chose action: o(1,3)
+Next state:
+.o..
+x..o
+....
+..x.
+Player 0 chose action: x(2,0)
+Next state:
+.o..
+x..o
+x...
+..x.
+Player 1 chose action: o(3,1)
+Next state:
+.o..
+x..o
+x...
+.ox.
+Player 0 chose action: x(3,3)
+Next state:
+.o..
+x..o
+x...
+.oxx
+Player 1 chose action: o(2,3)
+Next state:
+.o..
+x..o
+x..o
+.oxx
+Player 0 chose action: x(3,0)
+Next state:
+.o..
+x..o
+x..o
+xoxx
+Player 1 chose action: o(0,2)
+Next state:
+.oo.
+x..o
+x..o
+xoxx
+Player 0 chose action: x(2,1)
+Next state:
+.oo.
+x..o
+xx.o
+xoxx
+Player 1 chose action: o(1,2)
+Next state:
+.oo.
+x.oo
+xx.o
+xoxx
+Player 0 chose action: x(1,1)
+Next state:
+.oo.
+xxoo
+xx.o
+xoxx
+Player 1 chose action: o(2,2)
+Next state:
+.oo.
+xxoo
+xxoo
+xoxx
+Player 0 chose action: x(0,3)
+Next state:
+.oox
+xxoo
+xxoo
+xoxx
+Player 1 chose action: o(0,0)
+Next state:
+ooox
+xxoo
+xxoo
+xoxx
+Returns: 0, 0
+Game actions: x(1,0), o(0,1), x(3,2), o(1,3), x(2,0), o(3,1), x(3,3), o(2,3), x(3,0), o(0,2), x(2,1), o(1,2), x(1,1), o(2,2), x(0,3), o(0,0)
+Game 57
+History: x(1,0),o(0,1),x(3,2),o(1,3),x(2,0),o(3,1),x(3,3),o(2,3),x(3,0),o(0,2),x(2,1),o(1,2),x(1,1),o(2,2),x(0,3),o(0,0)
+State: .oo.x.ooxx.oxoxx
+Value: 1
+ 
+State: .oo.xxooxxooxoxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,0)
+Next state:
+....
+x...
+....
+....
+Player 1 chose action: o(2,0)
+Next state:
+....
+x...
+o...
+....
+Player 0 chose action: x(0,0)
+Next state:
+x...
+x...
+o...
+....
+Player 1 chose action: o(3,1)
+Next state:
+x...
+x...
+o...
+.o..
+Player 0 chose action: x(2,3)
+Next state:
+x...
+x...
+o..x
+.o..
+Player 1 chose action: o(0,1)
+Next state:
+xo..
+x...
+o..x
+.o..
+Player 0 chose action: x(0,2)
+Next state:
+xox.
+x...
+o..x
+.o..
+Player 1 chose action: o(2,1)
+Next state:
+xox.
+x...
+oo.x
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+xox.
+x...
+oo.x
+.ox.
+Player 1 chose action: o(3,3)
+Next state:
+xox.
+x...
+oo.x
+.oxo
+Player 0 chose action: x(2,2)
+Next state:
+xox.
+x...
+ooxx
+.oxo
+Player 1 chose action: o(0,3)
+Next state:
+xoxo
+x...
+ooxx
+.oxo
+Player 0 chose action: x(1,3)
+Next state:
+xoxo
+x..x
+ooxx
+.oxo
+Player 1 chose action: o(1,2)
+Next state:
+xoxo
+x.ox
+ooxx
+.oxo
+Player 0 chose action: x(1,1)
+Next state:
+xoxo
+xxox
+ooxx
+.oxo
+Player 1 chose action: o(3,0)
+Next state:
+xoxo
+xxox
+ooxx
+ooxo
+Returns: -1, 1
+Game actions: x(1,0), o(2,0), x(0,0), o(3,1), x(2,3), o(0,1), x(0,2), o(2,1), x(3,2), o(3,3), x(2,2), o(0,3), x(1,3), o(1,2), x(1,1), o(3,0)
+Game 58
+History: x(1,0),o(2,0),x(0,0),o(3,1),x(2,3),o(0,1),x(0,2),o(2,1),x(3,2),o(3,3),x(2,2),o(0,3),x(1,3),o(1,2),x(1,1),o(3,0)
+State: xox.x...ooxx.oxo
+Value: 1
+ 
+State: xoxox...ooxx.oxo
+Value: 1
+ 
+State: xoxox..xooxx.oxo
+Value: 1
+ 
+State: xoxox.oxooxx.oxo
+Value: -1
+ 
+State: xoxoxxoxooxx.oxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,0)
+Next state:
+....
+....
+x...
+....
+Player 1 chose action: o(3,1)
+Next state:
+....
+....
+x...
+.o..
+Player 0 chose action: x(1,3)
+Next state:
+....
+...x
+x...
+.o..
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+...x
+x...
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+..o.
+...x
+x...
+.ox.
+Player 1 chose action: o(3,3)
+Next state:
+..o.
+...x
+x...
+.oxo
+Player 0 chose action: x(2,3)
+Next state:
+..o.
+...x
+x..x
+.oxo
+Player 1 chose action: o(3,0)
+Next state:
+..o.
+...x
+x..x
+ooxo
+Player 0 chose action: x(2,2)
+Next state:
+..o.
+...x
+x.xx
+ooxo
+Player 1 chose action: o(0,1)
+Next state:
+.oo.
+...x
+x.xx
+ooxo
+Player 0 chose action: x(1,0)
+Next state:
+.oo.
+x..x
+x.xx
+ooxo
+Player 1 chose action: o(0,0)
+Next state:
+ooo.
+x..x
+x.xx
+ooxo
+Player 0 chose action: x(1,2)
+Next state:
+ooo.
+x.xx
+x.xx
+ooxo
+Player 1 chose action: o(1,1)
+Next state:
+ooo.
+xoxx
+x.xx
+ooxo
+Player 0 chose action: x(0,3)
+Next state:
+ooox
+xoxx
+x.xx
+ooxo
+Player 1 chose action: o(2,1)
+Next state:
+ooox
+xoxx
+xoxx
+ooxo
+Returns: -1, 1
+Game actions: x(2,0), o(3,1), x(1,3), o(0,2), x(3,2), o(3,3), x(2,3), o(3,0), x(2,2), o(0,1), x(1,0), o(0,0), x(1,2), o(1,1), x(0,3), o(2,1)
+Game 59
+History: x(2,0),o(3,1),x(1,3),o(0,2),x(3,2),o(3,3),x(2,3),o(3,0),x(2,2),o(0,1),x(1,0),o(0,0),x(1,2),o(1,1),x(0,3),o(2,1)
+State: ooo.x..xx.xxooxo
+Value: 1
+ 
+State: ooo.x.xxx.xxooxo
+Value: 1
+ 
+State: ooo.xoxxx.xxooxo
+Value: 1
+ 
+State: oooxxoxxx.xxooxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,0)
+Next state:
+....
+x...
+....
+....
+Player 1 chose action: o(3,2)
+Next state:
+....
+x...
+....
+..o.
+Player 0 chose action: x(2,3)
+Next state:
+....
+x...
+...x
+..o.
+Player 1 chose action: o(0,1)
+Next state:
+.o..
+x...
+...x
+..o.
+Player 0 chose action: x(0,2)
+Next state:
+.ox.
+x...
+...x
+..o.
+Player 1 chose action: o(1,2)
+Next state:
+.ox.
+x.o.
+...x
+..o.
+Player 0 chose action: x(1,3)
+Next state:
+.ox.
+x.ox
+...x
+..o.
+Player 1 chose action: o(0,0)
+Next state:
+oox.
+x.ox
+...x
+..o.
+Player 0 chose action: x(0,3)
+Next state:
+ooxx
+x.ox
+...x
+..o.
+Player 1 chose action: o(2,0)
+Next state:
+ooxx
+x.ox
+o..x
+..o.
+Player 0 chose action: x(2,2)
+Next state:
+ooxx
+x.ox
+o.xx
+..o.
+Player 1 chose action: o(3,0)
+Next state:
+ooxx
+x.ox
+o.xx
+o.o.
+Player 0 chose action: x(3,1)
+Next state:
+ooxx
+x.ox
+o.xx
+oxo.
+Player 1 chose action: o(1,1)
+Next state:
+ooxx
+xoox
+o.xx
+oxo.
+Player 0 chose action: x(2,1)
+Next state:
+ooxx
+xoox
+oxxx
+oxo.
+Player 1 chose action: o(3,3)
+Next state:
+ooxx
+xoox
+oxxx
+oxoo
+Returns: 0, 0
+Game actions: x(1,0), o(3,2), x(2,3), o(0,1), x(0,2), o(1,2), x(1,3), o(0,0), x(0,3), o(2,0), x(2,2), o(3,0), x(3,1), o(1,1), x(2,1), o(3,3)
+Game 60
+History: x(1,0),o(3,2),x(2,3),o(0,1),x(0,2),o(1,2),x(1,3),o(0,0),x(0,3),o(2,0),x(2,2),o(3,0),x(3,1),o(1,1),x(2,1),o(3,3)
+State: ooxxx.oxo.xxo.o.
+Value: 1
+ 
+State: ooxxxooxo.xxoxo.
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(3,2)
+Next state:
+..x.
+....
+....
+..o.
+Player 0 chose action: x(1,2)
+Next state:
+..x.
+..x.
+....
+..o.
+Player 1 chose action: o(2,0)
+Next state:
+..x.
+..x.
+o...
+..o.
+Player 0 chose action: x(2,2)
+Next state:
+..x.
+..x.
+o.x.
+..o.
+Player 1 chose action: o(2,3)
+Next state:
+..x.
+..x.
+o.xo
+..o.
+Player 0 chose action: x(2,1)
+Next state:
+..x.
+..x.
+oxxo
+..o.
+Player 1 chose action: o(0,1)
+Next state:
+.ox.
+..x.
+oxxo
+..o.
+Player 0 chose action: x(0,3)
+Next state:
+.oxx
+..x.
+oxxo
+..o.
+Player 1 chose action: o(0,0)
+Next state:
+ooxx
+..x.
+oxxo
+..o.
+Player 0 chose action: x(3,3)
+Next state:
+ooxx
+..x.
+oxxo
+..ox
+Player 1 chose action: o(1,1)
+Next state:
+ooxx
+.ox.
+oxxo
+..ox
+Player 0 chose action: x(3,1)
+Next state:
+ooxx
+.ox.
+oxxo
+.xox
+Player 1 chose action: o(1,3)
+Next state:
+ooxx
+.oxo
+oxxo
+.xox
+Player 0 chose action: x(1,0)
+Next state:
+ooxx
+xoxo
+oxxo
+.xox
+Player 1 chose action: o(3,0)
+Next state:
+ooxx
+xoxo
+oxxo
+oxox
+Returns: 0, 0
+Game actions: x(0,2), o(3,2), x(1,2), o(2,0), x(2,2), o(2,3), x(2,1), o(0,1), x(0,3), o(0,0), x(3,3), o(1,1), x(3,1), o(1,3), x(1,0), o(3,0)
+Game 61
+History: x(0,2),o(3,2),x(1,2),o(2,0),x(2,2),o(2,3),x(2,1),o(0,1),x(0,3),o(0,0),x(3,3),o(1,1),x(3,1),o(1,3),x(1,0),o(3,0)
+State: ooxx.ox.oxxo..ox
+Value: 1
+ 
+State: ooxx.oxooxxo.xox
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+....
+....
+....
+Player 1 chose action: o(3,1)
+Next state:
+.x..
+....
+....
+.o..
+Player 0 chose action: x(2,1)
+Next state:
+.x..
+....
+.x..
+.o..
+Player 1 chose action: o(1,0)
+Next state:
+.x..
+o...
+.x..
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+.x..
+o...
+.x..
+.ox.
+Player 1 chose action: o(3,3)
+Next state:
+.x..
+o...
+.x..
+.oxo
+Player 0 chose action: x(3,0)
+Next state:
+.x..
+o...
+.x..
+xoxo
+Player 1 chose action: o(2,0)
+Next state:
+.x..
+o...
+ox..
+xoxo
+Player 0 chose action: x(1,2)
+Next state:
+.x..
+o.x.
+ox..
+xoxo
+Player 1 chose action: o(0,0)
+Next state:
+ox..
+o.x.
+ox..
+xoxo
+Player 0 chose action: x(1,1)
+Next state:
+ox..
+oxx.
+ox..
+xoxo
+Player 1 chose action: o(1,3)
+Next state:
+ox..
+oxxo
+ox..
+xoxo
+Player 0 chose action: x(2,3)
+Next state:
+ox..
+oxxo
+ox.x
+xoxo
+Player 1 chose action: o(0,2)
+Next state:
+oxo.
+oxxo
+ox.x
+xoxo
+Player 0 chose action: x(2,2)
+Next state:
+oxo.
+oxxo
+oxxx
+xoxo
+Player 1 chose action: o(0,3)
+Next state:
+oxoo
+oxxo
+oxxx
+xoxo
+Returns: 0, 0
+Game actions: x(0,1), o(3,1), x(2,1), o(1,0), x(3,2), o(3,3), x(3,0), o(2,0), x(1,2), o(0,0), x(1,1), o(1,3), x(2,3), o(0,2), x(2,2), o(0,3)
+Game 62
+History: x(0,1),o(3,1),x(2,1),o(1,0),x(3,2),o(3,3),x(3,0),o(2,0),x(1,2),o(0,0),x(1,1),o(1,3),x(2,3),o(0,2),x(2,2),o(0,3)
+State: ox..oxxoox..xoxo
+Value: 1
+ 
+State: oxo.oxxoox.xxoxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+....
+....
+....
+Player 1 chose action: o(1,3)
+Next state:
+.x..
+...o
+....
+....
+Player 0 chose action: x(2,0)
+Next state:
+.x..
+...o
+x...
+....
+Player 1 chose action: o(3,2)
+Next state:
+.x..
+...o
+x...
+..o.
+Player 0 chose action: x(2,3)
+Next state:
+.x..
+...o
+x..x
+..o.
+Player 1 chose action: o(3,3)
+Next state:
+.x..
+...o
+x..x
+..oo
+Player 0 chose action: x(1,0)
+Next state:
+.x..
+x..o
+x..x
+..oo
+Player 1 chose action: o(0,3)
+Next state:
+.x.o
+x..o
+x..x
+..oo
+Player 0 chose action: x(0,2)
+Next state:
+.xxo
+x..o
+x..x
+..oo
+Player 1 chose action: o(3,1)
+Next state:
+.xxo
+x..o
+x..x
+.ooo
+Player 0 chose action: x(0,0)
+Next state:
+xxxo
+x..o
+x..x
+.ooo
+Player 1 chose action: o(2,1)
+Next state:
+xxxo
+x..o
+xo.x
+.ooo
+Player 0 chose action: x(1,2)
+Next state:
+xxxo
+x.xo
+xo.x
+.ooo
+Player 1 chose action: o(2,2)
+Next state:
+xxxo
+x.xo
+xoox
+.ooo
+Player 0 chose action: x(1,1)
+Next state:
+xxxo
+xxxo
+xoox
+.ooo
+Player 1 chose action: o(3,0)
+Next state:
+xxxo
+xxxo
+xoox
+oooo
+Returns: -1, 1
+Game actions: x(0,1), o(1,3), x(2,0), o(3,2), x(2,3), o(3,3), x(1,0), o(0,3), x(0,2), o(3,1), x(0,0), o(2,1), x(1,2), o(2,2), x(1,1), o(3,0)
+Game 63
+History: x(0,1),o(1,3),x(2,0),o(3,2),x(2,3),o(3,3),x(1,0),o(0,3),x(0,2),o(3,1),x(0,0),o(2,1),x(1,2),o(2,2),x(1,1),o(3,0)
+State: xxxox..ox..x.ooo
+Value: 1
+ 
+State: xxxox..oxo.x.ooo
+Value: 1
+ 
+State: xxxox.xoxo.x.ooo
+Value: 1
+ 
+State: xxxox.xoxoox.ooo
+Value: 1
+ 
+State: xxxoxxxoxoox.ooo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,3)
+Next state:
+....
+...x
+....
+....
+Player 1 chose action: o(0,1)
+Next state:
+.o..
+...x
+....
+....
+Player 0 chose action: x(3,2)
+Next state:
+.o..
+...x
+....
+..x.
+Player 1 chose action: o(2,0)
+Next state:
+.o..
+...x
+o...
+..x.
+Player 0 chose action: x(3,1)
+Next state:
+.o..
+...x
+o...
+.xx.
+Player 1 chose action: o(1,1)
+Next state:
+.o..
+.o.x
+o...
+.xx.
+Player 0 chose action: x(1,0)
+Next state:
+.o..
+xo.x
+o...
+.xx.
+Player 1 chose action: o(1,2)
+Next state:
+.o..
+xoox
+o...
+.xx.
+Player 0 chose action: x(0,2)
+Next state:
+.ox.
+xoox
+o...
+.xx.
+Player 1 chose action: o(0,0)
+Next state:
+oox.
+xoox
+o...
+.xx.
+Player 0 chose action: x(3,0)
+Next state:
+oox.
+xoox
+o...
+xxx.
+Player 1 chose action: o(0,3)
+Next state:
+ooxo
+xoox
+o...
+xxx.
+Player 0 chose action: x(2,2)
+Next state:
+ooxo
+xoox
+o.x.
+xxx.
+Player 1 chose action: o(2,3)
+Next state:
+ooxo
+xoox
+o.xo
+xxx.
+Player 0 chose action: x(2,1)
+Next state:
+ooxo
+xoox
+oxxo
+xxx.
+Player 1 chose action: o(3,3)
+Next state:
+ooxo
+xoox
+oxxo
+xxxo
+Returns: 0, 0
+Game actions: x(1,3), o(0,1), x(3,2), o(2,0), x(3,1), o(1,1), x(1,0), o(1,2), x(0,2), o(0,0), x(3,0), o(0,3), x(2,2), o(2,3), x(2,1), o(3,3)
+Game 64
+History: x(1,3),o(0,1),x(3,2),o(2,0),x(3,1),o(1,1),x(1,0),o(1,2),x(0,2),o(0,0),x(3,0),o(0,3),x(2,2),o(2,3),x(2,1),o(3,3)
+State: ooxoxooxo...xxx.
+Value: 1
+ 
+State: ooxoxooxo.xoxxx.
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....
+Player 1 chose action: o(3,1)
+Next state:
+..x.
+....
+....
+.o..
+Player 0 chose action: x(2,3)
+Next state:
+..x.
+....
+...x
+.o..
+Player 1 chose action: o(1,0)
+Next state:
+..x.
+o...
+...x
+.o..
+Player 0 chose action: x(2,0)
+Next state:
+..x.
+o...
+x..x
+.o..
+Player 1 chose action: o(0,1)
+Next state:
+.ox.
+o...
+x..x
+.o..
+Player 0 chose action: x(0,0)
+Next state:
+xox.
+o...
+x..x
+.o..
+Player 1 chose action: o(1,3)
+Next state:
+xox.
+o..o
+x..x
+.o..
+Player 0 chose action: x(3,0)
+Next state:
+xox.
+o..o
+x..x
+xo..
+Player 1 chose action: o(3,3)
+Next state:
+xox.
+o..o
+x..x
+xo.o
+Player 0 chose action: x(0,3)
+Next state:
+xoxx
+o..o
+x..x
+xo.o
+Player 1 chose action: o(3,2)
+Next state:
+xoxx
+o..o
+x..x
+xooo
+Player 0 chose action: x(1,1)
+Next state:
+xoxx
+ox.o
+x..x
+xooo
+Player 1 chose action: o(2,2)
+Next state:
+xoxx
+ox.o
+x.ox
+xooo
+Player 0 chose action: x(2,1)
+Next state:
+xoxx
+ox.o
+xxox
+xooo
+Player 1 chose action: o(1,2)
+Next state:
+xoxx
+oxoo
+xxox
+xooo
+Returns: 0, 0
+Game actions: x(0,2), o(3,1), x(2,3), o(1,0), x(2,0), o(0,1), x(0,0), o(1,3), x(3,0), o(3,3), x(0,3), o(3,2), x(1,1), o(2,2), x(2,1), o(1,2)
+Game 65
+History: x(0,2),o(3,1),x(2,3),o(1,0),x(2,0),o(0,1),x(0,0),o(1,3),x(3,0),o(3,3),x(0,3),o(3,2),x(1,1),o(2,2),x(2,1),o(1,2)
+State: xoxxo..ox..xxo.o
+Value: 1
+ 
+State: xoxxo..ox..xxooo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(1,0)
+Next state:
+....
+x...
+....
+....
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+x...
+....
+....
+Player 0 chose action: x(2,3)
+Next state:
+..o.
+x...
+...x
+....
+Player 1 chose action: o(3,1)
+Next state:
+..o.
+x...
+...x
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+..o.
+x...
+...x
+.ox.
+Player 1 chose action: o(1,3)
+Next state:
+..o.
+x..o
+...x
+.ox.
+Player 0 chose action: x(1,2)
+Next state:
+..o.
+x.xo
+...x
+.ox.
+Player 1 chose action: o(3,3)
+Next state:
+..o.
+x.xo
+...x
+.oxo
+Player 0 chose action: x(2,0)
+Next state:
+..o.
+x.xo
+x..x
+.oxo
+Player 1 chose action: o(0,1)
+Next state:
+.oo.
+x.xo
+x..x
+.oxo
+Player 0 chose action: x(0,3)
+Next state:
+.oox
+x.xo
+x..x
+.oxo
+Player 1 chose action: o(0,0)
+Next state:
+ooox
+x.xo
+x..x
+.oxo
+Player 0 chose action: x(2,2)
+Next state:
+ooox
+x.xo
+x.xx
+.oxo
+Player 1 chose action: o(3,0)
+Next state:
+ooox
+x.xo
+x.xx
+ooxo
+Player 0 chose action: x(1,1)
+Next state:
+ooox
+xxxo
+x.xx
+ooxo
+Player 1 chose action: o(2,1)
+Next state:
+ooox
+xxxo
+xoxx
+ooxo
+Returns: 0, 0
+Game actions: x(1,0), o(0,2), x(2,3), o(3,1), x(3,2), o(1,3), x(1,2), o(3,3), x(2,0), o(0,1), x(0,3), o(0,0), x(2,2), o(3,0), x(1,1), o(2,1)
+Game 66
+History: x(1,0),o(0,2),x(2,3),o(3,1),x(3,2),o(1,3),x(1,2),o(3,3),x(2,0),o(0,1),x(0,3),o(0,0),x(2,2),o(3,0),x(1,1),o(2,1)
+State: oooxx.xox..x.oxo
+Value: 1
+ 
+State: oooxx.xox.xxooxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,0)
+Next state:
+....
+....
+x...
+....
+Player 1 chose action: o(2,3)
+Next state:
+....
+....
+x..o
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+x..o
+....
+Player 1 chose action: o(3,1)
+Next state:
+..x.
+....
+x..o
+.o..
+Player 0 chose action: x(1,0)
+Next state:
+..x.
+x...
+x..o
+.o..
+Player 1 chose action: o(2,2)
+Next state:
+..x.
+x...
+x.oo
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+..x.
+x...
+x.oo
+.ox.
+Player 1 chose action: o(1,2)
+Next state:
+..x.
+x.o.
+x.oo
+.ox.
+Player 0 chose action: x(1,3)
+Next state:
+..x.
+x.ox
+x.oo
+.ox.
+Player 1 chose action: o(3,3)
+Next state:
+..x.
+x.ox
+x.oo
+.oxo
+Player 0 chose action: x(3,0)
+Next state:
+..x.
+x.ox
+x.oo
+xoxo
+Player 1 chose action: o(0,1)
+Next state:
+.ox.
+x.ox
+x.oo
+xoxo
+Player 0 chose action: x(0,3)
+Next state:
+.oxx
+x.ox
+x.oo
+xoxo
+Player 1 chose action: o(2,1)
+Next state:
+.oxx
+x.ox
+xooo
+xoxo
+Player 0 chose action: x(1,1)
+Next state:
+.oxx
+xxox
+xooo
+xoxo
+Player 1 chose action: o(0,0)
+Next state:
+ooxx
+xxox
+xooo
+xoxo
+Returns: 0, 0
+Game actions: x(2,0), o(2,3), x(0,2), o(3,1), x(1,0), o(2,2), x(3,2), o(1,2), x(1,3), o(3,3), x(3,0), o(0,1), x(0,3), o(2,1), x(1,1), o(0,0)
+Game 67
+History: x(2,0),o(2,3),x(0,2),o(3,1),x(1,0),o(2,2),x(3,2),o(1,2),x(1,3),o(3,3),x(3,0),o(0,1),x(0,3),o(2,1),x(1,1),o(0,0)
+State: .ox.x.oxx.ooxoxo
+Value: 1
+ 
+State: .oxxx.oxxoooxoxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+....
+....
+....
+Player 1 chose action: o(3,2)
+Next state:
+.x..
+....
+....
+..o.
+Player 0 chose action: x(1,0)
+Next state:
+.x..
+x...
+....
+..o.
+Player 1 chose action: o(1,3)
+Next state:
+.x..
+x..o
+....
+..o.
+Player 0 chose action: x(2,3)
+Next state:
+.x..
+x..o
+...x
+..o.
+Player 1 chose action: o(0,3)
+Next state:
+.x.o
+x..o
+...x
+..o.
+Player 0 chose action: x(0,2)
+Next state:
+.xxo
+x..o
+...x
+..o.
+Player 1 chose action: o(1,2)
+Next state:
+.xxo
+x.oo
+...x
+..o.
+Player 0 chose action: x(3,3)
+Next state:
+.xxo
+x.oo
+...x
+..ox
+Player 1 chose action: o(3,0)
+Next state:
+.xxo
+x.oo
+...x
+o.ox
+Player 0 chose action: x(2,0)
+Next state:
+.xxo
+x.oo
+x..x
+o.ox
+Player 1 chose action: o(0,0)
+Next state:
+oxxo
+x.oo
+x..x
+o.ox
+Player 0 chose action: x(3,1)
+Next state:
+oxxo
+x.oo
+x..x
+oxox
+Player 1 chose action: o(1,1)
+Next state:
+oxxo
+xooo
+x..x
+oxox
+Player 0 chose action: x(2,2)
+Next state:
+oxxo
+xooo
+x.xx
+oxox
+Player 1 chose action: o(2,1)
+Next state:
+oxxo
+xooo
+xoxx
+oxox
+Returns: -1, 1
+Game actions: x(0,1), o(3,2), x(1,0), o(1,3), x(2,3), o(0,3), x(0,2), o(1,2), x(3,3), o(3,0), x(2,0), o(0,0), x(3,1), o(1,1), x(2,2), o(2,1)
+Game 68
+History: x(0,1),o(3,2),x(1,0),o(1,3),x(2,3),o(0,3),x(0,2),o(1,2),x(3,3),o(3,0),x(2,0),o(0,0),x(3,1),o(1,1),x(2,2),o(2,1)
+State: .xxox.oox..xo.ox
+Value: 1
+ 
+State: oxxox.oox..xoxox
+Value: 1
+ 
+State: oxxoxooox.xxoxox
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(3,1)
+Next state:
+....
+....
+....
+.x..
+Player 1 chose action: o(1,0)
+Next state:
+....
+o...
+....
+.x..
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+o...
+....
+.x..
+Player 1 chose action: o(2,3)
+Next state:
+..x.
+o...
+...o
+.x..
+Player 0 chose action: x(2,0)
+Next state:
+..x.
+o...
+x..o
+.x..
+Player 1 chose action: o(0,0)
+Next state:
+o.x.
+o...
+x..o
+.x..
+Player 0 chose action: x(0,1)
+Next state:
+oxx.
+o...
+x..o
+.x..
+Player 1 chose action: o(3,0)
+Next state:
+oxx.
+o...
+x..o
+ox..
+Player 0 chose action: x(2,1)
+Next state:
+oxx.
+o...
+xx.o
+ox..
+Player 1 chose action: o(0,3)
+Next state:
+oxxo
+o...
+xx.o
+ox..
+Player 0 chose action: x(3,2)
+Next state:
+oxxo
+o...
+xx.o
+oxx.
+Player 1 chose action: o(3,3)
+Next state:
+oxxo
+o...
+xx.o
+oxxo
+Player 0 chose action: x(2,2)
+Next state:
+oxxo
+o...
+xxxo
+oxxo
+Player 1 chose action: o(1,2)
+Next state:
+oxxo
+o.o.
+xxxo
+oxxo
+Player 0 chose action: x(1,3)
+Next state:
+oxxo
+o.ox
+xxxo
+oxxo
+Player 1 chose action: o(1,1)
+Next state:
+oxxo
+ooox
+xxxo
+oxxo
+Returns: 0, 0
+Game actions: x(3,1), o(1,0), x(0,2), o(2,3), x(2,0), o(0,0), x(0,1), o(3,0), x(2,1), o(0,3), x(3,2), o(3,3), x(2,2), o(1,2), x(1,3), o(1,1)
+Game 69
+History: x(3,1),o(1,0),x(0,2),o(2,3),x(2,0),o(0,0),x(0,1),o(3,0),x(2,1),o(0,3),x(3,2),o(3,3),x(2,2),o(1,2),x(1,3),o(1,1)
+State: oxxoo...xx.ooxxo
+Value: 1
+ 
+State: oxxoo...xxxooxxo
+Value: 1
+ 
+State: oxxoo.o.xxxooxxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,1)
+Next state:
+.x..
+....
+....
+....
+Player 1 chose action: o(2,3)
+Next state:
+.x..
+....
+...o
+....
+Player 0 chose action: x(1,3)
+Next state:
+.x..
+...x
+...o
+....
+Player 1 chose action: o(0,3)
+Next state:
+.x.o
+...x
+...o
+....
+Player 0 chose action: x(0,2)
+Next state:
+.xxo
+...x
+...o
+....
+Player 1 chose action: o(3,3)
+Next state:
+.xxo
+...x
+...o
+...o
+Player 0 chose action: x(0,0)
+Next state:
+xxxo
+...x
+...o
+...o
+Player 1 chose action: o(3,1)
+Next state:
+xxxo
+...x
+...o
+.o.o
+Player 0 chose action: x(1,1)
+Next state:
+xxxo
+.x.x
+...o
+.o.o
+Player 1 chose action: o(3,2)
+Next state:
+xxxo
+.x.x
+...o
+.ooo
+Player 0 chose action: x(2,2)
+Next state:
+xxxo
+.x.x
+..xo
+.ooo
+Player 1 chose action: o(1,0)
+Next state:
+xxxo
+ox.x
+..xo
+.ooo
+Player 0 chose action: x(2,1)
+Next state:
+xxxo
+ox.x
+.xxo
+.ooo
+Player 1 chose action: o(1,2)
+Next state:
+xxxo
+oxox
+.xxo
+.ooo
+Player 0 chose action: x(2,0)
+Next state:
+xxxo
+oxox
+xxxo
+.ooo
+Player 1 chose action: o(3,0)
+Next state:
+xxxo
+oxox
+xxxo
+oooo
+Returns: -1, 1
+Game actions: x(0,1), o(2,3), x(1,3), o(0,3), x(0,2), o(3,3), x(0,0), o(3,1), x(1,1), o(3,2), x(2,2), o(1,0), x(2,1), o(1,2), x(2,0), o(3,0)
+Game 70
+History: x(0,1),o(2,3),x(1,3),o(0,3),x(0,2),o(3,3),x(0,0),o(3,1),x(1,1),o(3,2),x(2,2),o(1,0),x(2,1),o(1,2),x(2,0),o(3,0)
+State: xxxo.x.x..xo.ooo
+Value: 1
+ 
+State: xxxoox.x.xxo.ooo
+Value: 1
+ 
+State: xxxooxoxxxxo.ooo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(3,2)
+Next state:
+....
+....
+....
+..x.
+Player 1 chose action: o(3,1)
+Next state:
+....
+....
+....
+.ox.
+Player 0 chose action: x(2,3)
+Next state:
+....
+....
+...x
+.ox.
+Player 1 chose action: o(3,0)
+Next state:
+....
+....
+...x
+oox.
+Player 0 chose action: x(1,0)
+Next state:
+....
+x...
+...x
+oox.
+Player 1 chose action: o(2,0)
+Next state:
+....
+x...
+o..x
+oox.
+Player 0 chose action: x(0,0)
+Next state:
+x...
+x...
+o..x
+oox.
+Player 1 chose action: o(0,2)
+Next state:
+x.o.
+x...
+o..x
+oox.
+Player 0 chose action: x(2,2)
+Next state:
+x.o.
+x...
+o.xx
+oox.
+Player 1 chose action: o(1,2)
+Next state:
+x.o.
+x.o.
+o.xx
+oox.
+Player 0 chose action: x(3,3)
+Next state:
+x.o.
+x.o.
+o.xx
+ooxx
+Player 1 chose action: o(0,1)
+Next state:
+xoo.
+x.o.
+o.xx
+ooxx
+Player 0 chose action: x(1,3)
+Next state:
+xoo.
+x.ox
+o.xx
+ooxx
+Player 1 chose action: o(2,1)
+Next state:
+xoo.
+x.ox
+ooxx
+ooxx
+Player 0 chose action: x(1,1)
+Next state:
+xoo.
+xxox
+ooxx
+ooxx
+Returns: 1, -1
+Game actions: x(3,2), o(3,1), x(2,3), o(3,0), x(1,0), o(2,0), x(0,0), o(0,2), x(2,2), o(1,2), x(3,3), o(0,1), x(1,3), o(2,1), x(1,1)
+Game 71
+History: x(3,2),o(3,1),x(2,3),o(3,0),x(1,0),o(2,0),x(0,0),o(0,2),x(2,2),o(1,2),x(3,3),o(0,1),x(1,3),o(2,1),x(1,1)
+State: xoo.x.o.o.xxooxx
+Value: 1
+ 
+State: xoo.x.oxo.xxooxx
+Value: -1
+ 
+State: xoo.x.oxooxxooxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(3,2)
+Next state:
+....
+....
+....
+..x.
+Player 1 chose action: o(0,1)
+Next state:
+.o..
+....
+....
+..x.
+Player 0 chose action: x(1,3)
+Next state:
+.o..
+...x
+....
+..x.
+Player 1 chose action: o(1,0)
+Next state:
+.o..
+o..x
+....
+..x.
+Player 0 chose action: x(2,0)
+Next state:
+.o..
+o..x
+x...
+..x.
+Player 1 chose action: o(3,0)
+Next state:
+.o..
+o..x
+x...
+o.x.
+Player 0 chose action: x(3,1)
+Next state:
+.o..
+o..x
+x...
+oxx.
+Player 1 chose action: o(1,1)
+Next state:
+.o..
+oo.x
+x...
+oxx.
+Player 0 chose action: x(3,3)
+Next state:
+.o..
+oo.x
+x...
+oxxx
+Player 1 chose action: o(1,2)
+Next state:
+.o..
+ooox
+x...
+oxxx
+Player 0 chose action: x(2,3)
+Next state:
+.o..
+ooox
+x..x
+oxxx
+Player 1 chose action: o(0,2)
+Next state:
+.oo.
+ooox
+x..x
+oxxx
+Player 0 chose action: x(2,1)
+Next state:
+.oo.
+ooox
+xx.x
+oxxx
+Player 1 chose action: o(0,0)
+Next state:
+ooo.
+ooox
+xx.x
+oxxx
+Player 0 chose action: x(2,2)
+Next state:
+ooo.
+ooox
+xxxx
+oxxx
+Returns: 1, -1
+Game actions: x(3,2), o(0,1), x(1,3), o(1,0), x(2,0), o(3,0), x(3,1), o(1,1), x(3,3), o(1,2), x(2,3), o(0,2), x(2,1), o(0,0), x(2,2)
+Game 72
+History: x(3,2),o(0,1),x(1,3),o(1,0),x(2,0),o(3,0),x(3,1),o(1,1),x(3,3),o(1,2),x(2,3),o(0,2),x(2,1),o(0,0),x(2,2)
+State: .oo.oooxx..xoxxx
+Value: 1
+ 
+State: .oo.oooxxx.xoxxx
+Value: -1
+ 
+State: ooo.oooxxx.xoxxx
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(2,3)
+Next state:
+....
+....
+...x
+....
+Player 1 chose action: o(0,2)
+Next state:
+..o.
+....
+...x
+....
+Player 0 chose action: x(2,0)
+Next state:
+..o.
+....
+x..x
+....
+Player 1 chose action: o(3,1)
+Next state:
+..o.
+....
+x..x
+.o..
+Player 0 chose action: x(2,2)
+Next state:
+..o.
+....
+x.xx
+.o..
+Player 1 chose action: o(1,1)
+Next state:
+..o.
+.o..
+x.xx
+.o..
+Player 0 chose action: x(3,2)
+Next state:
+..o.
+.o..
+x.xx
+.ox.
+Player 1 chose action: o(0,0)
+Next state:
+o.o.
+.o..
+x.xx
+.ox.
+Player 0 chose action: x(3,0)
+Next state:
+o.o.
+.o..
+x.xx
+xox.
+Player 1 chose action: o(1,3)
+Next state:
+o.o.
+.o.o
+x.xx
+xox.
+Player 0 chose action: x(0,3)
+Next state:
+o.ox
+.o.o
+x.xx
+xox.
+Player 1 chose action: o(3,3)
+Next state:
+o.ox
+.o.o
+x.xx
+xoxo
+Player 0 chose action: x(1,0)
+Next state:
+o.ox
+xo.o
+x.xx
+xoxo
+Player 1 chose action: o(1,2)
+Next state:
+o.ox
+xooo
+x.xx
+xoxo
+Player 0 chose action: x(0,1)
+Next state:
+oxox
+xooo
+x.xx
+xoxo
+Player 1 chose action: o(2,1)
+Next state:
+oxox
+xooo
+xoxx
+xoxo
+Returns: 0, 0
+Game actions: x(2,3), o(0,2), x(2,0), o(3,1), x(2,2), o(1,1), x(3,2), o(0,0), x(3,0), o(1,3), x(0,3), o(3,3), x(1,0), o(1,2), x(0,1), o(2,1)
+Game 73
+History: x(2,3),o(0,2),x(2,0),o(3,1),x(2,2),o(1,1),x(3,2),o(0,0),x(3,0),o(1,3),x(0,3),o(3,3),x(1,0),o(1,2),x(0,1),o(2,1)
+State: o.ox.o.ox.xxxoxo
+Value: 1
+ 
+State: o.oxxooox.xxxoxo
+Value: 1
+ 
+Initial state:
+....
+....
+....
+....
+Player 0 chose action: x(0,2)
+Next state:
+..x.
+....
+....
+....

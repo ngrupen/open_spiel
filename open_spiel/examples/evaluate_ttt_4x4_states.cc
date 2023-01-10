@@ -65,7 +65,6 @@ ABSL_FLAG(int, az_cache_shards, 1, "Cache shards of AZ algorithm.");
 ABSL_FLAG(std::string, data_path, "", "Path to 4x4 state ids.");
 ABSL_FLAG(std::string, save_path, "", "Path to save test results.");
 
-
 std::vector<double> Softmax(
     const std::vector<double>& values, double lambda) {
   std::vector<double> new_values = values;
