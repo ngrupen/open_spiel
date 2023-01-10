@@ -688,7 +688,6 @@ bool AlphaZero(AlphaZeroConfig config, StopToken* stop, bool resuming) {
           start_info.model_checkpoint_step);
     }
   }
-
   auto eval = std::make_shared<VPNetEvaluator>(
       &device_manager, config.inference_batch_size, config.inference_threads,
       config.inference_cache, (config.actors + config.evaluators) / 16);

@@ -173,6 +173,17 @@ std::string ConnectFourState::ToString() const {
   }
   return str;
 }
+
+std::string ConnectFourState::GetIDString() {
+  std::string id_str;
+  for (int r = 0; r < kRows; ++r) {
+    for (int c = 0; c < kCols; ++c) {
+      absl::StrAppend(&id_str, StateToString(CellAt(r, c)));
+    }
+  }
+  return id_str;
+}
+
 bool ConnectFourState::IsTerminal() const {
   return outcome_ != Outcome::kUnknown;
 }
