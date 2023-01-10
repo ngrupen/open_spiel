@@ -220,12 +220,68 @@ void TicTacToe5x5State::UndoAction(Player player, Action move) {
   --move_number_;
 }
 
+void TicTacToe5x5State::FillBoardFromStr(std::string state_str) {
+  if (state_str.length() == kNumCells){
+    int board_idx = 0;
+    int num_xs = 0;
+    int num_os = 0;
+    for(char& c : state_str) {
+      if (c == '.') {
+        board_[board_idx] = CellState::kEmpty;
+      }
+      else if (c == 'o') {
+        board_[board_idx] = CellState::kNought;
+        num_os++;
+      }
+      else if (c == 'x') {
+        board_[board_idx] = CellState::kCross;
+        num_xs++;
+     }
+      else {
+        SpielFatalError("Unknown str.");
+      }
+
+      board_idx++;
+    }
+
+    // Assign correct player based on pieces on the board
+    if (num_xs == num_os)
+      current_player_ = 0;
+    else
+      current_player_ = 1;
+    
+    if ((num_os > num_xs) || (num_xs - num_os > 1)) {
+      std::cout << "State ID: " << state_str << std::endl;
+      SpielFatalError("Illegal starting state!");
+    }
+
+    // Account for prior moves
+    num_moves_ = num_xs + num_os;
+
+  } else {
+    SpielFatalError("State string does not match board size!");
+  }
+}
+
 std::unique_ptr<State> TicTacToe5x5State::Clone() const {
   return std::unique_ptr<State>(new TicTacToe5x5State(*this));
 }
 
 TicTacToe5x5Game::TicTacToe5x5Game(const GameParameters& params)
     : Game(kGameType, params) {}
+
+// std::unique_ptr<State> TicTacToe5x5Game::LoadStateFromID(std::string state_id) const {
+std::unique_ptr<State> TicTacToe5x5Game::NewInitialState(const std::string& str) const {
+
+//   std::string state_str = "xoo..x...";
+  TicTacToe5x5State init_state = TicTacToe5x5State(shared_from_this());
+//   init_state.FillBoardFromStr(state_id);
+  init_state.FillBoardFromStr(str);
+
+//   std::cout << "State ID: " << state_str << std::endl;
+//   std::cout << "Board: " << init_state.ToString() << std::endl;
+  return std::unique_ptr<State>(init_state.Clone());
+}
 
 }  // namespace tic_tac_toe
 }  // namespace open_spiel

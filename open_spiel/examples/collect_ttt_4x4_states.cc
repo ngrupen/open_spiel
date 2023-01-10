@@ -25,6 +25,7 @@
 #include "open_spiel/abseil-cpp/absl/strings/str_join.h"
 #include "open_spiel/abseil-cpp/absl/time/clock.h"
 #include "open_spiel/abseil-cpp/absl/time/time.h"
+#include "open_spiel/algorithms/supergame_minimax.h"
 #include "open_spiel/algorithms/alpha_zero_torch/device_manager.h"
 #include "open_spiel/algorithms/alpha_zero_torch/vpevaluator.h"
 #include "open_spiel/algorithms/alpha_zero_torch/vpnet.h"
@@ -33,7 +34,11 @@
 #include "open_spiel/spiel.h"
 #include "open_spiel/spiel_utils.h"
 
-ABSL_FLAG(std::string, game, "tic_tac_toe", "The name of the game to play.");
+using open_spiel::algorithms::SupergameAlphaBetaSearch;
+inline constexpr int kSearchDepth = 1000;
+
+
+ABSL_FLAG(std::string, game, "tic_tac_toe_4x4", "The name of the game to play.");
 ABSL_FLAG(std::string, player, "random", "Who controls player.");
 ABSL_FLAG(std::string, az_path, "", "Path to AZ experiment.");
 ABSL_FLAG(std::string, az_graph_def, "vpnet.pb",
@@ -237,6 +242,9 @@ int main(int argc, char **argv) {
         InitBot(absl::GetFlag(FLAGS_player), *game, 1, evaluator));
   }
 
+  // empty function for minimax oracle
+  std::function<double(const open_spiel::State&)> empty_funct;
+
   // game params set up
   std::map<std::string, int> histories;
   std::vector<double> overall_returns(2, 0);
@@ -259,7 +267,16 @@ int main(int argc, char **argv) {
       std::cerr << "History: " << absl::StrJoin(history, ",") << std::endl;
     
       for (int idx = 0; idx < state_history.size(); ++idx) {
-        outFile << state_history[idx] << std::endl;
+        std::unique_ptr<open_spiel::State> state = game->NewInitialState(state_history[idx]);
+
+        std::pair<double, open_spiel::Action> value_action = SupergameAlphaBetaSearch(
+            *game, state.get(), empty_funct, kSearchDepth, state->CurrentPlayer());
+        if (value_action.first != 0) {
+          std::cerr << "State: " << state->GetIDString() << std::endl;
+          std::cerr << "Value: " << value_action.first << std::endl;
+          std::cerr << " " << std::endl;
+          outFile << state_history[idx] << std::endl;
+        }
       }
 
       // log history

@@ -76,6 +76,7 @@ class TicTacToe5x5State : public State {
   CellState BoardAt(int row, int column) const {
     return board_[row * kNumCols + column];
   }
+  void FillBoardFromStr(std::string state_str);
 
  protected:
   std::array<CellState, kNumCells> board_;
@@ -97,6 +98,7 @@ class TicTacToe5x5Game : public Game {
   std::unique_ptr<State> NewInitialState() const override {
     return std::unique_ptr<State>(new TicTacToe5x5State(shared_from_this()));
   }
+  std::unique_ptr<State> NewInitialState(const std::string& str) const override;
   int NumPlayers() const override { return kNumPlayers; }
   double MinUtility() const override { return -1; }
   double UtilitySum() const override { return 0; }
