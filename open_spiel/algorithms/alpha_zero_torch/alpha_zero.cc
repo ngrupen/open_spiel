@@ -171,75 +171,6 @@ Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
   return trajectory;
 }
 
-// Trajectory PlayGame(Logger* logger, int game_num, const open_spiel::Game& game,
-//                     std::vector<std::unique_ptr<MCTSBot>>* bots,
-//                     std::mt19937* rng, double temperature, int temperature_drop,
-//                     double cutoff_value, int max_simulations, std::shared_ptr<Evaluator> vp_eval,
-//                     bool verbose = false) {
-//   std::unique_ptr<open_spiel::State> state = game.NewInitialState();
-//   std::vector<std::string> history;
-//   Trajectory trajectory;
-
-//   while (true) {
-//     open_spiel::Player player = state->CurrentPlayer();
-//     open_spiel::ActionsAndProbs policy;
-//     std::unique_ptr<SearchNode> root = (*bots)[player]->MCTSearch(*state);
-//     policy.reserve(root->children.size());
-//     std::cerr << "Root children size: " << root->children.size() << std::endl;
-//     for (const SearchNode& c : root->children) {
-//       policy.emplace_back(c.action,
-//                           std::pow(c.explore_count, 1.0 / temperature));
-//     }
-
-//     std::cerr << "Pre-normalization policy" << std::endl;
-//     for (const std::pair<Action, double>& outcome : policy) {
-//         std::cerr << "Outcome first: " << outcome.first << std::endl;
-//         std::cerr << "Outcome second: " << outcome.second << std::endl;
-//     }
-//     std::cerr << " " << std::endl;
-
-//     NormalizePolicy(&policy);
-//     std::cerr << "Post-normalization policy" << std::endl;
-//     for (const std::pair<Action, double>& outcome : policy) {
-//         std::cerr << "Outcome first: " << outcome.first << std::endl;
-//         std::cerr << "Outcome second: " << outcome.second << std::endl;
-//     }
-//     std::cerr << " " << std::endl;
-
-//     open_spiel::Action action;
-//     if (history.size() >= temperature_drop) {
-//       action = root->BestChild().action;
-//     } else {
-//       action = open_spiel::SampleAction(policy, *rng).first;
-//     }
-
-//     double root_value = root->total_reward / root->explore_count;
-//     trajectory.states.push_back(Trajectory::State{
-//         state->ObservationTensor(), player, state->LegalActions(), action,
-//         std::move(policy), root_value});
-//     std::string action_str = state->ActionToString(player, action);
-//     history.push_back(action_str);
-//     state->ApplyAction(action);
-//     if (verbose) {
-//       logger->Print("Player: %d, action: %s", player, action_str);
-//     }
-//     if (state->IsTerminal()) {
-//       trajectory.returns = state->Returns();
-//       break;
-//     } else if (std::abs(root_value) > cutoff_value) {
-//       trajectory.returns.resize(2);
-//       trajectory.returns[player] = root_value;
-//       trajectory.returns[1 - player] = -root_value;
-//       break;
-//     }
-//   }
-
-//   logger->Print("Game %d: Returns: %s; Actions: %s", game_num,
-//                 absl::StrJoin(trajectory.returns, " "),
-//                 absl::StrJoin(history, " "));
-//   return trajectory;
-// }
-
 std::unique_ptr<MCTSBot> InitAZBot(const AlphaZeroConfig& config,
                                    const open_spiel::Game& game,
                                    std::shared_ptr<Evaluator> evaluator,
@@ -667,7 +598,6 @@ bool AlphaZero(AlphaZeroConfig config, StopToken* stop, bool resuming) {
           start_info.model_checkpoint_step);
     }
   }
-
   auto eval = std::make_shared<VPNetEvaluator>(
       &device_manager, config.inference_batch_size, config.inference_threads,
       config.inference_cache, (config.actors + config.evaluators) / 16);
