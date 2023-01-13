@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef OPEN_SPIEL_GAMES_CONNECT_FOUR_H_
-#define OPEN_SPIEL_GAMES_CONNECT_FOUR_H_
+#ifndef OPEN_SPIEL_GAMES_TIC_TAC_TOE_TURNS_5x5_H_
+#define OPEN_SPIEL_GAMES_TIC_TAC_TOE_TURNS_5x5_H_
 
 #include <array>
 #include <map>
@@ -23,32 +23,23 @@
 
 #include "open_spiel/spiel.h"
 
-// Simple game of Connect Four
-// https://en.wikipedia.org/wiki/Connect_Four
-//
-// Minimax values (win/loss/draw) available for first 8 moves, here:
-// https://archive.ics.uci.edu/ml/datasets/Connect-4
+// Simple game of Noughts and Crosses:
+// https://en.wikipedia.org/wiki/Tic-tac-toe
 //
 // Parameters: none
 
 namespace open_spiel {
-namespace connect_four {
+namespace tic_tac_toe_turns_5x5 {
 
 // Constants.
 inline constexpr int kNumPlayers = 2;
-inline constexpr int kRows = 6;
-inline constexpr int kCols = 7;
-inline constexpr int kNumCells = kRows * kCols;
-inline constexpr int kCellStates =
-    1 + kNumPlayers;  // player 0, player 1, empty
+inline constexpr int kNumRows = 5;
+inline constexpr int kNumCols = 5;
+inline constexpr int kNumCells = kNumRows * kNumCols;
+inline constexpr int kCellStates = 1 + kNumPlayers;  // empty, 'x', and 'o'.
 
-// Outcome of the game.
-enum class Outcome {
-  kPlayer1 = 0,
-  kPlayer2 = 1,
-  kUnknown,
-  kDraw,
-};
+// https://math.stackexchange.com/questions/485752/tictactoe-state-space-choose-calculation/485852
+inline constexpr int kNumberStates = 5478;
 
 // State of a cell.
 enum class CellState {
@@ -58,15 +49,16 @@ enum class CellState {
 };
 
 // State of an in-play game.
-class ConnectFourState : public State {
+class TicTacToeTurns5x5State : public State {
  public:
-  ConnectFourState(std::shared_ptr<const Game>);
-  explicit ConnectFourState(std::shared_ptr<const Game> game,
-                            const std::string& str);
-  ConnectFourState(const ConnectFourState& other) = default;
+  TicTacToeTurns5x5State(std::shared_ptr<const Game> game);
 
-  Player CurrentPlayer() const override;
-  std::vector<Action> LegalActions() const override;
+  TicTacToeTurns5x5State(const TicTacToeTurns5x5State&) = default;
+  TicTacToeTurns5x5State& operator=(const TicTacToeTurns5x5State&) = default;
+
+  Player CurrentPlayer() const override {
+    return IsTerminal() ? kTerminalPlayerId : current_player_;
+  }
   std::string ActionToString(Player player, Action action_id) const override;
   std::string ToString() const override;
   std::string GetIDString() override;
@@ -77,68 +69,56 @@ class ConnectFourState : public State {
   void ObservationTensor(Player player,
                          absl::Span<float> values) const override;
   std::unique_ptr<State> Clone() const override;
-  std::vector<Action> ActionsConsistentWithInformationFrom(
-      Action action) const override {
-    return {action};
-  }
-  std::unique_ptr<State> ResampleFromInfostate(
-      int player_id, std::function<double()> rng) const override {
-    return Clone();
+  void UndoAction(Player player, Action move) override;
+  std::vector<Action> LegalActions() const override;
+  std::vector<Action> OriginalLegalActions(Player player) override;
+  CellState BoardAt(int cell) const { return board_[cell]; }
+  CellState BoardAt(int row, int column) const {
+    return board_[row * kNumCols + column];
   }
   void FillBoardFromStr(std::string state_str, bool inverted) override;
   std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> CanonicalStates() override;
 
-
  protected:
+  std::array<CellState, kNumCells> board_;
   void DoApplyAction(Action move) override;
 
  private:
-  CellState& CellAt(int row, int col);
-  CellState CellAt(int row, int col) const;
   bool HasLine(Player player) const;  // Does this player have a line?
-  bool HasLineFrom(Player player, int row, int col) const;
-  bool HasLineFromInDirection(Player player, int row, int col, int drow,
-                              int dcol) const;
-  bool IsFull() const;         // Is the board full?
-  Player current_player_ = 0;  // Player zero goes first
-  Outcome outcome_ = Outcome::kUnknown;
-  std::array<CellState, kNumCells> board_;
+  bool IsFull() const;                // Is the board full?
+  Player current_player_ = 0;         // Player zero goes first
+  Player outcome_ = kInvalidPlayer;
   int num_moves_ = 0;
   bool inverted_ = 0;
 };
 
 // Game object.
-class ConnectFourGame : public Game {
+class TicTacToeTurns5x5Game : public Game {
  public:
-  explicit ConnectFourGame(const GameParameters& params);
-  int NumDistinctActions() const override { return kCols; }
+  explicit TicTacToeTurns5x5Game(const GameParameters& params);
+  int NumDistinctActions() const override { return kNumCells; }
   std::unique_ptr<State> NewInitialState() const override {
-    return std::unique_ptr<State>(new ConnectFourState(shared_from_this()));
+    return std::unique_ptr<State>(new TicTacToeTurns5x5State(shared_from_this()));
   }
+  std::unique_ptr<State> NewInitialState(const std::string& str) const override;
   int NumPlayers() const override { return kNumPlayers; }
   double MinUtility() const override { return -1; }
   double UtilitySum() const override { return 0; }
   double MaxUtility() const override { return 1; }
   std::vector<int> ObservationTensorShape() const override {
-    return {kCellStates, kRows, kCols};
+    return {kCellStates+1, kNumRows, kNumCols};
   }
   int MaxGameLength() const override { return kNumCells; }
 };
 
+CellState PlayerToState(Player player);
+std::string StateToString(CellState state);
+
 inline std::ostream& operator<<(std::ostream& stream, const CellState& state) {
-  switch (state) {
-    case CellState::kEmpty:
-      return stream << "Empty";
-    case CellState::kNought:
-      return stream << "O";
-    case CellState::kCross:
-      return stream << "X";
-    default:
-      SpielFatalError("Unknown cell state");
-  }
+  return stream << StateToString(state);
 }
 
-}  // namespace connect_four
+}  // namespace tic_tac_toe_turns_5x5
 }  // namespace open_spiel
 
-#endif  // OPEN_SPIEL_GAMES_CONNECT_FOUR_H_
+#endif  // OPEN_SPIEL_GAMES_TIC_TAC_TOE_TURNS_5x5_H_

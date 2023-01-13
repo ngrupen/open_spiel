@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef OPEN_SPIEL_GAMES_CONNECT_FOUR_H_
-#define OPEN_SPIEL_GAMES_CONNECT_FOUR_H_
+#ifndef OPEN_SPIEL_GAMES_CONNECT_FOUR_TURNS_H_
+#define OPEN_SPIEL_GAMES_CONNECT_FOUR_TURNS_H_
 
 #include <array>
 #include <map>
@@ -32,7 +32,7 @@
 // Parameters: none
 
 namespace open_spiel {
-namespace connect_four {
+namespace connect_four_turns {
 
 // Constants.
 inline constexpr int kNumPlayers = 2;
@@ -58,12 +58,12 @@ enum class CellState {
 };
 
 // State of an in-play game.
-class ConnectFourState : public State {
+class ConnectFourTurnsState : public State {
  public:
-  ConnectFourState(std::shared_ptr<const Game>);
-  explicit ConnectFourState(std::shared_ptr<const Game> game,
+  ConnectFourTurnsState(std::shared_ptr<const Game>);
+  explicit ConnectFourTurnsState(std::shared_ptr<const Game> game,
                             const std::string& str);
-  ConnectFourState(const ConnectFourState& other) = default;
+  ConnectFourTurnsState(const ConnectFourTurnsState& other) = default;
 
   Player CurrentPlayer() const override;
   std::vector<Action> LegalActions() const override;
@@ -108,19 +108,19 @@ class ConnectFourState : public State {
 };
 
 // Game object.
-class ConnectFourGame : public Game {
+class ConnectFourTurnsGame : public Game {
  public:
-  explicit ConnectFourGame(const GameParameters& params);
+  explicit ConnectFourTurnsGame(const GameParameters& params);
   int NumDistinctActions() const override { return kCols; }
   std::unique_ptr<State> NewInitialState() const override {
-    return std::unique_ptr<State>(new ConnectFourState(shared_from_this()));
+    return std::unique_ptr<State>(new ConnectFourTurnsState(shared_from_this()));
   }
   int NumPlayers() const override { return kNumPlayers; }
   double MinUtility() const override { return -1; }
   double UtilitySum() const override { return 0; }
   double MaxUtility() const override { return 1; }
   std::vector<int> ObservationTensorShape() const override {
-    return {kCellStates, kRows, kCols};
+    return {kCellStates+1, kRows, kCols};
   }
   int MaxGameLength() const override { return kNumCells; }
 };
@@ -138,7 +138,7 @@ inline std::ostream& operator<<(std::ostream& stream, const CellState& state) {
   }
 }
 
-}  // namespace connect_four
+}  // namespace connect_four_turns
 }  // namespace open_spiel
 
-#endif  // OPEN_SPIEL_GAMES_CONNECT_FOUR_H_
+#endif  // OPEN_SPIEL_GAMES_CONNECT_FOUR_TURNS_H_

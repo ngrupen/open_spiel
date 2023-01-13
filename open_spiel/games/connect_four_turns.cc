@@ -12,24 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "open_spiel/games/tic_tac_toe.h"
+#include "open_spiel/games/connect_four_turns.h"
 
 #include <algorithm>
 #include <memory>
 #include <utility>
-#include <vector>
 
-#include "open_spiel/spiel_utils.h"
 #include "open_spiel/utils/tensor_view.h"
 
 namespace open_spiel {
-namespace tic_tac_toe {
+namespace connect_four_turns {
 namespace {
 
-// Facts about the game.
+// Facts about the game
 const GameType kGameType{
-    /*short_name=*/"tic_tac_toe",
-    /*long_name=*/"Tic Tac Toe",
+    /*short_name=*/"connect_four_turns",
+    /*long_name=*/"Connect Four Turns",
     GameType::Dynamics::kSequential,
     GameType::ChanceMode::kDeterministic,
     GameType::Information::kPerfectInformation,
@@ -45,12 +43,10 @@ const GameType kGameType{
 };
 
 std::shared_ptr<const Game> Factory(const GameParameters& params) {
-  return std::shared_ptr<const Game>(new TicTacToeGame(params));
+  return std::shared_ptr<const Game>(new ConnectFourTurnsGame(params));
 }
 
 REGISTER_SPIEL_GAME(kGameType, Factory);
-
-}  // namespace
 
 CellState PlayerToState(Player player) {
   switch (player) {
@@ -60,7 +56,6 @@ CellState PlayerToState(Player player) {
       return CellState::kNought;
     default:
       SpielFatalError(absl::StrCat("Invalid player id ", player));
-      return CellState::kEmpty;
   }
 }
 
@@ -74,190 +69,175 @@ std::string StateToString(CellState state) {
       return "x";
     default:
       SpielFatalError("Unknown state.");
+      return "This will never return.";
+  }
+}
+}  // namespace
+
+CellState& ConnectFourTurnsState::CellAt(int row, int col) {
+  return board_[row * kCols + col];
+}
+
+CellState ConnectFourTurnsState::CellAt(int row, int col) const {
+  return board_[row * kCols + col];
+}
+
+int ConnectFourTurnsState::CurrentPlayer() const {
+  if (IsTerminal()) {
+    return kTerminalPlayerId;
+  } else {
+    return current_player_;
   }
 }
 
-CellState InvertCellState(CellState state) {
-  switch (state) {
-    case CellState::kEmpty:
-      return CellState::kEmpty;
-    case CellState::kNought:
-      return CellState::kCross;
-    case CellState::kCross:
-      return CellState::kNought;
-    default:
-      SpielFatalError("Unknown state.");
-  }
-}
+void ConnectFourTurnsState::DoApplyAction(Action move) {
+  SPIEL_CHECK_EQ(CellAt(kRows - 1, move), CellState::kEmpty);
+  int row = 0;
+  while (CellAt(row, move) != CellState::kEmpty) ++row;
+  CellAt(row, move) = PlayerToState(CurrentPlayer());
 
-void TicTacToeState::DoApplyAction(Action move) {
-  SPIEL_CHECK_EQ(board_[move], CellState::kEmpty);
-  board_[move] = PlayerToState(CurrentPlayer());
   if (HasLine(current_player_)) {
-    outcome_ = current_player_;
+    outcome_ = static_cast<Outcome>(current_player_);
+  } else if (IsFull()) {
+    outcome_ = Outcome::kDraw;
   }
+
   current_player_ = 1 - current_player_;
-  num_moves_ += 1;
 }
 
-std::vector<Action> TicTacToeState::LegalActions() const {
-  if (IsTerminal()) return {};
-  // Can move in any empty cell.
+std::vector<Action> ConnectFourTurnsState::LegalActions() const {
+  // Can move in any non-full column.
   std::vector<Action> moves;
-  for (int cell = 0; cell < kNumCells; ++cell) {
-    if (board_[cell] == CellState::kEmpty) {
-      moves.push_back(cell);
-    }
+  if (IsTerminal()) return moves;
+  for (int col = 0; col < kCols; ++col) {
+    if (CellAt(kRows - 1, col) == CellState::kEmpty) moves.push_back(col);
   }
   return moves;
 }
 
-std::vector<Action> TicTacToeState::OriginalLegalActions(Player player)  {
-  if (IsTerminal()) return {};
-  // Can move in any empty cell.
-  std::vector<Action> moves;
-  for (int cell = 0; cell < kNumCells; ++cell) {
-    if (board_[cell] == CellState::kEmpty) {
-      moves.push_back(cell);
-    }
-  }
-  return moves;
+std::string ConnectFourTurnsState::ActionToString(Player player,
+                                             Action action_id) const {
+  return absl::StrCat(StateToString(PlayerToState(player)), action_id);
 }
 
-std::string TicTacToeState::ActionToString(Player player,
-                                           Action action_id) const {
-  return absl::StrCat(StateToString(PlayerToState(player)), "(",
-                      action_id / kNumCols, ",", action_id % kNumCols, ")");
+bool ConnectFourTurnsState::HasLineFrom(Player player, int row, int col) const {
+  return HasLineFromInDirection(player, row, col, 0, 1) ||
+         HasLineFromInDirection(player, row, col, -1, -1) ||
+         HasLineFromInDirection(player, row, col, -1, 0) ||
+         HasLineFromInDirection(player, row, col, -1, 1);
 }
 
-bool TicTacToeState::HasLine(Player player) const {
+bool ConnectFourTurnsState::HasLineFromInDirection(Player player, int row, int col,
+                                              int drow, int dcol) const {
+  if (row + 3 * drow >= kRows || col + 3 * dcol >= kCols ||
+      row + 3 * drow < 0 || col + 3 * dcol < 0)
+    return false;
   CellState c = PlayerToState(player);
-  return (board_[0] == c && board_[1] == c && board_[2] == c) ||
-         (board_[3] == c && board_[4] == c && board_[5] == c) ||
-         (board_[6] == c && board_[7] == c && board_[8] == c) ||
-         (board_[0] == c && board_[3] == c && board_[6] == c) ||
-         (board_[1] == c && board_[4] == c && board_[7] == c) ||
-         (board_[2] == c && board_[5] == c && board_[8] == c) ||
-         (board_[0] == c && board_[4] == c && board_[8] == c) ||
-         (board_[2] == c && board_[4] == c && board_[6] == c);
+  for (int i = 0; i < 4; ++i) {
+    if (CellAt(row, col) != c) return false;
+    row += drow;
+    col += dcol;
+  }
+  return true;
 }
 
-bool TicTacToeState::IsFull() const { return num_moves_ == kNumCells; }
+bool ConnectFourTurnsState::HasLine(Player player) const {
+  CellState c = PlayerToState(player);
+  for (int col = 0; col < kCols; ++col) {
+    for (int row = 0; row < kRows; ++row) {
+      if (CellAt(row, col) == c && HasLineFrom(player, row, col)) return true;
+    }
+  }
+  return false;
+}
 
-TicTacToeState::TicTacToeState(std::shared_ptr<const Game> game) : State(game) {
+bool ConnectFourTurnsState::IsFull() const {
+  for (int col = 0; col < kCols; ++col) {
+    if (CellAt(kRows - 1, col) == CellState::kEmpty) return false;
+  }
+  return true;
+}
+
+ConnectFourTurnsState::ConnectFourTurnsState(std::shared_ptr<const Game> game)
+    : State(game) {
   std::fill(begin(board_), end(board_), CellState::kEmpty);
 }
 
-std::string TicTacToeState::ToString() const {
+std::string ConnectFourTurnsState::ToString() const {
   std::string str;
-  for (int r = 0; r < kNumRows; ++r) {
-    for (int c = 0; c < kNumCols; ++c) {
-      absl::StrAppend(&str, StateToString(BoardAt(r, c)));
+  for (int row = kRows - 1; row >= 0; --row) {
+    for (int col = 0; col < kCols; ++col) {
+      str.append(StateToString(CellAt(row, col)));
     }
-    if (r < (kNumRows - 1)) {
-      absl::StrAppend(&str, "\n");
-    }
+    str.append("\n");
   }
   return str;
 }
 
-std::string TicTacToeState::GetIDString() {
+std::string ConnectFourTurnsState::GetIDString() {
   std::string id_str;
-  for (int r = 0; r < kNumRows; ++r) {
-    for (int c = 0; c < kNumCols; ++c) {
-      absl::StrAppend(&id_str, StateToString(BoardAt(r, c)));
+  for (int r = 0; r < kRows; ++r) {
+    for (int c = 0; c < kCols; ++c) {
+      absl::StrAppend(&id_str, StateToString(CellAt(r, c)));
     }
   }
   return id_str;
 }
 
-bool TicTacToeState::IsTerminal() const {
-  return outcome_ != kInvalidPlayer || IsFull();
+bool ConnectFourTurnsState::IsTerminal() const {
+  return outcome_ != Outcome::kUnknown;
 }
 
-bool TicTacToeState::IsInverted() {
-  return inverted_;
+std::vector<double> ConnectFourTurnsState::Returns() const {
+  if (outcome_ == Outcome::kPlayer1) return {1.0, -1.0};
+  if (outcome_ == Outcome::kPlayer2) return {-1.0, 1.0};
+  return {0.0, 0.0};
 }
 
-std::vector<double> TicTacToeState::Returns() const {
-  if (HasLine(Player{0})) {
-    return {1.0, -1.0};
-  } else if (HasLine(Player{1})) {
-    return {-1.0, 1.0};
-  } else {
-    return {0.0, 0.0};
-  }
-}
-
-std::string TicTacToeState::InformationStateString(Player player) const {
+std::string ConnectFourTurnsState::InformationStateString(Player player) const {
   SPIEL_CHECK_GE(player, 0);
   SPIEL_CHECK_LT(player, num_players_);
   return HistoryString();
 }
 
-std::string TicTacToeState::ObservationString(Player player) const {
+std::string ConnectFourTurnsState::ObservationString(Player player) const {
   SPIEL_CHECK_GE(player, 0);
   SPIEL_CHECK_LT(player, num_players_);
   return ToString();
 }
 
-void TicTacToeState::ObservationTensor(Player player,
-                                       absl::Span<float> values) const {
+int PlayerRelative(CellState state, Player current) {
+  switch (state) {
+    case CellState::kNought:
+      return current == 0 ? 0 : 1;
+    case CellState::kCross:
+      return current == 1 ? 0 : 1;
+    case CellState::kEmpty:
+      return 2;
+    default:
+      SpielFatalError("Unknown player type.");
+  }
+}
+
+void ConnectFourTurnsState::ObservationTensor(Player player,
+                                         absl::Span<float> values) const {
   SPIEL_CHECK_GE(player, 0);
   SPIEL_CHECK_LT(player, num_players_);
 
-  // Treat `values` as a 2-d tensor.
-  TensorView<2> view(values, {kCellStates, kNumCells}, true);
+  TensorView<2> view(values, {kCellStates+1, kNumCells}, true);
+
   for (int cell = 0; cell < kNumCells; ++cell) {
-    view[{static_cast<int>(board_[cell]), cell}] = 1.0;
+    view[{PlayerRelative(board_[cell], player), cell}] = 1.0;
   }
 
-  // print out each dimension of tensor view 
-//   std::cerr << "----" << std::endl;
-//   std::cerr << "----" << std::endl;
-//   std::cerr << "" << std::endl;
-//   std::cerr << "Obs tensor: " << std::endl;
-//   for (int idx = 0; idx < 3; idx++) {
-//     for (int cell = 0; cell < kNumCells; cell++) {
-//       std::cerr << "idx: " << idx << ", cell: " << cell << ", view: " << view[{idx, cell}] << std::endl;
-//     }
-//     std::cerr << "----" << std::endl;
-//   }
-//   std::cerr << "" << std::endl;
-//   std::cerr << "----" << std::endl;
-//   std::cerr << "----" << std::endl;
-}
-
-void TicTacToeState::InvertedObservationTensor(Player player,
-                                       absl::Span<float> values) const {
-  SPIEL_CHECK_GE(player, 0);
-  SPIEL_CHECK_LT(player, num_players_);
-
-  // inverted version
-  TensorView<2> view(values, {kCellStates, kNumCells}, true);
+  // current player plane
   for (int cell = 0; cell < kNumCells; ++cell) {
-    view[{static_cast<int>(InvertCellState(board_[cell])), cell}] = 1.0;
+    view[{3, cell}] = current_player_;
   }
 
-  // print out each dimension of tensor view   
-//   for (int idx = 0; idx < 3; idx++) {
-//     for (int cell = 0; cell < kNumCells; cell++) {
-//       std::cerr << "idx: " << idx << ", cell: " << cell << ", inverted_view: " << view[{idx, cell}] << std::endl;
-//     }
-//     std::cerr << "----" << std::endl;
-//   }
 }
 
-void TicTacToeState::UndoAction(Player player, Action move) {
-  board_[move] = CellState::kEmpty;
-  current_player_ = player;
-  outcome_ = kInvalidPlayer;
-  num_moves_ -= 1;
-  history_.pop_back();
-  --move_number_;
-}
-
-void TicTacToeState::FillBoardFromStr(std::string state_str, bool inverted) {
+void ConnectFourTurnsState::FillBoardFromStr(std::string state_str, bool inverted) {
   if (state_str.length() == kNumCells){
     int board_idx = 0;
     int num_xs = 0;
@@ -334,11 +314,11 @@ void TicTacToeState::FillBoardFromStr(std::string state_str, bool inverted) {
   }
 }
 
-std::unique_ptr<State> TicTacToeState::Clone() const {
-  return std::unique_ptr<State>(new TicTacToeState(*this));
+std::unique_ptr<State> ConnectFourTurnsState::Clone() const {
+  return std::unique_ptr<State>(new ConnectFourTurnsState(*this));
 }
 
-std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> TicTacToeState::CanonicalStates() {
+std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> ConnectFourTurnsState::CanonicalStates() {
 // std::pair<std::vector<std::unique_ptr<State>>, std::vector<std::vector<Action>>> TicTacToeState::CanonicalStates() {
 // std::vector<std::unique_ptr<State>> TicTacToeState::CanonicalStates() {
 //   std::cout << "----------------------------------" << std::endl;
@@ -365,7 +345,7 @@ std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> TicTacToeSta
   // ---------------------------------------------
   // rotate 90 degrees
   // ---------------------------------------------
-  int rot_90_idxs[kNumCells] = {3,6,9,2,5,8,1,4,7};
+  int rot_90_idxs[kNumCells] = {7,14,21,28,35,42,6,13,20,27,34,41,5,12,19,26,33,40,4,11,18,25,32,39,3,10,17,24,31,38,2,9,16,23,30,37,1,8,15,22,29,36};
   std::vector<int> rot_90_policy_idxs;
   std::string rot_90_str;
   for (int idx = 0; idx < kNumCells; ++idx) {
@@ -402,7 +382,7 @@ std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> TicTacToeSta
   // ---------------------------------------------
   // rotate 180 degrees
   // ---------------------------------------------
-  int rot_180_idxs[kNumCells] = {9,8,7,6,5,4,3,2,1};
+  int rot_180_idxs[kNumCells] = {42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1};
   std::string rot_180_str;
   for (int idx = 0; idx < kNumCells; ++idx) {
     int board_idx = rot_180_idxs[idx] - 1;
@@ -437,7 +417,7 @@ std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> TicTacToeSta
   // ---------------------------------------------
   // rotate 270 degrees
   // ---------------------------------------------
-  int rot_270_idxs[kNumCells] = {7,4,1,8,5,2,9,6,3};
+  int rot_270_idxs[kNumCells] = {36,29,22,15,8,1,37,30,23,16,9,2,38,31,24,17,10,3,39,32,25,18,11,4,40,33,26,19,12,5,41,34,27,20,13,6,42,35,28,21,14,7};
   std::string rot_270_str;
   for (int idx = 0; idx < kNumCells; ++idx) {
     int board_idx = rot_270_idxs[idx] - 1;
@@ -473,7 +453,7 @@ std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> TicTacToeSta
   // ---------------------------------------------
   // vertical mirror 
   // ---------------------------------------------
-  int v_mirror_idxs[kNumCells] = {7,8,9,4,5,6,1,2,3};
+  int v_mirror_idxs[kNumCells] = {36,37,38,39,40,41,42,29,30,31,32,33,34,35,22,23,24,25,26,27,28,15,16,17,18,19,20,21,8,9,10,11,12,13,14,1,2,3,4,5,6,7};
   std::string v_mirror_str;
   for (int idx = 0; idx < kNumCells; ++idx) {
     int board_idx = v_mirror_idxs[idx] - 1;
@@ -508,7 +488,7 @@ std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> TicTacToeSta
   // ---------------------------------------------
   // horizontal mirror 
   // ---------------------------------------------
-  int h_mirror_idxs[kNumCells] = {3,2,1,6,5,4,9,8,7};
+  int h_mirror_idxs[kNumCells] = {7,6,5,4,3,2,1,14,13,12,11,10,9,8,21,20,19,18,17,16,15,28,27,26,25,24,23,22,35,34,33,32,31,30,29,42,41,40,39,38,37,36};
   std::string h_mirror_str;
   for (int idx = 0; idx < kNumCells; ++idx) {
     int board_idx = h_mirror_idxs[idx] - 1;
@@ -543,7 +523,7 @@ std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> TicTacToeSta
   // ---------------------------------------------
   // rotate 90 degrees, vertical mirror 
   // ---------------------------------------------
-  int rot_90_v_mirror_idxs[kNumCells] = {1,4,7,2,5,8,3,6,9};
+  int rot_90_v_mirror_idxs[kNumCells] = {1,8,15,22,29,36,2,9,16,23,30,37,3,10,17,24,31,38,4,11,18,25,32,39,5,12,19,26,33,40,6,13,20,27,34,41,7,14,21,28,35,42};
   std::string rot_90_v_mirror_str;
   for (int idx = 0; idx < kNumCells; ++idx) {
     int board_idx = rot_90_v_mirror_idxs[idx] - 1;
@@ -578,7 +558,7 @@ std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> TicTacToeSta
   // ---------------------------------------------
   // rotate 90 degrees, horizontal mirror 
   // ---------------------------------------------
-  int rot_90_h_mirror_idxs[kNumCells] = {9,6,3,8,5,2,7,4,1};
+  int rot_90_h_mirror_idxs[kNumCells] = {42,35,28,21,14,7,41,34,27,20,13,6,40,33,26,19,12,5,39,32,25,18,11,4,38,31,24,17,10,3,37,30,23,16,9,2,36,29,22,15,8,1};
   std::string rot_90_h_mirror_str;
   for (int idx = 0; idx < kNumCells; ++idx) {
     int board_idx = rot_90_h_mirror_idxs[idx] - 1;
@@ -617,19 +597,52 @@ std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> TicTacToeSta
   return states_and_actions;
 }
 
-TicTacToeGame::TicTacToeGame(const GameParameters& params)
+ConnectFourTurnsGame::ConnectFourTurnsGame(const GameParameters& params)
     : Game(kGameType, params) {}
 
-std::unique_ptr<State> TicTacToeGame::NewInitialState(const std::string& str) const {
+ConnectFourTurnsState::ConnectFourTurnsState(std::shared_ptr<const Game> game,
+                                   const std::string& str)
+    : State(game) {
+  int xs = 0;
+  int os = 0;
+  int r = 5;
+  int c = 0;
+  for (const char ch : str) {
+    switch (ch) {
+      case '.':
+        CellAt(r, c) = CellState::kEmpty;
+        break;
+      case 'x':
+        ++xs;
+        CellAt(r, c) = CellState::kCross;
+        break;
+      case 'o':
+        ++os;
+        CellAt(r, c) = CellState::kNought;
+        break;
+    }
+    if (ch == '.' || ch == 'x' || ch == 'o') {
+      ++c;
+      if (c >= kCols) {
+        r--;
+        c = 0;
+      }
+    }
+  }
+  SPIEL_CHECK_TRUE(xs == os || xs == (os + 1));
+  SPIEL_CHECK_TRUE(r == -1 && ("Problem parsing state (incorrect rows)."));
+  SPIEL_CHECK_TRUE(c == 0 &&
+                   ("Problem parsing state (column value should be 0)"));
+  current_player_ = (xs == os) ? 0 : 1;
 
-//   std::string state_str = "xoo..x...";
-  TicTacToeState init_state = TicTacToeState(shared_from_this());
-  init_state.FillBoardFromStr(str, false);
-
-//   std::cout << "State ID: " << state_str << std::endl;
-//   std::cout << "Board: " << init_state.ToString() << std::endl;
-  return std::unique_ptr<State>(init_state.Clone());
+  if (HasLine(0)) {
+    outcome_ = Outcome::kPlayer1;
+  } else if (HasLine(1)) {
+    outcome_ = Outcome::kPlayer2;
+  } else if (IsFull()) {
+    outcome_ = Outcome::kDraw;
+  }
 }
 
-}  // namespace tic_tac_toe
+}  // namespace connect_four_turns
 }  // namespace open_spiel

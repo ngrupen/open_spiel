@@ -76,7 +76,8 @@ class TicTacToe4x4State : public State {
   CellState BoardAt(int row, int column) const {
     return board_[row * kNumCols + column];
   }
-  void FillBoardFromStr(std::string state_str);
+  void FillBoardFromStr(std::string state_str, bool inverted) override;
+  std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> CanonicalStates() override;
 
  protected:
   std::array<CellState, kNumCells> board_;
@@ -88,6 +89,7 @@ class TicTacToe4x4State : public State {
   Player current_player_ = 0;         // Player zero goes first
   Player outcome_ = kInvalidPlayer;
   int num_moves_ = 0;
+  bool inverted_ = 0;
 };
 
 // Game object.
@@ -117,7 +119,7 @@ inline std::ostream& operator<<(std::ostream& stream, const CellState& state) {
   return stream << StateToString(state);
 }
 
-}  // namespace tic_tac_toe
+}  // namespace tic_tac_toe_4x4
 }  // namespace open_spiel
 
 #endif  // OPEN_SPIEL_GAMES_TIC_TAC_TOE_4x4_H_

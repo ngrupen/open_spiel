@@ -33,6 +33,8 @@ set(GAME_SOURCES
   coin_game.h
   connect_four.cc
   connect_four.h
+  connect_four_turns.cc
+  connect_four_turns.h
   coop_box_pushing.cc
   coop_box_pushing.h
   coordinated_mp.cc
@@ -134,8 +136,12 @@ set(GAME_SOURCES
   tic_tac_toe_turns.h
   tic_tac_toe_4x4.cc
   tic_tac_toe_4x4.h
+  tic_tac_toe_turns_4x4.cc
+  tic_tac_toe_turns_4x4.h
   tic_tac_toe_5x5.cc
   tic_tac_toe_5x5.h
+  tic_tac_toe_turns_5x5.cc
+  tic_tac_toe_turns_5x5.h
   tiny_bridge.cc
   tiny_bridge.h
   tiny_hanabi.cc
@@ -282,6 +288,11 @@ add_executable(connect_four_test connect_four_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>
                $<TARGET_OBJECTS:algorithms>)
 add_test(connect_four_test connect_four_test)
+
+add_executable(connect_four_turns_test connect_four_turns_test.cc ${OPEN_SPIEL_OBJECTS}
+               $<TARGET_OBJECTS:tests>
+               $<TARGET_OBJECTS:algorithms>)
+add_test(connect_four_turns_test connect_four_turns_test)
 
 add_executable(coop_box_pushing_test coop_box_pushing_test.cc
                ${OPEN_SPIEL_OBJECTS}
@@ -477,6 +488,14 @@ add_test(tic_tac_toe_4x4_test tic_tac_toe_4x4_test)
 add_executable(tic_tac_toe_5x5_test tic_tac_toe_5x5_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
 add_test(tic_tac_toe_5x5_test tic_tac_toe_5x5_test)
+
+add_executable(tic_tac_toe_turns_4x4_test tic_tac_toe_turns_4x4_test.cc ${OPEN_SPIEL_OBJECTS}
+               $<TARGET_OBJECTS:tests>)
+add_test(tic_tac_toe_turns_4x4_test tic_tac_toe_turns_4x4_test)
+
+add_executable(tic_tac_toe_turns_5x5_test tic_tac_toe_turns_5x5_test.cc ${OPEN_SPIEL_OBJECTS}
+               $<TARGET_OBJECTS:tests>)
+add_test(tic_tac_toe_turns_5x5_test tic_tac_toe_turns_5x5_test)
 
 add_executable(laser_tag_test laser_tag_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)
