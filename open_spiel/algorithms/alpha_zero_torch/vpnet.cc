@@ -207,6 +207,10 @@ VPNetModel::LossInfo VPNetModel::Learn(const std::vector<TrainInputs>& inputs) {
   //   - Their default data type is a 32-bit float
   //   - Use the byte data type for boolean
 
+//   std::cerr << "calling learner!" << std::endl;
+//   std::cerr << "flat_input_size: " << flat_input_size_ << std::endl;
+
+
   torch::Tensor torch_train_inputs =
       torch::empty({training_batch_size, flat_input_size_}, torch_device_);
   torch::Tensor torch_train_legal_mask = torch::full(
@@ -216,26 +220,36 @@ VPNetModel::LossInfo VPNetModel::Learn(const std::vector<TrainInputs>& inputs) {
       torch::zeros({training_batch_size, num_actions_}, torch_device_);
   torch::Tensor torch_value_targets =
       torch::empty({training_batch_size, 1}, torch_device_);
+//   std::cerr << "got input sizes!" << std::endl;
 
+//   std::cerr << "iterating through batch!" << std::endl;
   for (int batch = 0; batch < training_batch_size; ++batch) {
     // Copy the legal mask(s) to a Torch tensor.
     for (Action action : inputs[batch].legal_actions) {
       torch_train_legal_mask[batch][action] = true;
     }
+    // std::cerr << "actions set!" << std::endl;
 
     // Copy the observation(s) to a Torch tensor.
     for (int i = 0; i < inputs[batch].observations.size(); ++i) {
       torch_train_inputs[batch][i] = inputs[batch].observations[i];
     }
+    // std::cerr << "observations set!" << std::endl;
 
     // Copy the policy target(s) to a Torch tensor.
     for (const auto& [action, probability] : inputs[batch].policy) {
+    //   std::cerr << "action: " << action << std::endl;
+    //   std::cerr << "probability: " << probability << std::endl;
       torch_policy_targets[batch][action] = probability;
     }
+    // std::cerr << "policies set!" << std::endl;
 
     // Copy the value target(s) to a Torch tensor.
     torch_value_targets[batch][0] = inputs[batch].value;
+    // std::cerr << "values set!" << std::endl;
+
   }
+//   std::cerr << "iterated through batch!" << std::endl;
 
   // Run a training step and get the losses.
   model_->train();
@@ -244,6 +258,7 @@ VPNetModel::LossInfo VPNetModel::Learn(const std::vector<TrainInputs>& inputs) {
   std::vector<torch::Tensor> torch_outputs =
       model_->losses(torch_train_inputs, torch_train_legal_mask,
                      torch_policy_targets, torch_value_targets);
+//   std::cerr << "got losses!" << std::endl;
 
   torch::Tensor total_loss =
       torch_outputs[0] + torch_outputs[1] + torch_outputs[2];

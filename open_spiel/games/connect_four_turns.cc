@@ -345,145 +345,145 @@ std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> ConnectFourT
   // ---------------------------------------------
   // rotate 90 degrees
   // ---------------------------------------------
-  int rot_90_idxs[kNumCells] = {7,14,21,28,35,42,6,13,20,27,34,41,5,12,19,26,33,40,4,11,18,25,32,39,3,10,17,24,31,38,2,9,16,23,30,37,1,8,15,22,29,36};
-  std::vector<int> rot_90_policy_idxs;
-  std::string rot_90_str;
-  for (int idx = 0; idx < kNumCells; ++idx) {
-    int board_idx = rot_90_idxs[idx] - 1;
-    absl::StrAppend(&rot_90_str, StateToString(board_[board_idx]));
-  }
+//   int rot_90_idxs[kNumCells] = {7,14,21,28,35,42,6,13,20,27,34,41,5,12,19,26,33,40,4,11,18,25,32,39,3,10,17,24,31,38,2,9,16,23,30,37,1,8,15,22,29,36};
+//   std::vector<int> rot_90_policy_idxs;
+//   std::string rot_90_str;
+//   for (int idx = 0; idx < kNumCells; ++idx) {
+    // int board_idx = rot_90_idxs[idx] - 1;
+    // absl::StrAppend(&rot_90_str, StateToString(board_[board_idx]));
+//   }
 
-  std::unique_ptr<State> rot_90_state = Clone();
-  rot_90_state->FillBoardFromStr(rot_90_str, false);
+//   std::unique_ptr<State> rot_90_state = Clone();
+//   rot_90_state->FillBoardFromStr(rot_90_str, false);
 //   std::cout << " " << std::endl;
 //   std::cout << "Rot 90 ID: " << rot_90_state->GetIDString() << std::endl;
 //   std::cout << "Rot 90 State: " << std::endl << rot_90_state->ToString() << std::endl;
 
   // std::cout << "Original Legal Moves: " << absl::StrJoin(original_legal_actions, ", ") << std::endl;
-  std::vector<Action> rot_90_action_idxs;
-  for (auto const & act : original_legal_actions) {
-    int x = std::distance(rot_90_idxs, std::find(rot_90_idxs, rot_90_idxs + kNumCells, act + 1));
-    rot_90_action_idxs.push_back(x);
-  }
+//   std::vector<Action> rot_90_action_idxs;
+//   for (auto const & act : original_legal_actions) {
+    // int x = std::distance(rot_90_idxs, std::find(rot_90_idxs, rot_90_idxs + kNumCells, act + 1));
+    // rot_90_action_idxs.push_back(x);
+//   }
   // std::cout << "Rot 90 Legal Moves: " << absl::StrJoin(rot_90_action_idxs, ", ") << std::endl;
   // action_permutation_indices.push_back(rot_90_action_idxs);
-  states_and_actions.emplace_back(rot_90_state->Clone(), rot_90_action_idxs);
+//   states_and_actions.emplace_back(rot_90_state->Clone(), rot_90_action_idxs);
 
   // ---------------------------------------------
   // swap pieces, rotate 90 degrees
   // ---------------------------------------------
-  std::unique_ptr<State> inv_rot_90_state = Clone();
-  inv_rot_90_state->FillBoardFromStr(rot_90_str, true);
+//   std::unique_ptr<State> inv_rot_90_state = Clone();
+//   inv_rot_90_state->FillBoardFromStr(rot_90_str, true);
 //   std::cout << " " << std::endl;
 //   std::cout << "Inv Rot 90 ID: " << inv_rot_90_state->GetIDString() << std::endl;
 //   std::cout << "Inv Rot 90 State: " << std::endl << inv_rot_90_state->ToString() << std::endl;
-  states_and_actions.emplace_back(inv_rot_90_state->Clone(), rot_90_action_idxs);
+//   states_and_actions.emplace_back(inv_rot_90_state->Clone(), rot_90_action_idxs);
 
   // ---------------------------------------------
   // rotate 180 degrees
   // ---------------------------------------------
-  int rot_180_idxs[kNumCells] = {42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1};
-  std::string rot_180_str;
-  for (int idx = 0; idx < kNumCells; ++idx) {
-    int board_idx = rot_180_idxs[idx] - 1;
-    absl::StrAppend(&rot_180_str, StateToString(board_[board_idx]));
-  }
-  std::unique_ptr<State> rot_180_state = Clone();
-  rot_180_state->FillBoardFromStr(rot_180_str, false);
+//   int rot_180_idxs[kNumCells] = {42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1};
+//   std::string rot_180_str;
+//   for (int idx = 0; idx < kNumCells; ++idx) {
+    // int board_idx = rot_180_idxs[idx] - 1;
+    // absl::StrAppend(&rot_180_str, StateToString(board_[board_idx]));
+//   }
+//   std::unique_ptr<State> rot_180_state = Clone();
+//   rot_180_state->FillBoardFromStr(rot_180_str, false);
   // canonical_states.push_back(rot_180_state->Clone());
 //   std::cout << " " << std::endl;
 //   std::cout << "Rot 180 ID: " << rot_180_state->GetIDString() << std::endl;
 //   std::cout << "Rot 180 State: " << std::endl << rot_180_state->ToString() << std::endl;
   // std::cout << "Original Legal Moves: " << absl::StrJoin(original_legal_actions, ", ") << std::endl;
-  std::vector<Action> rot_180_action_idxs;
-  for (auto const & act : original_legal_actions) {
-    int x = std::distance(rot_180_idxs, std::find(rot_180_idxs, rot_180_idxs + kNumCells, act + 1));
-    rot_180_action_idxs.push_back(x);
-  }
+//   std::vector<Action> rot_180_action_idxs;
+//   for (auto const & act : original_legal_actions) {
+    // int x = std::distance(rot_180_idxs, std::find(rot_180_idxs, rot_180_idxs + kNumCells, act + 1));
+    // rot_180_action_idxs.push_back(x);
+//   }
   // std::cout << "Rot 180 Legal Moves: " << absl::StrJoin(rot_180_action_idxs, ", ") << std::endl;
   // action_permutation_indices.push_back(rot_180_action_idxs);
-  states_and_actions.emplace_back(rot_180_state->Clone(), rot_180_action_idxs);
+//   states_and_actions.emplace_back(rot_180_state->Clone(), rot_180_action_idxs);
 
   // ---------------------------------------------
   // swap pieces, rotate 180 degrees
   // ---------------------------------------------
-  std::unique_ptr<State> inv_rot_180_state = Clone();
-  inv_rot_180_state->FillBoardFromStr(rot_180_str, true);
+//   std::unique_ptr<State> inv_rot_180_state = Clone();
+//   inv_rot_180_state->FillBoardFromStr(rot_180_str, true);
 //   std::cout << " " << std::endl;
 //   std::cout << "Inv Rot 180 ID: " << inv_rot_180_state->GetIDString() << std::endl;
 //   std::cout << "Inv Rot 180 State: " << std::endl << inv_rot_180_state->ToString() << std::endl;
-  states_and_actions.emplace_back(inv_rot_180_state->Clone(), rot_180_action_idxs);
+//   states_and_actions.emplace_back(inv_rot_180_state->Clone(), rot_180_action_idxs);
 
   // ---------------------------------------------
   // rotate 270 degrees
   // ---------------------------------------------
-  int rot_270_idxs[kNumCells] = {36,29,22,15,8,1,37,30,23,16,9,2,38,31,24,17,10,3,39,32,25,18,11,4,40,33,26,19,12,5,41,34,27,20,13,6,42,35,28,21,14,7};
-  std::string rot_270_str;
-  for (int idx = 0; idx < kNumCells; ++idx) {
-    int board_idx = rot_270_idxs[idx] - 1;
-    absl::StrAppend(&rot_270_str, StateToString(board_[board_idx]));
-  }
-  std::unique_ptr<State> rot_270_state = Clone();
-  rot_270_state->FillBoardFromStr(rot_270_str, false);
+//   int rot_270_idxs[kNumCells] = {36,29,22,15,8,1,37,30,23,16,9,2,38,31,24,17,10,3,39,32,25,18,11,4,40,33,26,19,12,5,41,34,27,20,13,6,42,35,28,21,14,7};
+//   std::string rot_270_str;
+//   for (int idx = 0; idx < kNumCells; ++idx) {
+//     int board_idx = rot_270_idxs[idx] - 1;
+//     absl::StrAppend(&rot_270_str, StateToString(board_[board_idx]));
+//   }
+//   std::unique_ptr<State> rot_270_state = Clone();
+//   rot_270_state->FillBoardFromStr(rot_270_str, false);
   // canonical_states.push_back(rot_270_state->Clone());
 //   std::cout << " " << std::endl;
 //   std::cout << "Rot 270 ID: " << rot_270_state->GetIDString() << std::endl;
 //   std::cout << "Rot 270 State: " << std::endl << rot_270_state->ToString() << std::endl;
   // std::cout << "Original Legal Moves: " << absl::StrJoin(original_legal_actions, ", ") << std::endl;
-  std::vector<Action> rot_270_action_idxs;
-  for (auto const & act : original_legal_actions) {
-    int x = std::distance(rot_270_idxs, std::find(rot_270_idxs, rot_270_idxs + kNumCells, act + 1));
-    rot_270_action_idxs.push_back(x);
-  }
+//   std::vector<Action> rot_270_action_idxs;
+//   for (auto const & act : original_legal_actions) {
+//     int x = std::distance(rot_270_idxs, std::find(rot_270_idxs, rot_270_idxs + kNumCells, act + 1));
+//     rot_270_action_idxs.push_back(x);
+//   }
   // std::cout << "Rot 270 Legal Moves: " << absl::StrJoin(rot_270_action_idxs, ", ") << std::endl;
   // action_permutation_indices.push_back(rot_270_action_idxs);
-  states_and_actions.emplace_back(rot_270_state->Clone(), rot_270_action_idxs);
+//   states_and_actions.emplace_back(rot_270_state->Clone(), rot_270_action_idxs);
 
   // ---------------------------------------------
   // swap pieces, rotate 270 degrees
   // ---------------------------------------------
-  std::unique_ptr<State> inv_rot_270_state = Clone();
-  inv_rot_270_state->FillBoardFromStr(rot_270_str, true);
+//   std::unique_ptr<State> inv_rot_270_state = Clone();
+//   inv_rot_270_state->FillBoardFromStr(rot_270_str, true);
 //   std::cout << " " << std::endl;
 //   std::cout << "Inv Rot 270 ID: " << inv_rot_270_state->GetIDString() << std::endl;
 //   std::cout << "Inv Rot 270 State: " << std::endl << inv_rot_270_state->ToString() << std::endl;
-  states_and_actions.emplace_back(inv_rot_270_state->Clone(), rot_270_action_idxs);
+//   states_and_actions.emplace_back(inv_rot_270_state->Clone(), rot_270_action_idxs);
   
 
   // ---------------------------------------------
   // vertical mirror 
   // ---------------------------------------------
-  int v_mirror_idxs[kNumCells] = {36,37,38,39,40,41,42,29,30,31,32,33,34,35,22,23,24,25,26,27,28,15,16,17,18,19,20,21,8,9,10,11,12,13,14,1,2,3,4,5,6,7};
-  std::string v_mirror_str;
-  for (int idx = 0; idx < kNumCells; ++idx) {
-    int board_idx = v_mirror_idxs[idx] - 1;
-    absl::StrAppend(&v_mirror_str, StateToString(board_[board_idx]));
-  }
-  std::unique_ptr<State> v_mirror_state = Clone();
-  v_mirror_state->FillBoardFromStr(v_mirror_str, false);
+//   int v_mirror_idxs[kNumCells] = {36,37,38,39,40,41,42,29,30,31,32,33,34,35,22,23,24,25,26,27,28,15,16,17,18,19,20,21,8,9,10,11,12,13,14,1,2,3,4,5,6,7};
+//   std::string v_mirror_str;
+//   for (int idx = 0; idx < kNumCells; ++idx) {
+//     int board_idx = v_mirror_idxs[idx] - 1;
+//     absl::StrAppend(&v_mirror_str, StateToString(board_[board_idx]));
+//   }
+//   std::unique_ptr<State> v_mirror_state = Clone();
+//   v_mirror_state->FillBoardFromStr(v_mirror_str, false);
   // canonical_states.push_back(v_mirror_state->Clone());
 //   std::cout << " " << std::endl;
 //   std::cout << "V Mirror ID: " << v_mirror_state->GetIDString() << std::endl;
 //   std::cout << "V Mirror State: " << std::endl << v_mirror_state->ToString() << std::endl;
   // std::cout << "Original Legal Moves: " << absl::StrJoin(original_legal_actions, ", ") << std::endl;
-  std::vector<Action> v_mirror_action_idxs;
-  for (auto const & act : original_legal_actions) {
-    int x = std::distance(v_mirror_idxs, std::find(v_mirror_idxs, v_mirror_idxs + kNumCells, act + 1));
-    v_mirror_action_idxs.push_back(x);
-  }
+//   std::vector<Action> v_mirror_action_idxs;
+//   for (auto const & act : original_legal_actions) {
+//     int x = std::distance(v_mirror_idxs, std::find(v_mirror_idxs, v_mirror_idxs + kNumCells, act + 1));
+//     v_mirror_action_idxs.push_back(x);
+//   }
   // std::cout << "V Mirror Legal Moves: " << absl::StrJoin(v_mirror_action_idxs, ", ") << std::endl;
   // action_permutation_indices.push_back(v_mirror_action_idxs);
-  states_and_actions.emplace_back(v_mirror_state->Clone(), v_mirror_action_idxs);
+//   states_and_actions.emplace_back(v_mirror_state->Clone(), v_mirror_action_idxs);
 
   // ---------------------------------------------
   // swap pieces, vertical mirror 
   // ---------------------------------------------
-  std::unique_ptr<State> inv_v_mirror_state = Clone();
-  inv_v_mirror_state->FillBoardFromStr(v_mirror_str, true);
+//   std::unique_ptr<State> inv_v_mirror_state = Clone();
+//   inv_v_mirror_state->FillBoardFromStr(v_mirror_str, true);
 //   std::cout << " " << std::endl;
 //   std::cout << "Inv V Mirror ID: " << inv_v_mirror_state->GetIDString() << std::endl;
 //   std::cout << "Inv V Mirror State: " << std::endl << inv_v_mirror_state->ToString() << std::endl;
-  states_and_actions.emplace_back(inv_v_mirror_state->Clone(), v_mirror_action_idxs);
+//   states_and_actions.emplace_back(inv_v_mirror_state->Clone(), v_mirror_action_idxs);
 
   // ---------------------------------------------
   // horizontal mirror 
@@ -523,72 +523,72 @@ std::vector<std::pair<std::unique_ptr<State>, std::vector<Action>>> ConnectFourT
   // ---------------------------------------------
   // rotate 90 degrees, vertical mirror 
   // ---------------------------------------------
-  int rot_90_v_mirror_idxs[kNumCells] = {1,8,15,22,29,36,2,9,16,23,30,37,3,10,17,24,31,38,4,11,18,25,32,39,5,12,19,26,33,40,6,13,20,27,34,41,7,14,21,28,35,42};
-  std::string rot_90_v_mirror_str;
-  for (int idx = 0; idx < kNumCells; ++idx) {
-    int board_idx = rot_90_v_mirror_idxs[idx] - 1;
-    absl::StrAppend(&rot_90_v_mirror_str, StateToString(board_[board_idx]));
-  }
-  std::unique_ptr<State> rot_90_v_mirror_state = Clone();
-  rot_90_v_mirror_state->FillBoardFromStr(rot_90_v_mirror_str, false);
+//   int rot_90_v_mirror_idxs[kNumCells] = {1,8,15,22,29,36,2,9,16,23,30,37,3,10,17,24,31,38,4,11,18,25,32,39,5,12,19,26,33,40,6,13,20,27,34,41,7,14,21,28,35,42};
+//   std::string rot_90_v_mirror_str;
+//   for (int idx = 0; idx < kNumCells; ++idx) {
+//     int board_idx = rot_90_v_mirror_idxs[idx] - 1;
+//     absl::StrAppend(&rot_90_v_mirror_str, StateToString(board_[board_idx]));
+//   }
+//   std::unique_ptr<State> rot_90_v_mirror_state = Clone();
+//   rot_90_v_mirror_state->FillBoardFromStr(rot_90_v_mirror_str, false);
   // canonical_states.push_back(rot_90_v_mirror_state->Clone());
 //   std::cout << " " << std::endl;
 //   std::cout << "Rot 90 V Mirror ID: " << rot_90_v_mirror_state->GetIDString() << std::endl;
 //   std::cout << "Rot 90 V Mirror State: " << std::endl << rot_90_v_mirror_state->ToString() << std::endl;
   // std::cout << "Original Legal Moves: " << absl::StrJoin(original_legal_actions, ", ") << std::endl;
-  std::vector<Action> rot_90_v_mirror_action_idxs;
-  for (auto const & act : original_legal_actions) {
-    int x = std::distance(rot_90_v_mirror_idxs, std::find(rot_90_v_mirror_idxs, rot_90_v_mirror_idxs + kNumCells, act + 1));
-    rot_90_v_mirror_action_idxs.push_back(x);
-  }
+//   std::vector<Action> rot_90_v_mirror_action_idxs;
+//   for (auto const & act : original_legal_actions) {
+//     int x = std::distance(rot_90_v_mirror_idxs, std::find(rot_90_v_mirror_idxs, rot_90_v_mirror_idxs + kNumCells, act + 1));
+//     rot_90_v_mirror_action_idxs.push_back(x);
+//   }
   // std::cout << "Rot 90 V Mirror Legal Moves: " << absl::StrJoin(rot_90_v_mirror_action_idxs, ", ") << std::endl;
   // action_permutation_indices.push_back(rot_90_v_mirror_action_idxs);
-  states_and_actions.emplace_back(rot_90_v_mirror_state->Clone(), rot_90_v_mirror_action_idxs);
+//   states_and_actions.emplace_back(rot_90_v_mirror_state->Clone(), rot_90_v_mirror_action_idxs);
 
   // ---------------------------------------------
   // swap pieces, rotate 90 degrees, vertical mirror 
   // ---------------------------------------------
-  std::unique_ptr<State> inv_rot_90_v_mirror_state = Clone();
-  inv_rot_90_v_mirror_state->FillBoardFromStr(rot_90_v_mirror_str, true);
+//   std::unique_ptr<State> inv_rot_90_v_mirror_state = Clone();
+//   inv_rot_90_v_mirror_state->FillBoardFromStr(rot_90_v_mirror_str, true);
 //   std::cout << " " << std::endl;
 //   std::cout << "Inv Rot 90 V Mirror ID: " << inv_rot_90_v_mirror_state->GetIDString() << std::endl;
 //   std::cout << "Inv Rot 90 V Mirror State: " << std::endl << inv_rot_90_v_mirror_state->ToString() << std::endl;
-  states_and_actions.emplace_back(inv_rot_90_v_mirror_state->Clone(), rot_90_v_mirror_action_idxs);
+//   states_and_actions.emplace_back(inv_rot_90_v_mirror_state->Clone(), rot_90_v_mirror_action_idxs);
 
   // ---------------------------------------------
   // rotate 90 degrees, horizontal mirror 
   // ---------------------------------------------
-  int rot_90_h_mirror_idxs[kNumCells] = {42,35,28,21,14,7,41,34,27,20,13,6,40,33,26,19,12,5,39,32,25,18,11,4,38,31,24,17,10,3,37,30,23,16,9,2,36,29,22,15,8,1};
-  std::string rot_90_h_mirror_str;
-  for (int idx = 0; idx < kNumCells; ++idx) {
-    int board_idx = rot_90_h_mirror_idxs[idx] - 1;
-    absl::StrAppend(&rot_90_h_mirror_str, StateToString(board_[board_idx]));
-  }
-  std::unique_ptr<State> rot_90_h_mirror_state = Clone();
-  rot_90_h_mirror_state->FillBoardFromStr(rot_90_h_mirror_str, false);
+//   int rot_90_h_mirror_idxs[kNumCells] = {42,35,28,21,14,7,41,34,27,20,13,6,40,33,26,19,12,5,39,32,25,18,11,4,38,31,24,17,10,3,37,30,23,16,9,2,36,29,22,15,8,1};
+//   std::string rot_90_h_mirror_str;
+//   for (int idx = 0; idx < kNumCells; ++idx) {
+//     int board_idx = rot_90_h_mirror_idxs[idx] - 1;
+//     absl::StrAppend(&rot_90_h_mirror_str, StateToString(board_[board_idx]));
+//   }
+//   std::unique_ptr<State> rot_90_h_mirror_state = Clone();
+//   rot_90_h_mirror_state->FillBoardFromStr(rot_90_h_mirror_str, false);
   // canonical_states.push_back(rot_90_h_mirror_state->Clone());
 //   std::cout << " " << std::endl;
 //   std::cout << "Rot 90 H Mirror ID: " << rot_90_h_mirror_state->GetIDString() << std::endl;
 //   std::cout << "Rot 90 H Mirror State: " << std::endl << rot_90_h_mirror_state->ToString() << std::endl;
   // std::cout << "Original Legal Moves: " << absl::StrJoin(original_legal_actions, ", ") << std::endl;
-  std::vector<Action> rot_90_h_mirror_action_idxs;
-  for (auto const & act : original_legal_actions) {
-    int x = std::distance(rot_90_h_mirror_idxs, std::find(rot_90_h_mirror_idxs, rot_90_h_mirror_idxs + kNumCells, act + 1));
-    rot_90_h_mirror_action_idxs.push_back(x);
-  }
+//   std::vector<Action> rot_90_h_mirror_action_idxs;
+//   for (auto const & act : original_legal_actions) {
+//     int x = std::distance(rot_90_h_mirror_idxs, std::find(rot_90_h_mirror_idxs, rot_90_h_mirror_idxs + kNumCells, act + 1));
+//     rot_90_h_mirror_action_idxs.push_back(x);
+//   }
   // std::cout << "Rot 90 H Mirror Legal Moves: " << absl::StrJoin(rot_90_h_mirror_action_idxs, ", ") << std::endl;
   // action_permutation_indices.push_back(rot_90_h_mirror_action_idxs);
-  states_and_actions.emplace_back(rot_90_h_mirror_state->Clone(), rot_90_h_mirror_action_idxs);
+//   states_and_actions.emplace_back(rot_90_h_mirror_state->Clone(), rot_90_h_mirror_action_idxs);
 
   // ---------------------------------------------
   // swap pieces, rotate 90 degrees, horizontal mirror 
   // ---------------------------------------------
-  std::unique_ptr<State> inv_rot_90_h_mirror_state = Clone();
-  inv_rot_90_h_mirror_state->FillBoardFromStr(rot_90_h_mirror_str, true);
+//   std::unique_ptr<State> inv_rot_90_h_mirror_state = Clone();
+//   inv_rot_90_h_mirror_state->FillBoardFromStr(rot_90_h_mirror_str, true);
 //   std::cout << " " << std::endl;
 //   std::cout << "Inv Rot 90 H Mirror ID: " << inv_rot_90_h_mirror_state->GetIDString() << std::endl;
 //   std::cout << "Inv Rot 90 H Mirror State: " << std::endl << inv_rot_90_h_mirror_state->ToString() << std::endl;
-  states_and_actions.emplace_back(inv_rot_90_h_mirror_state->Clone(), rot_90_h_mirror_action_idxs);
+//   states_and_actions.emplace_back(inv_rot_90_h_mirror_state->Clone(), rot_90_h_mirror_action_idxs);
   
 //   SpielFatalError("Test!");
 

@@ -529,16 +529,21 @@ void learner(const open_spiel::Game& game, const AlphaZeroConfig& config,
       config.path, "learner", true, "a", start_info.start_time);
   std::mt19937 rng;
 
+//   std::cerr << "In learner!" << std::endl;
+
   int device_id = 0;  // Do not change, the first device is the learner.
   logger.Print("Running the learner on device %d: %s", device_id,
                device_manager->Get(0, device_id)->Device());
 
+//   std::cerr << "Initing train inputs / replay buffer!" << std::endl;
   SerializableCircularBuffer<VPNetModel::TrainInputs> replay_buffer(
       config.replay_buffer_size);
   if (start_info.start_step > 1) {
     replay_buffer.LoadBuffer(config.path + "/replay_buffer.data");
   }
   int learn_rate = config.replay_buffer_size / config.replay_buffer_reuse;
+//   std::cerr << "Buffer size: " << config.replay_buffer_size << " Buffer reuse: " << config.replay_buffer_reuse << " learn_rate: " << learn_rate << std::endl;
+  
   int64_t total_trajectories = start_info.total_trajectories;
 
   const int stage_count = 7;
@@ -550,6 +555,7 @@ void learner(const open_spiel::Game& game, const AlphaZeroConfig& config,
   open_spiel::HistogramNamed outcomes({"Player1", "Player2", "Draw"});
   // Actor threads have likely been contributing for a while, so put `last` in
   // the past to avoid a giant spike on the first step.
+//   std::cerr << "entering loop!" << std::endl;
   absl::Time last = absl::Now() - absl::Seconds(60);
   for (int step = start_info.start_step;
        !stop->StopRequested() &&
@@ -569,17 +575,21 @@ void learner(const open_spiel::Game& game, const AlphaZeroConfig& config,
     int queue_size = trajectory_queue->Size();
     int num_states = 0;
     int num_trajectories = 0;
+//   std::cerr << "collecting trajectories!" << std::endl;
     while (!stop->StopRequested() && num_states < learn_rate) {
+    //   std::cerr << "getting trajectory!" << std::endl;
       absl::optional<Trajectory> trajectory = trajectory_queue->Pop();
       if (trajectory) {
         num_trajectories += 1;
         total_trajectories += 1;
         game_lengths.Add(trajectory->states.size());
         game_lengths_hist.Add(trajectory->states.size());
+        // std::cerr << "got trajectory!" << std::endl;
 
         double p1_outcome = trajectory->returns[0];
         outcomes.Add(p1_outcome > 0 ? 0 : (p1_outcome < 0 ? 1 : 2));
 
+        // std::cerr << "adding states to buffer!" << std::endl;
         for (const Trajectory::State& state : trajectory->states) {
           if (state.inverted) {
             replay_buffer.Add(VPNetModel::TrainInputs{state.legal_actions,
@@ -595,7 +605,8 @@ void learner(const open_spiel::Game& game, const AlphaZeroConfig& config,
         //                                             state.policy, p1_outcome});
           num_states += 1;
         }
-
+        // std::cerr << "DONE adding states to buffer!" << std::endl;
+        // std::cerr << "making predictions for buffer states!" << std::endl;
         for (int stage = 0; stage < stage_count; ++stage) {
           // Scale for the length of the game
           int index = (trajectory->states.size() - 1) *
@@ -605,8 +616,11 @@ void learner(const open_spiel::Game& game, const AlphaZeroConfig& config,
               (s.value >= 0) == (trajectory->returns[s.current_player] >= 0));
           value_predictions[stage].Add(abs(s.value));
         }
+        // std::cerr << "DONE making predictons!" << std::endl;
+
       }
     }
+    // std::cerr << "DONE collecting trajectories!" << std::endl;
     absl::Time now = absl::Now();
     double seconds = absl::ToDoubleSeconds(now - last);
 
