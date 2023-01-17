@@ -174,7 +174,8 @@ PlayGame(const open_spiel::Game &game,
     history.push_back(state->ActionToString(current_player, action));
     state->ApplyAction(action);
     if ((num_moves > move_log_cutoff) && (!state->IsTerminal())) {
-        state_history.push_back(state->GetIDString());
+       std::cerr << "pushing state:\n" << std::endl;
+       state_history.push_back(state->GetIDString());
     }
     num_moves++;
 
@@ -268,10 +269,15 @@ int main(int argc, char **argv) {
     
       for (int idx = 0; idx < state_history.size(); ++idx) {
         std::unique_ptr<open_spiel::State> state = game->NewInitialState(state_history[idx]);
+        std::cerr << "Evaling state: " << std::endl << state->ToString() << std::endl;
 
         std::pair<double, open_spiel::Action> value_action = SupergameAlphaBetaSearch(
             *game, state.get(), empty_funct, kSearchDepth, state->CurrentPlayer());
+
+        std::cerr << "Done evaling state: " << std::endl << state->ToString() << std::endl;
+        
         if (value_action.first != 0) {
+          std::cerr << "getting states info" << std::endl;
           std::cerr << "State: " << state->GetIDString() << std::endl;
           std::cerr << "Value: " << value_action.first << std::endl;
           std::cerr << " " << std::endl;

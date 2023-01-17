@@ -115,6 +115,16 @@ std::vector<Action> ConnectFourState::LegalActions() const {
   return moves;
 }
 
+std::vector<Action> ConnectFourState::OriginalLegalActions(Player player) {
+  // Can move in any non-full column.
+  std::vector<Action> moves;
+  if (IsTerminal()) return moves;
+  for (int col = 0; col < kCols; ++col) {
+    if (CellAt(kRows - 1, col) == CellState::kEmpty) moves.push_back(col);
+  }
+  return moves;
+}
+
 std::string ConnectFourState::ActionToString(Player player,
                                              Action action_id) const {
   return absl::StrCat(StateToString(PlayerToState(player)), action_id);
@@ -251,6 +261,38 @@ void ConnectFourState::ObservationTensor(Player player,
 
 }
 
+void ConnectFourState::UndoAction(Player player, Action move) {
+//   std::cerr << "state (before undo): " << std::endl << ToString() << std::endl;
+  std::string before_str = ToString();
+//   std::cerr << "move: " << move << std::endl;
+  int row = 0;
+  while (CellAt(row, move) != CellState::kEmpty) ++row;
+//   std::cerr << "row: " << row << std::endl;
+  if (row < kRows) {
+    row = row - 1;
+  } else {
+    row = kRows - 1;
+  }
+//   std::cerr << "new row: " << row << std::endl;
+//   CellAt(row-1, move) = CellState::kEmpty;
+  CellAt(row, move) = CellState::kEmpty;
+  current_player_ = player;
+  outcome_ = Outcome::kUnknown;
+//   if (HasLine(current_player_)) {
+//     outcome_ = static_cast<Outcome>(current_player_);
+//   } else if (IsFull()) {
+//     outcome_ = Outcome::kDraw;
+//   } else {
+//     outcome_ = Outcome::kUnknown;
+//   }
+  
+  num_moves_ -= 1;
+  history_.pop_back();
+  --move_number_;
+//   std::cerr << "state (after undo): " << std::endl << ToString() << std::endl;
+//   SpielFatalError("test.");
+}
+
 void ConnectFourState::FillBoardFromStr(std::string state_str, bool inverted) {
   if (state_str.length() == kNumCells){
     int board_idx = 0;
@@ -313,6 +355,7 @@ void ConnectFourState::FillBoardFromStr(std::string state_str, bool inverted) {
           current_player_ = 0;
         else
           current_player_ = 1;
+        
         
         if ((num_os > num_xs) || (num_xs - num_os > 1)) {
             std::cout << "State ID: " << state_str << std::endl;
@@ -657,6 +700,27 @@ ConnectFourState::ConnectFourState(std::shared_ptr<const Game> game,
     outcome_ = Outcome::kDraw;
   }
 }
+
+std::unique_ptr<State> ConnectFourGame::NewInitialState(const std::string& str) const {
+
+//   std::string state_str = "ooxxxoo\n"
+//       "xxoooxx\n"
+//       "ooxxxoo\n"
+//       "xxoooxx\n"
+//       "ooxxxoo\n"
+//       "xxoooxx\n";
+//   std::string state_str = "ooxxxooxxoooxxooxxxooxxoooxxooxxxooxxoooxx";
+//   std::cout << "State ID 1: " << state_str << std::endl;
+//   ConnectFourState init_state = ConnectFourState(shared_from_this(), str);
+  ConnectFourState init_state = ConnectFourState(shared_from_this());
+  init_state.FillBoardFromStr(str, false);
+
+
+//   std::cout << "State ID 2: " << state_str << std::endl;
+//   std::cout << "Board: " << init_state.ToString() << std::endl;
+  return std::unique_ptr<State>(init_state.Clone());
+}
+
 
 }  // namespace connect_four
 }  // namespace open_spiel

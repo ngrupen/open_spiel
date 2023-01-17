@@ -66,7 +66,9 @@ class ConnectFourState : public State {
   ConnectFourState(const ConnectFourState& other) = default;
 
   Player CurrentPlayer() const override;
+  void UndoAction(Player player, Action move) override;
   std::vector<Action> LegalActions() const override;
+  std::vector<Action> OriginalLegalActions(Player player) override;
   std::string ActionToString(Player player, Action action_id) const override;
   std::string ToString() const override;
   std::string GetIDString() override;
@@ -115,6 +117,7 @@ class ConnectFourGame : public Game {
   std::unique_ptr<State> NewInitialState() const override {
     return std::unique_ptr<State>(new ConnectFourState(shared_from_this()));
   }
+  std::unique_ptr<State> NewInitialState(const std::string& str) const override;
   int NumPlayers() const override { return kNumPlayers; }
   double MinUtility() const override { return -1; }
   double UtilitySum() const override { return 0; }
