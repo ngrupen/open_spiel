@@ -134,14 +134,14 @@ const SearchNode& SearchNode::BestChild() const {
   // - Hardest loss if everything is a loss
   // - Highest expected reward if explore counts are equal (unlikely).
   // - Longest win, if multiple are proven (unlikely due to early stopping).
-//   return *std::max_element(children.begin(), children.end(),
-//                            [](const SearchNode& a, const SearchNode& b) {
-//                              return a.CompareFinal(b);
-//                            });
-  return *std::min_element(children.begin(), children.end(),
+  return *std::max_element(children.begin(), children.end(),
                            [](const SearchNode& a, const SearchNode& b) {
                              return a.CompareFinal(b);
                            });
+//   return *std::min_element(children.begin(), children.end(),
+//                            [](const SearchNode& a, const SearchNode& b) {
+//                              return a.CompareFinal(b);
+//                            });
 }
 
 std::string SearchNode::ChildrenStr(const State& state) const {
