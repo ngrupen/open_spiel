@@ -654,8 +654,8 @@ std::unique_ptr<State> ConnectFourGame::NewInitialState(const std::string& str) 
 //       "xxoooxx\n";
 //   std::string state_str = "ooxxxooxxoooxxooxxxooxxoooxxooxxxooxxoooxx";
 //   std::cout << "State ID 1: " << state_str << std::endl;
-//   ConnectFourState init_state = ConnectFourState(shared_from_this(), str);
-  ConnectFourState init_state = ConnectFourState(shared_from_this());
+//   ConnectFourTurnsState init_state = ConnectFourTurnsState(shared_from_this(), str);
+  ConnectFourTurnsState init_state = ConnectFourTurnsState(shared_from_this());
   init_state.FillBoardFromStr(str, false);
 
 
