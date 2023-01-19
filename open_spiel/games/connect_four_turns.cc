@@ -115,7 +115,7 @@ std::vector<Action> ConnectFourTurnsState::LegalActions() const {
   return moves;
 }
 
-std::vector<Action> ConnectFourState::OriginalLegalActions(Player player) {
+std::vector<Action> ConnectFourTurnsState::OriginalLegalActions(Player player) {
   // Can move in any non-full column.
   std::vector<Action> moves;
   if (IsTerminal()) return moves;
