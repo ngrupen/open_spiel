@@ -51,39 +51,28 @@ double _alpha_beta(State* state, int depth, double alpha, double beta,
     return state->PlayerReturn(maximizing_player);
   }
 
-//   std::cerr << "1" << std::endl;
-
   if (depth == 0 && !value_function) {
     SpielFatalError(
         "We assume we can walk the full depth of the tree. "
         "Try increasing depth or provide a value_function.");
   }
-//   std::cerr << "2" << std::endl;
 
   if (depth == 0) {
     return value_function(*state);
   }
 
-//   std::cerr << "2" << std::endl;
-
   Player player = state->CurrentPlayer();
   if (player == maximizing_player) {
     double value = -std::numeric_limits<double>::infinity();
 
-    // std::cerr << "3" << std::endl;
-
     for (auto action : state->OriginalLegalActions(player)) {
-    //   std::cerr << "4a" << std::endl;
-      state->ApplyAction(action);
-    //   std::cerr << "4b" << std::endl;
 
+      state->ApplyAction(action);
       double child_value =
           _alpha_beta(state, /*depth=*/depth - 1, /*alpha=*/alpha,
                       /*beta=*/beta, value_function, maximizing_player,
                       /*best_action=*/nullptr);
       state->UndoAction(player, action);
-
-    //   std::cerr << "5" << std::endl;
 
       if (child_value > value) {
         value = child_value;
@@ -91,30 +80,24 @@ double _alpha_beta(State* state, int depth, double alpha, double beta,
           *best_action = action;
         }
       }
-    //   std::cerr << "6" << std::endl;
 
       alpha = std::max(alpha, value);
       if (alpha >= beta) {
         break;  // beta cut-off
       }
     }
-    // std::cerr << "7" << std::endl;
 
     return value;
   } else {
     double value = std::numeric_limits<double>::infinity();
 
-    // std::cerr << "8" << std::endl;
     for (auto action : state->OriginalLegalActions(player)) {
-    //   std::cerr << "9a" << std::endl;
       state->ApplyAction(action);
-    //   std::cerr << "9b" << std::endl;
       double child_value =
           _alpha_beta(state, /*depth=*/depth - 1, /*alpha=*/alpha,
                       /*beta=*/beta, value_function, maximizing_player,
                       /*best_action=*/nullptr);
       state->UndoAction(player, action);
-    //   std::cerr << "10" << std::endl;
 
       if (child_value < value) {
         value = child_value;
@@ -127,7 +110,6 @@ double _alpha_beta(State* state, int depth, double alpha, double beta,
       if (alpha >= beta) {
         break;  // alpha cut-off
       }
-    //   std::cerr << "11" << std::endl;
     }
 
     return value;
@@ -171,15 +153,12 @@ std::pair<double, Action> SupergameAlphaBetaSearch(
   if (maximizing_player == kInvalidPlayer) {
     maximizing_player = search_root->CurrentPlayer();
   }
-//   std::cerr << "Running search on:" << std::endl << state->ToString() << std::endl;
 
   double infinity = std::numeric_limits<double>::infinity();
   Action best_action = kInvalidAction;
   double value = _alpha_beta(
       search_root.get(), /*depth=*/depth_limit, /*alpha=*/-infinity,
       /*beta=*/infinity, value_function, maximizing_player, &best_action);
-
-//   std::cerr << "DONE search" << std::endl;
 
   return std::pair<double, Action>(value, best_action);
 }
