@@ -115,6 +115,7 @@ class ConnectFourTurnsGame : public Game {
   std::unique_ptr<State> NewInitialState() const override {
     return std::unique_ptr<State>(new ConnectFourTurnsState(shared_from_this()));
   }
+  std::unique_ptr<State> NewInitialState(const std::string& str) const override;
   int NumPlayers() const override { return kNumPlayers; }
   double MinUtility() const override { return -1; }
   double UtilitySum() const override { return 0; }

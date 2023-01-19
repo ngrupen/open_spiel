@@ -644,5 +644,25 @@ ConnectFourTurnsState::ConnectFourTurnsState(std::shared_ptr<const Game> game,
   }
 }
 
+std::unique_ptr<State> ConnectFourGame::NewInitialState(const std::string& str) const {
+
+//   std::string state_str = "ooxxxoo\n"
+//       "xxoooxx\n"
+//       "ooxxxoo\n"
+//       "xxoooxx\n"
+//       "ooxxxoo\n"
+//       "xxoooxx\n";
+//   std::string state_str = "ooxxxooxxoooxxooxxxooxxoooxxooxxxooxxoooxx";
+//   std::cout << "State ID 1: " << state_str << std::endl;
+//   ConnectFourState init_state = ConnectFourState(shared_from_this(), str);
+  ConnectFourState init_state = ConnectFourState(shared_from_this());
+  init_state.FillBoardFromStr(str, false);
+
+
+//   std::cout << "State ID 2: " << state_str << std::endl;
+//   std::cout << "Board: " << init_state.ToString() << std::endl;
+  return std::unique_ptr<State>(init_state.Clone());
+}
+
 }  // namespace connect_four_turns
 }  // namespace open_spiel
