@@ -644,7 +644,7 @@ ConnectFourTurnsState::ConnectFourTurnsState(std::shared_ptr<const Game> game,
   }
 }
 
-std::unique_ptr<State> ConnectFourGame::NewInitialState(const std::string& str) const {
+std::unique_ptr<State> ConnectFourTurnsGame::NewInitialState(const std::string& str) const {
 
 //   std::string state_str = "ooxxxoo\n"
 //       "xxoooxx\n"
