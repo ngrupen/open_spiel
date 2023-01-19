@@ -66,7 +66,9 @@ class ConnectFourTurnsState : public State {
   ConnectFourTurnsState(const ConnectFourTurnsState& other) = default;
 
   Player CurrentPlayer() const override;
+  void UndoAction(Player player, Action move) override;
   std::vector<Action> LegalActions() const override;
+  std::vector<Action> OriginalLegalActions(Player player) override;
   std::string ActionToString(Player player, Action action_id) const override;
   std::string ToString() const override;
   std::string GetIDString() override;

@@ -115,6 +115,16 @@ std::vector<Action> ConnectFourTurnsState::LegalActions() const {
   return moves;
 }
 
+std::vector<Action> ConnectFourState::OriginalLegalActions(Player player) {
+  // Can move in any non-full column.
+  std::vector<Action> moves;
+  if (IsTerminal()) return moves;
+  for (int col = 0; col < kCols; ++col) {
+    if (CellAt(kRows - 1, col) == CellState::kEmpty) moves.push_back(col);
+  }
+  return moves;
+}
+
 std::string ConnectFourTurnsState::ActionToString(Player player,
                                              Action action_id) const {
   return absl::StrCat(StateToString(PlayerToState(player)), action_id);
@@ -236,6 +246,39 @@ void ConnectFourTurnsState::ObservationTensor(Player player,
   }
 
 }
+
+void ConnectFourTurnsState::UndoAction(Player player, Action move) {
+//   std::cerr << "state (before undo): " << std::endl << ToString() << std::endl;
+  std::string before_str = ToString();
+//   std::cerr << "move: " << move << std::endl;
+  int row = 0;
+  while (CellAt(row, move) != CellState::kEmpty) ++row;
+//   std::cerr << "row: " << row << std::endl;
+  if (row < kRows) {
+    row = row - 1;
+  } else {
+    row = kRows - 1;
+  }
+//   std::cerr << "new row: " << row << std::endl;
+//   CellAt(row-1, move) = CellState::kEmpty;
+  CellAt(row, move) = CellState::kEmpty;
+  current_player_ = player;
+  outcome_ = Outcome::kUnknown;
+//   if (HasLine(current_player_)) {
+//     outcome_ = static_cast<Outcome>(current_player_);
+//   } else if (IsFull()) {
+//     outcome_ = Outcome::kDraw;
+//   } else {
+//     outcome_ = Outcome::kUnknown;
+//   }
+  
+  num_moves_ -= 1;
+  history_.pop_back();
+  --move_number_;
+//   std::cerr << "state (after undo): " << std::endl << ToString() << std::endl;
+//   SpielFatalError("test.");
+}
+
 
 void ConnectFourTurnsState::FillBoardFromStr(std::string state_str, bool inverted) {
   if (state_str.length() == kNumCells){
